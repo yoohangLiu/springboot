@@ -12,7 +12,7 @@
 <div style="text-align: center;">
     <form action="${basePath}user/delete_s" method="post">
         <span>ID:</span><input type="int" name="id" value="${user.id}"><br>
-        <input type="submit" value="删除">
+        <input type="submit" value="删除test">
     </form>
 </div>
 </body>
