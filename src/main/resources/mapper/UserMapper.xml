@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xs.boot.dao.UserMapper">
     <insert id="insert" parameterType="User">
-        insert into t_user(name,age,address)values(#{name},#{age},#{address})
+        insert into  t_user(name,age,address)values(#{name},#{age},#{address})
     </insert>
     <update id="update" parameterType="User">
         update t_user set address=#{address} where  id=#{id}
