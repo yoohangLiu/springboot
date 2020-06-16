@@ -9,7 +9,7 @@ public class IndexController {
      * 默认启动页设置
      * @return
      */
-    @RequestMapping(value = "/ff")
+    @RequestMapping(value = "/")
     public String index(){
         return "index";
     }
