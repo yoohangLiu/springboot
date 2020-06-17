@@ -10,6 +10,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!--导入基础依赖css文件-->
     <link href="../static/css/basic.css" rel="stylesheet" type="text/css" />
+    <!--导入自己的 css -->
+    <link href="../static/css/bmbk/create-exam.css" rel="stylesheet" type="text/css" />
   </head>
   <body class="skin-blue sidebar-mini">
     <div class="wrapper">
@@ -30,7 +32,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">左侧导航栏</span>
           </a>
-          <!-- 右侧导航栏 -->
+          <!-- 头部：右侧导航栏 -->
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <!-- 消息提示菜单 -->
@@ -153,40 +155,44 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <section class="content">
           <!-- 我们的页面内容放这里 -->
           <div id="create_exam">
-            <div class="func_name">创建考试</div>
+            <div class="func_name">创建考试(可删)</div>
             <div class="func_content">
-              <div>
-                <input v-model="examNum" type="text" placeholder="请输入考次"/>
-
-                <div class="input-group margin">
-                  <div class="input-group-btn">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">考试类型 <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                      <li v-for="(item, index) in examTypelist" @click="chooseExamType(index)"><a href="#">{{ item }}</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">请选择</a></li>
-                    </ul>
-                  </div>
-                  <input v-model="examType" type="text" placeholder="请选择考试类型" disabled/>
+              <div class="exam_item">
+                <div style="padding-right: 10px">类型: </div>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default">{{ examType == ''?'请选择' : examType}}</button>
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">下拉</span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li v-for="(item, index) in examTypelist" @click="chooseExamType(index)"><a href="#">{{item}}</a></li>
+                  </ul>
                 </div>
+              </div>
 
-                <div style="display: flex; justify-content: flex-start; align-items: center;">
-                  <div>选择考试类型</div>
+              <div class="exam_item">
+                  <div style="padding-right: 10px">考次: </div>
                   <div class="btn-group">
-                    <button type="button" class="btn btn-default">{{ examType == ''?'统考' : examType}}</button>
+                    <button type="button" class="btn btn-default">{{ examNum == -1 ?'请选择' : examNum}}</button>
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                       <span class="caret"></span>
                       <span class="sr-only">下拉</span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      <li v-for="(item, index) in examTypelist" @click="chooseExamType(index)"><a href="#">{{item}}</a></li>
+                      <li v-for="(item, index) in examNumList" @click="chooseExamNum(index)"><a href="#">{{item}}</a></li>
                     </ul>
                   </div>
                 </div>
 
+              <div class="exam_button">
                 <button class="btn btn-block btn-primary" @click="addExam">创建</button>
               </div>
             </div>
+          </div>
+
+          <div>
+
           </div>
 
         </section><!-- /.content -->
@@ -220,12 +226,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
       let createExam = new Vue({
         el: '#create_exam',
         data: {
-          opHtmlList:[],
-          examNum:120,
+          examNum:-1,
           examType:'',
+          examNumList:[1,2,3,4],
           examTypelist: ['统考', '省考', '英语听说', '毕业论文', '实践性环节'],
         },
         methods: {
+          chooseExamNum: function (index) {
+            this.examNum = this.examNumList[index];
+          },
           chooseExamType: function (index) {
             this.examType = this.examTypelist[index];
             console.log("考次："+this.examNum);

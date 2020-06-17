@@ -5,4 +5,8 @@
     <insert id="insert" parameterType="Exam">
         insert into exam(id,exam_num,exam_type) values(#{id},#{exam_num},#{exam_type})
     </insert>
+
+    <select id="findExam" parameterType="Exam" resultType="Exam">
+        select id, exam_num, exam_type from exam where exam_num=#{exam_num} and exam_type=#{exam_type}
+    </select>
 </mapper>

@@ -10,4 +10,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ExamMapper {
     public void insert(Exam exam);
+    public Exam findExam(Exam exam);
 }

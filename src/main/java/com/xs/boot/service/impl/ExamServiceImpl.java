@@ -21,4 +21,10 @@ public class ExamServiceImpl implements IExamService{
     public void insert(Exam exam) {
         examMapper.insert(exam);
     }
+
+    @Override
+    public Exam findExam(Exam exam) {
+        Exam examNew = examMapper.findExam(exam);
+        return examNew;
+    }
 }

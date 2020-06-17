@@ -25,4 +25,11 @@ public class ExamController {
         examService.insert(exam);
         return exam;
     }
+
+    @RequestMapping(value = "/findExam", method = {RequestMethod.POST})
+    @ResponseBody
+    public Exam findExam(@RequestBody Exam exam, Model model){
+        Exam examNew = examService.findExam(exam);
+        return examNew;
+    }
 }

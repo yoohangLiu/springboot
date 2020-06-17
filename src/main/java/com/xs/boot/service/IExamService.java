@@ -8,4 +8,5 @@ import com.xs.boot.entity.Exam;
 
 public interface IExamService {
     public void insert(Exam exam);
+    public Exam findExam(Exam exam);
 }

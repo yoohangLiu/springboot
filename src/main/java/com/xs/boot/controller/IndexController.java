@@ -19,4 +19,9 @@ public class IndexController {
     public String starter(){
         return "starter";
     }
+
+    @RequestMapping(value = "/table-example")
+    public String tableExample(){
+        return "table-example";
+    }
 }
