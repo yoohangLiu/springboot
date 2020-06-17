@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>My first Vue app</title>
+    <style>
+        .active {
+            border: 3px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="databind">
+            <!-- 数据绑定 -->
+            <ul>
+                <!-- 无序列表 -->>
+                <li>{{group.name}}</li>
+                <li>{{team[0]}}</li>
+                <li>{{team[1]}}</li>
+                <li>{{team[2]}}</li>
+                <li>{{team[3]}}</li>
+            </ul>
+        </div>
+        <div id="v-text">
+            <!-- 设置标签的文本内容 -->
+            <p v-html='content'>{{content}}</p>
+            <p v-text='content'>{{content}}</p>
+        </div>
+        <div id="v-html">
+            <!-- 设置标签的文本内容 如果有html标签 解析为innerHTML -->
+            <p v-html='content'></p>
+            <p>{{content}}</p>
+        </div>
+        <div id="v-on">
+            <!-- 绑定事件 v-on: 或 @: 事件名 -->
+            <div class="c" v-on:dblclick="doubleclick">{{ message }}</div>
+            <input type="button" value="doIt" @click="doIt('FF', 'LoveU')">
+            <!-- keyup监听键盘按键按下 keyup.enter监听回车键按下-->
+            <input type="text" value="doIt" @keyup.enter="doIt()">
+        </div>
+        <div id="v-show">
+            <!-- 通过操纵样式的display属性 控制元素显示 性能开销小 频繁切换的元素用v-show -->
+            <input type="button" value="切换图片显示状态" @click="changeIsShow">
+            <input type="button" value="年龄累加" @click="addAge">
+            <img v-show="isShow" src="../static/dist/img/user2-160x160.jpg" alt="">
+            <img v-show="age>=18" src="../static/dist/img/user2-160x160.jpg" alt="">
+        </div>
+        <div id="v-if">
+            <!-- 通过操纵DOW树 控制元素显示 性能开销大-->
+            <input type="button" value="切换图片显示状态" @click="changeIsShow">
+            <input type="button" value="年龄累加" @click="addAge">
+            <img v-if="isShow" src="../static/dist/img/user2-160x160.jpg" alt="">
+            <img v-if="age>=18" src="../static/dist/img/user2-160x160.jpg" alt="">
+        </div>
+        <div id="v-bind">
+            <!-- 绑定元素的属性 v-bind: 或 : 属性名-->
+            <img v-bind:src="imgSrc" alt="">
+            <img :src="imgSrc" alt="" :title='imgTitle+"!!!"' :class='isActive?"active":""' @click="toggleActive">
+            <img :src="imgSrc" alt="" :title='imgTitle+"!!!"' :class="{active: isActive}" @click="toggleActive">
+        </div>
+        <div id="v-for">
+            <!-- 循环显示项 -->
+            <input type="button" value="add" @click="v4Add">
+            <input type="button" value="drop" @click="v4Drop">
+            <ul>
+                <li v-for="(item, index) in v4Arr1">{{index+1}}. 一线城市：{{ item }}</li>
+            </ul>
+            <h2 v-for="(item, index) in v4Arr2" :title="item.gender">{{index+1}}. People I like: {{ item.name }}</h2>
+        </div>
+        <div id="v-model">
+            <!-- 快速获取和设置表单元素的值 数据双向绑定 修改任何一方 值都改变 -->
+            <input type="button" value="修改message" @click="setMessage">
+            <input type="text" v-model="message" @keyup.enter="getMessage">
+            <h2>{{message}}</h2>
+        </div>
+    </div>
+    <script src="../static/js/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app', //指明操作的对象
+            data: {
+                message: 'hello vue!',
+                group: {
+                    name: 'TeethSmarter',
+                    id: 0820
+                },
+                team: ['lsy', 'hyx', 'lyl', 'wsc', 'ff'],
+                content: '<a href="http://www.baidu.com">FF</a>',
+                isShow: false,
+                age: 17,
+                imgSrc: '../src/assets/logo.png',
+                imgTitle: 'Tap for fun.',
+                isActive: false,
+                v4Arr1: ['北京', '上海', '成都', '广州', '深圳'],
+                v4Arr2: [{
+                    name: 'FF',
+                    gender: 'boy'
+                }, {
+                    name: 'LCY',
+                    gender: '2'
+                }, {
+                    name: 'ZZY',
+                    gender: '2'
+                }, {
+                    name: 'DEMI',
+                    gender: 'girl'
+                }, {
+                    name: 'ILOVEME',
+                    gender: 'it'
+                }]
+            },
+            methods: {
+                doIt: function(p1, p2) {
+                    // alert("do it");
+                    console.log("do it");
+                    console.log(p1, p2);
+                    let that = this;
+                    that.message = that.message + " click ";
+                },
+                doubleclick: function() {
+                    let that = this;
+                    that.message += " double! ";
+                },
+                changeIsShow: function() {
+                    this.isShow = !this.isShow;
+                },
+                addAge: function() {
+                    this.age += 1;
+                },
+                toggleActive: function() {
+                    this.isActive = !this.isActive;
+                },
+                v4Add: function() {
+                    this.v4Arr2.push({
+                        name: 'LY',
+                        gender: 'girl'
+                    });
+                },
+                v4Drop: function() {
+                    this.v4Arr2.pop();
+                },
+                getMessage() {
+                    alert(this.message);
+                },
+                setMessage() {
+                    this.message = 'FF';
+                },
+            },
+        })
+    </script>
+</body>
+
+</html>

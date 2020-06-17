@@ -13,4 +13,10 @@ public class IndexController {
     public String index(){
         return "index";
     }
+
+
+    @RequestMapping(value = "/starter")
+    public String starter(){
+        return "starter";
+    }
 }

@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+/*Bootstrap 3.3.4*/
+@import "../bootstrap/css/bootstrap.min.css";
+
+/*Font Awesome Icons*/
+@import "../dist/css/font-awesome.min.css";
+
+/*Ionicons*/
+@import "../dist/css/ionicons.min.css";
+
+/*Theme style*/
+@import "../dist/css/AdminLTE.min.css";
+
+/*AdminLTE Skins. We have chosen the skin-blue for this starter*/
+/*page. However, you can choose any other skin. Make sure you*/
+/*apply the skin class to the body tag so the changes take effect.*/
+@import "../dist/css/skins/skin-blue.min.css";

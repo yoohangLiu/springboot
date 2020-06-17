@@ -34,27 +34,36 @@
 <footer class="info">
     <a href="http://www.baidu.com">百度</a>
 </footer>
-</body>
-
 <script>
     let app = new Vue({
         el: '#todoapp',
         data: {
             list: ['吃饭饭', '睡觉觉', '写文档'],
-            newTodo: '好好学习'
+            list1:[{name:1, address: "chengdu"},{name:1, address: "chengdu"}],
+            newTodo: '好好学习',
+            test4Fun: {name:1, address: "chengdu"}
         },
         methods: {
             add: function() {
-                this.list.push(this.newTodo);
+                let that = this;
+                this.list.push(that.newTodo);
+                console.log(this.list);
+                console.log(this.newTodo);
             },
             remove: function(index) {
                 this.list.splice(index, 1); // 删除数组中指定下标的元素 删一次
+                console.log(this.list);
             },
             clear: function() {
                 this.list = [];
+            },
+            test4Fun1:function(){
+
             }
         },
     })
 </script>
+
+</body>
 
 </html>
