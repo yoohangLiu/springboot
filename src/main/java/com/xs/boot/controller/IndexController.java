@@ -24,4 +24,9 @@ public class IndexController {
     public String tableExample(){
         return "table-example";
     }
+
+    @RequestMapping(value = "/vuejs-learn")
+    public String vuejsLearn(){
+        return "vuejs-learn";
+    }
 }
