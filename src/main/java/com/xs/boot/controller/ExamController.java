@@ -19,6 +19,11 @@ public class ExamController {
     @Autowired
     private IExamService examService;
 
+    @RequestMapping("/create")
+    public String bmbk(){
+        return "bmbk-example";
+    }
+
     @RequestMapping(value = "/addExam", method = {RequestMethod.POST})
     @ResponseBody
     public Exam addExam(@RequestBody Exam exam, Model model){
