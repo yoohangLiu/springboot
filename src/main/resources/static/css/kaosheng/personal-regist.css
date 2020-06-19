@@ -1,0 +1,71 @@
+.kaosheng{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.func_name{
+     /* margin-bottom: 20px; */
+}
+
+.func_content{
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.func_content_left{
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.func_content_right{
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.func_item{
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items:flex-start;
+}
+
+.func_item label{
+    width: 30%;
+    margin-bottom: 5px;
+}
+
+.func_item input{
+    padding: 3px 8px;
+    width: 40%;
+}
+
+.func_item div{
+    width: 45%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.func_item div input{
+    width: 20%;
+}
+
+.func_buttons{
+
+}
