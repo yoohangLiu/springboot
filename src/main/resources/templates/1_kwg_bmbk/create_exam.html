@@ -1,10 +1,281 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>省考试院自学考试考务管理系统</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!--导入基础依赖css文件-->
+    <link href="../static/css/basic.css" rel="stylesheet" type="text/css" />
+    <!--导入自己的 css -->
+    <link href="../static/css/bmbk/create-exam.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body class="skin-blue sidebar-mini">
+<div class="wrapper">
+    <!-- Main Header -->
+    <header class="main-header">
 
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>考务</b></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>自学考试 </b>考务管理</span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- 打开左侧导航栏按钮 -->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">左侧导航栏</span>
+            </a>
+            <!-- 头部：右侧导航栏 -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- 消息提示菜单 -->
+                    <li class="dropdown notifications-menu">
+                        <!-- Menu toggle button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-comment"></span>
+                            <span class="label label-warning">10</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">你有 10 条信息待处理</li>
+                            <li>
+                                <!-- Inner Menu: contains the notifications -->
+                                <ul class="menu">
+                                    <li><!-- start notification 如果有多条 可用 v-for -->
+                                        <a href="#">
+                                            <i class="fa fa-users text-aqua"></i> 5 条白名单申请待处理
+                                        </a>
+                                    </li><!-- end notification -->
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="#">查看全部</a></li>
+                        </ul>
+                    </li>
+                    <!-- User Account Menu -->
+                    <li class="dropdown user user-menu">
+                        <!-- Menu Toggle Button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <!-- The user image in the navbar-->
+                            <img src="../static/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                            <span class="hidden-xs">FF</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- The user image in the menu -->
+                            <li class="user-header">
+                                <img src="../static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                                <p>
+                                    FF
+                                    <small>四川大学考务</small>
+                                </p>
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="#" class="btn btn-default btn-flat">个人</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="#" class="btn btn-default btn-flat">登出</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 左侧边栏 -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- 用户面板 -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="../static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                </div>
+                <div class="pull-left info">
+                    <p>FF</p>
+                    <!-- 用户角色 -->
+                    <a href="#"><i class="fa fa-circle text-success"></i> 考务</a>
+                </div>
+            </div>
+
+            <!-- 搜索框 -->
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="搜索..."/>
+              <span class="input-group-btn">
+                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="glyphicon glyphicon-search"></i></button>
+              </span>
+                </div>
+            </form>
+            <!-- /.search form -->
+
+            <!-- 菜单栏 -->
+            <ul class="sidebar-menu">
+                <li class="header"></li>
+                <!--a标签使用示例-->
+                <li><a href="/"><span>首页</span></a></li>
+                <li class="active"><a href="/bmbk/"><span>报名报考</span></a></li>
+                <li><a href="#"><i class='glyphicon glyphicon-link'> </i><span>带图标链接示例</span></a></li>
+                <li class="treeview">
+                    <a href="#"><span>多级链接示例</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="#">二级链接</a></li>
+                        <li><a href="#">二级链接</a></li>
+                    </ul>
+                </li>
+            </ul><!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- 页面内容 -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                创建考试
+                <small>选择考试类型与考次来创建考试</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#">报名报考</a></li>
+                <li class="active">创建考试</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <!-- 我们的页面内容放这里 -->
+            <div id="create_exam">
+                <div class="func_name">创建考试</div>
+                <div class="func_content">
+                    <div class="exam_item">
+                        <div style="padding-right: 10px">类型: </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default">{{ examType == ''?'请选择' : examType}}</button>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">下拉</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li v-for="(item, index) in examTypelist" @click="chooseExamType(index)"><a href="#">{{item}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="exam_item">
+                        <div style="padding-right: 10px">考次: </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default">{{ examNum == -1 ?'请选择' : examNum}}</button>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">下拉</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li v-for="(item, index) in examNumList" @click="chooseExamNum(index)"><a href="#">{{item}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="exam_button">
+                        <button class="btn btn-block btn-primary" @click="addExam">创建</button>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+
+            </div>
+
+        </section><!-- /.content -->
+    </div><!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <div><strong>Copyright &copy; 2020 <a href="#">省考试院自学考试考务管理</a>.</strong> All rights reserved.</div>
+        </div>
+    </footer>
+</div><!-- ./wrapper -->
+
+<!-- 基础 js 文件 -->
+<!-- jQuery 2.1.4 -->
+<script src="../static/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<!-- popper.min.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<!-- Bootstrap 3.3.2 JS -->
+<script src="../static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- AdminLTE App -->
+<script src="../static/dist/js/app.min.js" type="text/javascript"></script>
+<!-- vuejs -->
+<script src="../static/js/vue.js"></script>
+<!-- axios：前后端数据交互 -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<!-- 额外 js 文件添加下面 -->
+
+<script>
+    let createExam = new Vue({
+        el: '#create_exam',
+        data: {
+            examNum:-1,
+            examType:'',
+            type_index:0,
+            examNumList:[1,2,3,4],
+            examTypelist: ['统考', '省考', '英语听说', '毕业论文', '实践性环节'],
+        },
+        methods: {
+            chooseExamNum: function (index) {
+                this.examNum = this.examNumList[index];
+            },
+            chooseExamType: function (index) {
+                this.examType = this.examTypelist[index];
+                this.type_index = index + 1;
+                let tmp = 0;
+                let that = this;
+                axios.post('/exam/find_max',
+                        {
+                            type_name : that.type_index
+                        })
+                        .then(function (response) {
+                            tmp = response.data.kc_code;
+                            console.log(tmp);
+                            //that.examNumList[0] = tmp + 1; //这样不会自动更新
+                            Vue.set(that.examNumList, 0, tmp + 1);
+                            Vue.set(that.examNumList, 1, tmp + 2);
+                            Vue.set(that.examNumList, 2, tmp + 3);
+                            Vue.set(that.examNumList, 3, tmp + 4);
+                            alert("自动查询可选考次成功！");
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                            alert("查询可选考次失败！");
+                        });
+            },
+            addExam: function () {
+                let that = this;
+                axios.post('/exam/addExam',
+                        {
+                            kc_code: that.examNum,
+                            type_name: that.type_index
+                        })
+                        .then(function (response) {
+                            console.log(response.data.kc_code);
+                            that.examNum = response.data.kc_code;
+                            alert("新建考试成功！");
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                            alert("新建考试失败！");
+                        });
+            }
+        },
+    })
+</script>
 </body>
 </html>

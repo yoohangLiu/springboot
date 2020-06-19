@@ -4,40 +4,40 @@ package com.xs.boot.entity;
  * Created by FF on 2020/6/16.
  */
 public class Exam {
-    private int id;
-    private int exam_num;
-    private String exam_type;
+    private int exam_id;
+    private int kc_code;
+    private int type_name;
 
-    public int getId() {
-        return id;
+    public int getExam_id() {
+        return exam_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setExam_id(int exam_id) {
+        this.exam_id = exam_id;
     }
 
-    public int getExam_num() {
-        return exam_num;
+    public int getKc_code() {
+        return kc_code;
     }
 
-    public void setExam_num(int exam_num) {
-        this.exam_num = exam_num;
+    public void setKc_code(int kc_code) {
+        this.kc_code = kc_code;
     }
 
-    public String  getExam_type() {
-        return exam_type;
+    public int getType_name() {
+        return type_name;
     }
 
-    public void setExam_type(String  exam_type) {
-        this.exam_type = exam_type;
+    public void setType_name(int type_name) {
+        this.type_name = type_name;
     }
 
     @Override
     public String toString() {
         return "Exam{" +
-                "id=" + id +
-                ", exam_num=" + exam_num +
-                ", exam_type=" + exam_type +
+                "exam_id=" + exam_id +
+                ", kc_code=" + kc_code +
+                ", type_name=" + type_name +
                 '}';
     }
 }
