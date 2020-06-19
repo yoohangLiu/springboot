@@ -8,5 +8,6 @@ import com.xs.boot.entity.Exam;
 
 public interface IExamService {
     public void insert(Exam exam);
+    public Exam find_max(Exam exam); //查找已用最大考次
     public Exam findExam(Exam exam);
 }

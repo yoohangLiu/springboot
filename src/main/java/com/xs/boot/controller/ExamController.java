@@ -20,8 +20,13 @@ public class ExamController {
     private IExamService examService;
 
     @RequestMapping("/create")
-    public String bmbk(){
-        return "bmbk-example";
+    public String create_exam(){
+        return "1_kwg_bmbk/create_exam";
+    }
+
+    @RequestMapping("/find")
+    public String find_exam(){
+        return "table-example";
     }
 
     @RequestMapping(value = "/addExam", method = {RequestMethod.POST})
@@ -29,6 +34,13 @@ public class ExamController {
     public Exam addExam(@RequestBody Exam exam, Model model){
         examService.insert(exam);
         return exam;
+    }
+
+    @RequestMapping(value = "/find_max", method = {RequestMethod.POST})
+    @ResponseBody
+    public Exam find_max(@RequestBody Exam exam, Model model){
+        Exam ret = examService.find_max(exam);
+        return ret;
     }
 
     @RequestMapping(value = "/findExam", method = {RequestMethod.POST})

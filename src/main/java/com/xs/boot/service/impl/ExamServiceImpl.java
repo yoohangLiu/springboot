@@ -23,6 +23,12 @@ public class ExamServiceImpl implements IExamService{
     }
 
     @Override
+    public Exam find_max(Exam exam){
+        Exam ret = examMapper.find_max(exam);
+        return ret;
+    }
+
+    @Override
     public Exam findExam(Exam exam) {
         Exam examNew = examMapper.findExam(exam);
         return examNew;
