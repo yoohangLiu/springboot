@@ -33,10 +33,17 @@ public class ZkyxController {
         return "zkyx/set_white_list";
     }
 
-    @RequestMapping(value = "/sset_white_list", method = {RequestMethod.POST})
+    @RequestMapping(value = "/add_white_list", method = {RequestMethod.POST})
     @ResponseBody
-    public WhiteList addExam(@RequestBody WhiteList whiteList, Model model){
+    public WhiteList addWhiteList(@RequestBody WhiteList whiteList, Model model){
         iWhiteListService.insert(whiteList);
+        return whiteList;
+    }
+
+    @RequestMapping(value = "/del_white_list", method = {RequestMethod.POST})
+    @ResponseBody
+    public WhiteList delWhiteList(@RequestBody WhiteList whiteList, Model model){
+        iWhiteListService.delete(whiteList);
         return whiteList;
     }
     /*--------------------------------------------------------------------*/

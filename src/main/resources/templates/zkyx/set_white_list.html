@@ -155,23 +155,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main content -->
         <section class="content">
             <!-- 我们的页面内容放这里 -->
-            <div id="add_white_list">
+            <div id="set_white_list">
                 <div class="func_name">添加白名单(可删)</div>
                 <div class="func_content">
 
-                    <div class="exam_item">
-                        <text>院校：</text>
-                        <input type="text" placeholder="请输入院校id" id="id1">
+                    <div>
+                        <div>院校id：</div>
+                        <input v-model="school_id" type="number"  placeholder="请输入院校id" >
                     </div>
 
-                    <div class="exam_item">
-                        <text>考生id：</text>
-                        <input type="text" placeholder="请输入考生id" id="id2">
+                    <div>
+                        <div>考生id：</div>
+                        <input v-model="student_id" type="number"  placeholder="请输入考生id" >
                     </div>
-
-                    <div class="exam_button">
+                    <div>
                         <button  @click="additem">添加</button>
+                        <button  @click="delitem">删除</button>
                     </div>
+
                 </div>
             </div>
 
@@ -204,32 +205,48 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <script>
     let addWhiteList = new Vue({
-        el: '#add_white_list',
+        el: '#set_white_list',
         data: {
-            school_id:0,
-            student_id:0
+            school_id:'',
+            student_id:'',
         },
         methods: {
 
             additem: function () {
-                this.school_id = document.getElementById("#id1")
-                this.student_id = document.getElementById("#id2");
+
                 let that = this;
-                axios.post('/zkyx/sset_white_list',
+                axios.post('/zkyx/add_white_list',
                     {
                         school_id: that.school_id,
                         student_id: that.student_id
                     })
                     .then(function (response) {
                         console.log(response.data.student_id, response.data.school_id);
-                        alert("新建白名单项成功！");
+                        alert("新建白名单项(student_id: " + that.student_id + ", school_id: " + that.school_id + ")成功！");
                     })
                     .catch(function (error) {
                         console.log(error);
-                        alert(error);
                         alert("新建白名单项失败！");
                     });
+            },
+            delitem: function () {
+                let that = this;
+                axios.post('/zkyx/del_white_list',
+                    {
+                        school_id: that.school_id,
+                        student_id: that.student_id
+                    })
+                    .then(function (response) {
+                        console.log(response.data.student_id, response.data.school_id);
+                        alert("删除白名单项(student_id: " + that.student_id + ", school_id: " + that.school_id + ")成功！");
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        alert("删除白名单项失败！");
+                    });
+
             }
+
         },
     })
 </script>
