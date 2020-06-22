@@ -23,7 +23,7 @@ public class ExamController {
 
     @RequestMapping("/create")
     public String create_exam(){
-        return "kaowugang/create_exam";
+        return "1_kwg_bmbk/create_exam";
     }
 
     @RequestMapping("/find")
@@ -33,7 +33,7 @@ public class ExamController {
 
     @RequestMapping("/show")
     public String show_exam(){
-        return "kaowugang/show_exam";
+        return "1_kwg_bmbk/show_exam";
     }
 
     @RequestMapping(value = "/addExam", method = {RequestMethod.POST})
