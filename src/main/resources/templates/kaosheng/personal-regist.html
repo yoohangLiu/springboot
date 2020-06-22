@@ -210,12 +210,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div>
                             <div class="func_item">
                                 <label>证件号码</label>
-                                <input v-model="zj_num" type="text" placeholder="请输入证件号码">
+                                <input v-model="zj_num" type="text" placeholder="请输入证件号码" @blur="zj_num_check">
+                                <label v-show="msg!=''"><span style="color: red; margin-left: 10px;">{{msg}}</span></label>
                             </div>
                             <!-- TODO: 根据证件号码截取年龄 -->
                             <div class="func_item">
                                 <label>年龄</label>
-                                <input v-model="age" type="text" placeholder="请输入年龄">
+                                <!-- <label>{{age>-1?age:'待输入'}}</label> -->
+                                <input v-model="age" type="text" placeholder="请输入年龄" disabled>
                             </div>
                             <div class="func_item">
                                 <label>民族</label>
@@ -299,8 +301,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <span class="sr-only">下拉</span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li v-for="(item, index) in stu_type_list" @click="choose_stu_type_list(index)"><a
-                                                href="#">{{item}}</a></li>
+                                        <li v-for="(item, index) in stu_type_list" @click="choose_stu_type(index)">
+                                            <a href="#">{{item}}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -347,14 +349,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <span class="sr-only">下拉</span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li v-for="(item, index) in taget_school_list" @click="choose_taget_school(index)"><a
-                                                href="#">{{item}}</a></li>
+                                        <li v-for="(item, index) in taget_school_list"
+                                            @click="choose_taget_school(index)"><a href="#">{{item}}</a></li>
                                     </ul>
                                 </div>
-                            </div>
-                            <div class="func_item">
-                                <label>联系方式</label>
-                                <input v-model="phone" type="text" placeholder="请输入联系方式">
                             </div>
                             <div class="func_item">
                                 <label>健康状况</label>
@@ -371,6 +369,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 href="#">{{item}}</a></li>
                                     </ul>
                                 </div>
+                            </div>
+                            <div class="func_item">
+                                <label>联系方式</label>
+                                <input v-model="phone" type="text" placeholder="请输入联系方式" @blur="phone_check">
+                                <label v-show="msg!=''"><span style="color: red; margin-left: 10px;">{{msg}}</span></label>
                             </div>
                         </div>
                     </div>
