@@ -7,7 +7,7 @@ var createExam = new Vue({
         zj_type: 0,
         zj_type_list: ['居民省份证', '军官证', '警官证', '文职干部证', '士兵证', '港澳台人员省份证', '外籍人员护照'],
         zj_num: '',
-        age: -1,
+        age: 1,
         nation: '',
         zzmm: -1,
         zzmm_list: ['党员', '团员', '其他', '未采集'],
@@ -30,8 +30,43 @@ var createExam = new Vue({
         taget_school_list: [],
 
         stu_img: '',
+        msg: '',
+        isOk:-1
     },
     methods: {
+        phone_check: function () {
+            var rexp = /^1[3|4|5|7|8]\d{9}$/;
+            if (!(rexp.test(this.phone))) {
+                this.msg = "输入出错, 请检查";
+                this.isOk = -1;
+            } else {
+                this.msg = '';
+            }
+        },
+        zj_num_check: function () {
+            var rexp = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+            if (!rexp.test(this.zj_num)) {
+                this.msg = "输入出错, 请检查";
+                this.isOk = -1;
+            } else {
+                this.msg = '';
+                this.age = this.get_age_from_zj_num();
+            }
+        },
+        get_age_from_zj_num: function () {
+            var zj_num = this.zj_num;
+            var myDate = new Date();
+            var month = myDate.getMonth() + 1;
+            var day = myDate.getDate();
+            var age = myDate.getFullYear() - zj_num.substring(6, 10) - 1;
+            if (zj_num.substring(10, 12) < month || zj_num.substring(10, 12) == month && zj_num.substring(12, 14) <= day) {
+                age++;
+            }
+            if (age <= 0) {
+                age = 1;
+            }
+            return age;
+        },
         choose_sex: function (index) {
             this.sex = index;
         },
@@ -39,7 +74,7 @@ var createExam = new Vue({
             this.zj_type = index;
         },
         choose_zzmm: function (index) {
-            this.zzmm = index + 1;
+            this.zzmm = index;
         },
         choose_huji_type: function (index) {
             this.huji_type = index;
@@ -50,8 +85,8 @@ var createExam = new Vue({
         choose_bk_major: function (index) {
             this.bk_major = this.bk_major_list[index];
         },
-        choose_stu_type_list: function (index) {
-            this.stu_type_list = index;
+        choose_stu_type: function (index) {
+            this.stu_type = index;
         },
         choose_sz_num: function (index) {
             this.sz_num = index;
@@ -67,18 +102,31 @@ var createExam = new Vue({
         },
         regist: function () {
             var that = this;
-            axios.post('/exam/addExam', {
-                exam_num: that.examNum,
-                exam_type: that.examType
-            })
-                .then(function (response) {
-                    console.log(response.data.exam_num);
-                    that.examNum = response.data.exam_num;
-                    alert("新建考试成功！");
+            axios.post('/kaosheng/personal-regist', {
+                stuName: that.stu_name,
+                sex: that.sex,
+                zjType: that.zj_type,
+                zjNum: that.zj_num,
+                age: that.age,
+                // nation: 0,
+                nation: that.nation,
+                zzmm: that.zzmm,
+                hujiType: that.huji_type,
+                bkLevel: that.bk_level,
+                bkMajor: that.bk_major,
+                phone: that.phone,
+                health: that.health,
+                stuType: that.stu_type,
+                szNum: that.sz_num,
+                qxNum: that.qx_num,
+                tagetSchoolId: that.taget_school,
+            }).then(function (response) {
+                    console.log(response);
+                    alert("报名成功！");
                 })
                 .catch(function (error) {
                     console.log(error);
-                    alert("新建考试失败！");
+                    alert("报名失败！");
                 });
         }
     },
