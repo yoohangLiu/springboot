@@ -1,7 +1,8 @@
 package com.xs.boot.controller;
 
-import com.xs.boot.entity.zkyx.white_list;
-import com.xs.boot.service.IExamService;
+import com.xs.boot.entity.Exam;
+import com.xs.boot.entity.zkyx.WhiteList;
+import com.xs.boot.service.zkyx.IWhiteListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +14,30 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/zkyx")
 public class ZkyxController {
+
     /*----------------------------------yuan------------------------------*/
     @RequestMapping("/group")
     public String group_register(){
         return "zkyx/group_register";
     }
 
+    /*--------------------------------------------------------------------*/
+
+    /*- ---------------------------------万虎的代码------------------------------*/
+
+    @Autowired
+    private IWhiteListService iWhiteListService;
+
+    @RequestMapping("/set_white_list")
+    public String set_white_list(){
+        return "zkyx/set_white_list";
+    }
+
+    @RequestMapping(value = "/sset_white_list", method = {RequestMethod.POST})
+    @ResponseBody
+    public WhiteList addExam(@RequestBody WhiteList whiteList, Model model){
+        iWhiteListService.insert(whiteList);
+        return whiteList;
+    }
     /*--------------------------------------------------------------------*/
 }
