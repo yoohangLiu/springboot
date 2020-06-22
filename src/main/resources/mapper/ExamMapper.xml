@@ -13,4 +13,8 @@
     <select id="findExam" parameterType="Exam" resultType="Exam">
         select exam_id, kc_code, type_name from exam where kc_code=#{kc_code} and type_name=#{type_name}
     </select>
+
+    <select id="allExam" resultType="Exam">
+        select kc_code, type_name from exam
+    </select>
 </mapper>

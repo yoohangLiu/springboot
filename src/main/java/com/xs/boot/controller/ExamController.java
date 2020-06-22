@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * Created by FF on 2020/6/16.
  */
@@ -29,24 +31,33 @@ public class ExamController {
         return "table-example";
     }
 
+    @RequestMapping("/show")
+    public String show_exam(){
+        return "kaowugang/show_exam";
+    }
+
     @RequestMapping(value = "/addExam", method = {RequestMethod.POST})
     @ResponseBody
-    public Exam addExam(@RequestBody Exam exam, Model model){
+    public Exam addExam(@RequestBody Exam exam){
         examService.insert(exam);
         return exam;
     }
 
     @RequestMapping(value = "/find_max", method = {RequestMethod.POST})
     @ResponseBody
-    public Exam find_max(@RequestBody Exam exam, Model model){
-        Exam ret = examService.find_max(exam);
-        return ret;
+    public Exam find_max(@RequestBody Exam exam){
+        return examService.find_max(exam);
     }
 
     @RequestMapping(value = "/findExam", method = {RequestMethod.POST})
     @ResponseBody
-    public Exam findExam(@RequestBody Exam exam, Model model){
-        Exam examNew = examService.findExam(exam);
-        return examNew;
+    public Exam findExam(@RequestBody Exam exam){
+        return examService.findExam(exam);
+    }
+
+    @RequestMapping(value = "/allExam", method = {RequestMethod.POST})
+    @ResponseBody
+    public List<Exam> allExam(){
+        return examService.allExam();
     }
 }

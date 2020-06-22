@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by FF on 2020/6/16.
@@ -24,13 +25,16 @@ public class ExamServiceImpl implements IExamService{
 
     @Override
     public Exam find_max(Exam exam){
-        Exam ret = examMapper.find_max(exam);
-        return ret;
+        return examMapper.find_max(exam);
     }
 
     @Override
     public Exam findExam(Exam exam) {
-        Exam examNew = examMapper.findExam(exam);
-        return examNew;
+        return examMapper.findExam(exam);
+    }
+
+    @Override
+    public List<Exam> allExam() {
+        return examMapper.allExam();
     }
 }
