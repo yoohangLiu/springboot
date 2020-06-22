@@ -21,7 +21,7 @@ public class ExamController {
 
     @RequestMapping("/create")
     public String create_exam(){
-        return "1_kwg_bmbk/create_exam";
+        return "kaowugang/create_exam";
     }
 
     @RequestMapping("/find")
