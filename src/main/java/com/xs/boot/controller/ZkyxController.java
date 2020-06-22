@@ -10,5 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@Controller
+@RequestMapping("/zkyx")
 public class ZkyxController {
+    /*----------------------------------yuan------------------------------*/
+    @RequestMapping("/group")
+    public String group_register(){
+        return "zkyx/group_register";
+    }
+
+    /*--------------------------------------------------------------------*/
 }
