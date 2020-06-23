@@ -5,6 +5,8 @@ public class Certain_kqu_kd {
     private int type_name ;
     private String kqu_id ;
     private int    kd_id  ;
+
+    private String kd_name;
     private int kd_state  ;
     private int  kd_type   ;
     private String belong_code ;
@@ -14,6 +16,14 @@ public class Certain_kqu_kd {
     private int kaochang_spec ;
     private int kaochang_num ;
     private String memo;
+
+    public String getKd_name() {
+        return kd_name;
+    }
+
+    public void setKd_name(String kd_name) {
+        this.kd_name = kd_name;
+    }
 
     public Certain_kqu_kd() {
     }

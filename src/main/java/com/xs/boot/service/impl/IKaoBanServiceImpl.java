@@ -1,6 +1,7 @@
 package com.xs.boot.service.impl;
 
 import com.xs.boot.dao.KaoBanMapper;
+import com.xs.boot.entity.Certain_exam_examArea;
 import com.xs.boot.entity.Certain_kqu_kd;
 import com.xs.boot.service.IKaoBanService;
 import org.springframework.stereotype.Service;
@@ -15,16 +16,22 @@ public class IKaoBanServiceImpl implements IKaoBanService {
     @Resource
     private KaoBanMapper kaoBanMapper;
 
+    @Override
+    public List<Certain_exam_examArea> find_exam(Certain_exam_examArea kqu_id) {
+        return kaoBanMapper.find_exam(kqu_id);
+    }
+
     @Transactional
     @Override
     public List<Certain_kqu_kd> find_kqu_kd(Certain_kqu_kd certain_kqu_kd) {
         return kaoBanMapper.find_kqu_kd(certain_kqu_kd);
     }
 
-    @Transactional
     @Override
-    public void addKaoChangRongLiang( int num) {
-        kaoBanMapper.insertKaoChangRongLiang(num);
+    public void addCapacity(Certain_exam_examArea certain_exam_examArea) {
+        kaoBanMapper.addCapacity(certain_exam_examArea);
     }
+
+
 
 }
