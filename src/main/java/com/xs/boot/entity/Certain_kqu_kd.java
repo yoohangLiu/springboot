@@ -5,7 +5,6 @@ public class Certain_kqu_kd {
     private int type_name ;
     private String kqu_id ;
     private int    kd_id  ;
-
     private String kd_name;
     private int kd_state  ;
     private int  kd_type   ;
@@ -15,6 +14,16 @@ public class Certain_kqu_kd {
     private String phone  ;
     private int kaochang_spec ;
     private int kaochang_num ;
+    private int post_code;
+
+    public int getPost_code() {
+        return post_code;
+    }
+
+    public void setPost_code(int post_code) {
+        this.post_code = post_code;
+    }
+
     private String memo;
 
     public String getKd_name() {

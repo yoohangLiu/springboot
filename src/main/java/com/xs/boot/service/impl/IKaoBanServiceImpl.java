@@ -32,6 +32,10 @@ public class IKaoBanServiceImpl implements IKaoBanService {
         kaoBanMapper.addCapacity(certain_exam_examArea);
     }
 
+    @Override
+    public void alterCertainKquKd(Certain_kqu_kd certain_kqu_kd) {
+        kaoBanMapper.alterCertainKquKd(certain_kqu_kd);
+    }
 
 
 }

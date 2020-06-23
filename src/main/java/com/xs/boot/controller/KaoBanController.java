@@ -33,9 +33,9 @@ public class KaoBanController {
     public List<Certain_exam_examArea> findExam(@RequestBody Certain_exam_examArea kqu_id){
         return kaoBanService.find_exam(kqu_id);
     }
-    @RequestMapping("/alter")
+    @RequestMapping("/seeKd")
     public String alter(){
-        return "/kaoban/Kqu_info_report";
+        return "/kaoban/Kd_info_report";
     }
 
     @RequestMapping("/seeCapacity")
@@ -47,6 +47,11 @@ public class KaoBanController {
     @ResponseBody
     public void addCapacity(@RequestBody Certain_exam_examArea certain_exam_examArea){
         kaoBanService.addCapacity(certain_exam_examArea);
+    }
+    @RequestMapping(value = "/alter_certain_kqu_kd", method = {RequestMethod.POST})
+    @ResponseBody
+    public void alterCertainKquKd(@RequestBody Certain_kqu_kd certain_kqu_kd){
+        kaoBanService.alterCertainKquKd(certain_kqu_kd);
     }
 
     @RequestMapping(value = "/find_kqu_kd", method = {RequestMethod.POST})
