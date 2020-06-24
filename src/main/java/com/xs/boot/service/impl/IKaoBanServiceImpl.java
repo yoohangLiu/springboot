@@ -3,6 +3,7 @@ package com.xs.boot.service.impl;
 import com.xs.boot.dao.KaoBanMapper;
 import com.xs.boot.entity.Certain_exam_examArea;
 import com.xs.boot.entity.Certain_kqu_kd;
+import com.xs.boot.entity.Orgnization_memo;
 import com.xs.boot.service.IKaoBanService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +36,16 @@ public class IKaoBanServiceImpl implements IKaoBanService {
     @Override
     public void alterCertainKquKd(Certain_kqu_kd certain_kqu_kd) {
         kaoBanMapper.alterCertainKquKd(certain_kqu_kd);
+    }
+
+    @Override
+    public Orgnization_memo find_exam2(Orgnization_memo kqu_id) {
+        return kaoBanMapper.find_exam2(kqu_id);
+    }
+
+    @Override
+    public void addOrganizationMemo(Orgnization_memo certain_exam_examArea) {
+        kaoBanMapper.addOrganazationMemo(certain_exam_examArea);
     }
 
 

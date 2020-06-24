@@ -2,6 +2,7 @@ package com.xs.boot.controller;
 
 import com.xs.boot.entity.Certain_exam_examArea;
 import com.xs.boot.entity.Certain_kqu_kd;
+import com.xs.boot.entity.Orgnization_memo;
 import com.xs.boot.service.IKaoBanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,13 @@ public class KaoBanController {
     public List<Certain_exam_examArea> findExam(@RequestBody Certain_exam_examArea kqu_id){
         return kaoBanService.find_exam(kqu_id);
     }
+    @RequestMapping(value = "/find_exam2", method = {RequestMethod.POST})
+    @ResponseBody
+    public Orgnization_memo findExam2(@RequestBody Orgnization_memo kqu_id){
+        return kaoBanService.find_exam2(kqu_id);
+    }
+
+
     @RequestMapping("/seeKd")
     public String alter(){
         return "/kaoban/Kd_info_report";
@@ -43,11 +51,24 @@ public class KaoBanController {
         return "/kaoban/show_examroom_capacity";
     }
 
+    @RequestMapping("/seeOrgnization")
+    public String see_orgnization(){
+        return "/kaoban/Organization_report";
+    }
+
     @RequestMapping(value = "/addCapacity", method = {RequestMethod.POST})
     @ResponseBody
     public void addCapacity(@RequestBody Certain_exam_examArea certain_exam_examArea){
         kaoBanService.addCapacity(certain_exam_examArea);
     }
+
+    @RequestMapping(value = "/addOrganizationMemo", method = {RequestMethod.POST})
+    @ResponseBody
+    public void addOrganizationMemo(@RequestBody Orgnization_memo certain_exam_examArea){
+        kaoBanService.addOrganizationMemo(certain_exam_examArea);
+    }
+
+
     @RequestMapping(value = "/alter_certain_kqu_kd", method = {RequestMethod.POST})
     @ResponseBody
     public void alterCertainKquKd(@RequestBody Certain_kqu_kd certain_kqu_kd){
@@ -60,11 +81,4 @@ public class KaoBanController {
         return kaoBanService.find_kqu_kd(certain_kqu_kd);
     }
 
-//
-//    @RequestMapping(value = "/addRongliang", method = {RequestMethod.POST})
-//    @ResponseBody
-//    public String addCapacity(@RequestBody String exam, Model model){
-//        kaoBanService.addKaoChangRongLiang(1);
-//        return exam;
-//    }
 }
