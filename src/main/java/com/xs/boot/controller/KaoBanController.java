@@ -2,6 +2,7 @@ package com.xs.boot.controller;
 
 import com.xs.boot.entity.Certain_exam_examArea;
 import com.xs.boot.entity.Certain_kqu_kd;
+import com.xs.boot.entity.Lingjuan_list;
 import com.xs.boot.entity.Orgnization_memo;
 import com.xs.boot.service.IKaoBanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,19 +29,6 @@ public class KaoBanController {
         model.addAttribute("kqu_id", kqu_id.getKqu_id());
         return "kaoban/Kqu_info_report";
     }
-
-    @RequestMapping(value = "/find_exam", method = {RequestMethod.POST})
-    @ResponseBody
-    public List<Certain_exam_examArea> findExam(@RequestBody Certain_exam_examArea kqu_id){
-        return kaoBanService.find_exam(kqu_id);
-    }
-    @RequestMapping(value = "/find_exam2", method = {RequestMethod.POST})
-    @ResponseBody
-    public Orgnization_memo findExam2(@RequestBody Orgnization_memo kqu_id){
-        return kaoBanService.find_exam2(kqu_id);
-    }
-
-
     @RequestMapping("/seeKd")
     public String alter(){
         return "/kaoban/Kd_info_report";
@@ -56,6 +44,35 @@ public class KaoBanController {
         return "/kaoban/Organization_report";
     }
 
+    @RequestMapping("/seeLingjuan")
+    public String see_Lingjuan(){
+        return "/kaoban/Lingjuan_people_report";
+    }
+
+    @RequestMapping(value = "/find_exam", method = {RequestMethod.POST})
+    @ResponseBody
+    public List<Certain_exam_examArea> findExam(@RequestBody Certain_exam_examArea kqu_id){
+        return kaoBanService.find_exam(kqu_id);
+    }
+
+    @RequestMapping(value = "/find_tongkao", method = {RequestMethod.POST})
+    @ResponseBody
+    public List<Lingjuan_list> findExam(@RequestBody Lingjuan_list kqu_id){
+        return kaoBanService.find_tongkao(kqu_id);
+    }
+
+    @RequestMapping(value = "/find_exam2", method = {RequestMethod.POST})
+    @ResponseBody
+    public Orgnization_memo findExam2(@RequestBody Orgnization_memo kqu_id){
+        return kaoBanService.find_exam2(kqu_id);
+    }
+    @RequestMapping(value = "/find_Lingjuan", method = {RequestMethod.POST})
+    @ResponseBody
+    public Lingjuan_list find_Lingjuan(@RequestBody Lingjuan_list kqu_id){
+        return kaoBanService.find_Lingjuan(kqu_id);
+    }
+
+
     @RequestMapping(value = "/addCapacity", method = {RequestMethod.POST})
     @ResponseBody
     public void addCapacity(@RequestBody Certain_exam_examArea certain_exam_examArea){
@@ -66,6 +83,11 @@ public class KaoBanController {
     @ResponseBody
     public void addOrganizationMemo(@RequestBody Orgnization_memo certain_exam_examArea){
         kaoBanService.addOrganizationMemo(certain_exam_examArea);
+    }
+    @RequestMapping(value = "/addLingjuanList", method = {RequestMethod.POST})
+    @ResponseBody
+    public void addLingjuanList(@RequestBody Lingjuan_list certain_exam_examArea){
+        kaoBanService.addLingjuanList(certain_exam_examArea);
     }
 
 

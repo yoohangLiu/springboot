@@ -1,18 +1,34 @@
 package com.xs.boot.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Lingjuan_list {
     int kc_code;
     String city_code;
+    String kqu_id;
     String leader_name ;
     String leader_address;
     String leader_phone ;
     String leader_id ;//身份证号
     String chepai_zuoci;
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     Date lingjuan_date ;
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     Date return_paper_stime ;
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     Date return_paper_etime ;
+
+    public String getKqu_id() {
+        return kqu_id;
+    }
+
+    public void setKqu_id(String kqu_id) {
+        this.kqu_id = kqu_id;
+    }
+
 
     @Override
     public String toString() {
