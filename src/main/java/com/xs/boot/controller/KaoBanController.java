@@ -1,9 +1,6 @@
 package com.xs.boot.controller;
 
-import com.xs.boot.entity.Certain_exam_examArea;
-import com.xs.boot.entity.Certain_kqu_kd;
-import com.xs.boot.entity.Lingjuan_list;
-import com.xs.boot.entity.Orgnization_memo;
+import com.xs.boot.entity.*;
 import com.xs.boot.service.IKaoBanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +24,7 @@ public class KaoBanController {
         model.addAttribute("kc_code", kqu_id.getKc_code());
         model.addAttribute("type_name", kqu_id.getType_name());
         model.addAttribute("kqu_id", kqu_id.getKqu_id());
-        return "kaoban/Kqu_info_report";
+        return "violation_report";
     }
     @RequestMapping("/seeKd")
     public String alter(){
@@ -49,6 +46,16 @@ public class KaoBanController {
         return "/kaoban/Lingjuan_people_report";
     }
 
+    @RequestMapping("/seeReportVio")
+    public String seeReportVio(){
+        return "/kaoban/violation_see";
+    }
+
+    @RequestMapping("/seeTotalKd")
+    public String seeTotalKd(){
+        return "/kaoban/Add_kd_info";
+    }
+
     @RequestMapping(value = "/find_exam", method = {RequestMethod.POST})
     @ResponseBody
     public List<Certain_exam_examArea> findExam(@RequestBody Certain_exam_examArea kqu_id){
@@ -66,12 +73,22 @@ public class KaoBanController {
     public Orgnization_memo findExam2(@RequestBody Orgnization_memo kqu_id){
         return kaoBanService.find_exam2(kqu_id);
     }
+
     @RequestMapping(value = "/find_Lingjuan", method = {RequestMethod.POST})
     @ResponseBody
     public Lingjuan_list find_Lingjuan(@RequestBody Lingjuan_list kqu_id){
         return kaoBanService.find_Lingjuan(kqu_id);
     }
-
+    @RequestMapping(value = "/find_total_kd", method = {RequestMethod.POST})
+    @ResponseBody
+    public List<Kd_info> find_total_kd(){
+        return kaoBanService.find_total_kd();
+    }
+    @RequestMapping(value = "/getViolationList", method = {RequestMethod.POST})
+    @ResponseBody
+    public List<Violist> getViolationList(@RequestBody Violist kqu_id){
+        return kaoBanService.find_vioList(kqu_id);
+    }
 
     @RequestMapping(value = "/addCapacity", method = {RequestMethod.POST})
     @ResponseBody
@@ -88,6 +105,11 @@ public class KaoBanController {
     @ResponseBody
     public void addLingjuanList(@RequestBody Lingjuan_list certain_exam_examArea){
         kaoBanService.addLingjuanList(certain_exam_examArea);
+    }
+    @RequestMapping(value = "/addViolationList", method = {RequestMethod.POST})
+    @ResponseBody
+    public void addViolationList(@RequestBody Violist certain_exam_examArea){
+        kaoBanService.addViolationList(certain_exam_examArea);
     }
 
 

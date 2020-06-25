@@ -1,12 +1,8 @@
 package com.xs.boot.dao;
 
-import com.xs.boot.entity.Certain_exam_examArea;
-import com.xs.boot.entity.Certain_kqu_kd;
-import com.xs.boot.entity.Lingjuan_list;
-import com.xs.boot.entity.Orgnization_memo;
+import com.xs.boot.entity.*;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Mapper
@@ -20,4 +16,7 @@ public interface KaoBanMapper {
     List<Lingjuan_list> find_tongkao(Lingjuan_list kqu_id);
     Lingjuan_list find_Lingjuan(Lingjuan_list kqu_id);
     void addLingjuanList(Lingjuan_list certain_exam_examArea);
+    List<Violist> find_vioList(Violist kqu_id);
+    void addViolationList(Violist certain_exam_examArea);
+    List<Kd_info> find_total_kd();
 }

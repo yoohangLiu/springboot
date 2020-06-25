@@ -1,10 +1,7 @@
 package com.xs.boot.service.impl;
 
 import com.xs.boot.dao.KaoBanMapper;
-import com.xs.boot.entity.Certain_exam_examArea;
-import com.xs.boot.entity.Certain_kqu_kd;
-import com.xs.boot.entity.Lingjuan_list;
-import com.xs.boot.entity.Orgnization_memo;
+import com.xs.boot.entity.*;
 import com.xs.boot.service.IKaoBanService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,6 +59,21 @@ public class IKaoBanServiceImpl implements IKaoBanService {
     @Override
     public void addLingjuanList(Lingjuan_list certain_exam_examArea) {
         kaoBanMapper.addLingjuanList(certain_exam_examArea);
+    }
+
+    @Override
+    public List<Violist> find_vioList(Violist kqu_id) {
+        return kaoBanMapper.find_vioList(kqu_id);
+    }
+
+    @Override
+    public void addViolationList(Violist certain_exam_examArea) {
+        kaoBanMapper.addViolationList(certain_exam_examArea);
+    }
+
+    @Override
+    public List<Kd_info> find_total_kd() {
+       return kaoBanMapper.find_total_kd();
     }
 
 
