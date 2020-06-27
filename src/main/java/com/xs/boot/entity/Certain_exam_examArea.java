@@ -6,6 +6,33 @@ public class Certain_exam_examArea {
     private String kqu_id ;
     private int kqu_capacity;
     private int xunkao_num;
+    private String city_code;
+    private String district_code;
+    private int bk_student_num;
+    public int getBk_student_num() {
+        return bk_student_num;
+    }
+
+    public void setBk_student_num(int bk_student_num) {
+        this.bk_student_num = bk_student_num;
+    }
+
+
+    public String getCity_code() {
+        return city_code;
+    }
+
+    public void setCity_code(String city_code) {
+        this.city_code = city_code;
+    }
+
+    public String getDistrict_code() {
+        return district_code;
+    }
+
+    public void setDistrict_code(String district_code) {
+        this.district_code = district_code;
+    }
 
     public Certain_exam_examArea() {
     }
