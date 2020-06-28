@@ -1,4 +1,4 @@
-package com.xs.boot.entity;
+package com.xs.boot.entity.myKaoban;
 
 public class Kd_info {
     private int kd_id;

@@ -1,4 +1,4 @@
-package com.xs.boot.entity;
+package com.xs.boot.entity.myKaoban;
 
 /**
  * Created by DELL on 2020/6/22.

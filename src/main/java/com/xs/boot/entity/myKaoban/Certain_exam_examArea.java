@@ -1,4 +1,4 @@
-package com.xs.boot.entity;
+package com.xs.boot.entity.myKaoban;
 
 public class Certain_exam_examArea {
     private int kc_code;

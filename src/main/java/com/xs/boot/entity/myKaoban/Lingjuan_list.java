@@ -1,4 +1,4 @@
-package com.xs.boot.entity;
+package com.xs.boot.entity.myKaoban;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;

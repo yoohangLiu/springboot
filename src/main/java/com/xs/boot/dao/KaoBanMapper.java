@@ -1,6 +1,6 @@
 package com.xs.boot.dao;
 
-import com.xs.boot.entity.*;
+import com.xs.boot.entity.myKaoban.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

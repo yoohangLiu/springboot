@@ -1,4 +1,4 @@
-package com.xs.boot.entity;
+package com.xs.boot.entity.myKaoban;
 
 public class Orgnization_memo {
     int kc_code;

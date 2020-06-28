@@ -1,6 +1,6 @@
 package com.xs.boot.controller;
 
-import com.xs.boot.entity.*;
+import com.xs.boot.entity.myKaoban.*;
 import com.xs.boot.service.IKaoBanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,13 +19,6 @@ public class KaoBanController {
     @Autowired
     private IKaoBanService kaoBanService;
 
-    @RequestMapping(value = "/setCapacity", method = {RequestMethod.POST})
-    public String jumpSet(@RequestBody Certain_exam_examArea kqu_id, Model model) {
-        model.addAttribute("kc_code", kqu_id.getKc_code());
-        model.addAttribute("type_name", kqu_id.getType_name());
-        model.addAttribute("kqu_id", kqu_id.getKqu_id());
-        return "violation_report";
-    }
     @RequestMapping("/seeKd")
     public String alter(){
         return "/kaoban/Kd_info_report";

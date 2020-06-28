@@ -2,9 +2,8 @@ package com.xs.boot.service;
 
 
 
-import com.xs.boot.entity.*;
+import com.xs.boot.entity.myKaoban.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface IKaoBanService {
