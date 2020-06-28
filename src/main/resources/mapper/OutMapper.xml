@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xs.boot.dao.OutMapper">
+
+    <select id="getList" resultType="OutData" parameterType="OutData">
+      SELECT
+       v.kc_code,v.type_name,o.name,COUNT(s.bk_course_id) sum
+       FROM total_exam_course v
+       LEFT JOIN courses o on v.course_id = o.course_id
+       LEFT JOIN student_bk s on v.kc_code = s.kc_code and v.type_name = s.type_name and v.course_id = s.bk_course_id
+       where v.kc_code=#{kc_code} and v.type_name =#{type_name}
+       GROUP BY s.bk_course_id
+
+    </select>
+
+    <select id="getExam" resultType="OutData">
+         select DISTINCT(kc_code), type_name from total_exam_course
+    </select>
+
+</mapper>

@@ -1,5 +1,9 @@
 package com.xs.boot.dao;
 
+import com.xs.boot.entity.Certain_exam_examArea;
+import com.xs.boot.entity.Certain_kqu_kd;
+import com.xs.boot.entity.Kd_info;
+import com.xs.boot.entity.Violist;
 import com.xs.boot.entity.myKaoban.*;
 import org.apache.ibatis.annotations.Mapper;
 

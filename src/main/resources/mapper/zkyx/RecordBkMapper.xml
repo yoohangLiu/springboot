@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xs.boot.dao.zkyx.RecordBkMapper">
+
+    <select id="count" parameterType="RecordBk" resultType="java.lang.Integer">
+        select count(*) from student_bk where kc_code = #{kc_code} and kqu_id = #{kqu_id}
+    </select>
+
+    <select id="count1" parameterType="RecordBk" resultType="java.lang.Integer">
+        select count(*) from student_bk where kc_code = #{kc_code} and type_name = #{type_name}
+    </select>
+
+    <select id="get_list" parameterType="RecordBk" resultType="RecordBk">
+        select * from student_bk where kc_code = #{kc_code} and type_name = #{type_name}
+    </select>
+
+    <update id="alter_kd" parameterType="RecordBk">
+        update student_bk set kd_id = #{kd_id} where student_id = #{student_id} and
+            kc_code = #{kc_code} and type_name = #{type_name} and
+            bk_major_id = #{bk_major_id} and bk_course_id = #{bk_course_id}
+    </update>
+
+
+
+</mapper>

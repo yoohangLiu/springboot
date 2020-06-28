@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xs.boot.dao.ExamMapper">
+    <insert id="insert" parameterType="Exam">
+        insert into exam(kc_code,type_name,creator_id,create_time) values(#{kc_code},#{type_name},#{creator_id},#{create_time})
+    </insert>
+
+    <select id="find_max" parameterType="Exam" resultType="Exam">
+        select kc_code from exam where type_name=#{type_name} order by kc_code desc limit 1
+    </select>
+
+    <select id="findExam" parameterType="Exam" resultType="Exam">
+        select * from exam where kc_code=#{kc_code} and type_name=#{type_name}
+    </select>
+
+    <select id="allExam" resultType="Exam">
+        select kc_code, type_name from exam
+    </select>
+
+    <update id="setExamTime" parameterType="Exam">
+        update exam
+        set bm_begin_time = #{bm_begin_time},
+            bm_end_time = #{bm_end_time},
+            xcqr_begin_time = #{xcqr_begin_time},
+            xcqr_end_time = #{xcqr_end_time},
+            sh_bk_s_time = #{sh_bk_s_time},
+            sh_bk_e_time = #{sh_bk_e_time},
+            yy_bk_s_time = #{yy_bk_s_time},
+            yy_bk_e_time = #{yy_bk_e_time},
+            dy_zw_s_time = #{dy_zw_s_time},
+            dy_zw_e_time = #{dy_zw_e_time},
+            exam_start_time = #{exam_start_time},
+            exam_end_time = #{exam_end_time}
+        where kc_code=#{kc_code} and type_name=#{type_name}
+    </update>
+
+    <update id="extExamTime" parameterType="Exam">
+        update exam
+        set sh_bk_e_time = #{sh_bk_e_time},
+        yy_bk_e_time = #{yy_bk_e_time}
+        where kc_code=#{kc_code} and type_name=#{type_name}
+    </update>
+
+    <update id="setSkBcTime" parameterType="Exam">
+        update exam
+        set bc_begin_time = #{bc_begin_time},
+            bc_end_time = #{bc_end_time}
+        where kc_code=#{kc_code} and type_name=#{type_name}
+    </update>
+
+    <select id="findExam_Kq" parameterType="Certain_exam_examArea" resultType="Certain_exam_examArea">
+        select *
+        from certain_exam_examarea
+        where kc_code=#{kc_code} and type_name=#{type_name} and kqu_id=#{kqu_id}
+    </select>
+
+    <update id="setSkXunkao" parameterType="Certain_exam_examArea">
+        update certain_exam_examarea
+        set xunkao_num = #{xunkao_num}
+        where kc_code=#{kc_code} and type_name=#{type_name} and kqu_id=#{kqu_id}
+    </update>
+
+    <select id="allEnKd" resultType="Kd_info">
+        select kd_name, post_code from total_kd where kd_type = 3
+    </select>
+
+    <insert id="addEnKd" parameterType="kd_info">
+        insert into total_kd(kd_name,post_code,kd_type) values(#{kd_name},#{post_code},3)
+    </insert>
+
+    <delete id="deleteEnKd" parameterType="kd_info">
+        delete from total_kd where kd_name=#{kd_name} and kd_type = 3
+    </delete>
+
+    <select id="allBL" resultType="Blacklist">
+        select * from black_list order by id desc
+    </select>
+
+    <insert id="addBL" parameterType="Blacklist">
+        insert into black_list(kc_code,type_name,school_id) values(#{kc_code},#{type_name},#{school_id})
+    </insert>
+
+    <delete id="deleteBL" parameterType="Blacklist">
+        delete from black_list where kc_code=#{kc_code} and type_name=#{type_name} and school_id=#{school_id}
+    </delete>
+
+    <insert id="setArrangetime" parameterType="Exam">
+        update exam set bm_begin_time = #{bm_begin_time},bm_end_time = #{bm_end_time} where kc_code = #{kc_code} and type_name = #{type_name}
+    </insert>
+
+    <insert id="setZkaoTime" parameterType="Exam">
+        update exam set dy_zkz_s_time = #{dy_zkz_s_time},dy_zkz_e_time = #{dy_zkz_e_time} where kc_code = #{kc_code} and type_name = #{type_name}
+    </insert>
+
+    <insert id="setJuandaispec" parameterType="Exam">
+        update exam set juandai_spec =#{juandai_spec} where kc_code = #{kc_code} and type_name = #{type_name}
+    </insert>
+
+    <select id="getArrangetime" resultType="Exam">
+        select kc_code,type_name from exam where bm_begin_time is null and bm_end_time is null
+    </select>
+
+    <select id="getJuandaispec" resultType="Exam">
+        select kc_code,type_name from exam where juandai_spec is null
+    </select>
+
+    <select id="getZkaoTime" resultType="Exam">
+        select kc_code,type_name from exam where dy_zkz_s_time is null and dy_zkz_e_time is null
+    </select>
+
+
+    <select id="getExam1" resultType="Exam">
+        select DISTINCT(kc_code),type_name  from certain_exam_examarea
+    </select>
+
+    <select id="getKqu" resultType="Exam" parameterType="Exam">
+        select e.kc_code,e.type_name,d.kqu_name,e.kqu_id,e.kqu_capacity
+        from certain_exam_examarea e
+        LEFT JOIN district d on e.kqu_id = concat(d.city_code , d.district_code)
+        where e.kc_code = #{kc_code} and e.type_name =#{type_name}
+    </select>
+
+    <insert id="addKquNum" parameterType="Exam">
+        update certain_exam_examarea set kqu_capacity = #{kqu_capacity} where kc_code = #{kc_code} and type_name =#{type_name} and kqu_id = #{kqu_id}
+    </insert>
+</mapper>

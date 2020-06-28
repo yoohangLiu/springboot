@@ -2,6 +2,10 @@ package com.xs.boot.service;
 
 
 
+import com.xs.boot.entity.Certain_exam_examArea;
+import com.xs.boot.entity.Certain_kqu_kd;
+import com.xs.boot.entity.Kd_info;
+import com.xs.boot.entity.Violist;
 import com.xs.boot.entity.myKaoban.*;
 
 import java.util.List;

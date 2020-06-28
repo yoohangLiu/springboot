@@ -1,0 +1,15 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xs.boot.dao.zkyx.GroupSignUpMapper">
+    <insert id="insert">
+    insert into student_bk(student_id, kc_code, type_name, bk_major, bk_course_id, kqu_id, target_school_id, op_time, pay_state)
+        VALUE(
+        #{student_id}, #{kc_code},
+        #{type_name},#{bk_major},
+        #{bk_course_id},#{kqu_id},
+        #{target_school_id},#{op_time},
+        #{pay_state}
+        )
+    </insert>
+
+</mapper>

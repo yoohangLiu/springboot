@@ -1,0 +1,10 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xs.boot.dao.zkyx.OtherMapper">
+
+    <insert id="insert" parameterType="Other" >
+        insert into graduation_practice(kc_code,type_name,school_id,path,kind) values (#{kc_code},#{type_name},#{school_id},#{path},#{kind})
+    </insert>
+
+
+</mapper>

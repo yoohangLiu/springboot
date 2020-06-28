@@ -18,7 +18,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <body class="skin-blue sidebar-mini">
   <div class="wrapper">
 
-    <!-- Main Header -->
+    <!-- 头部 -->
     <header class="main-header" id="top_bar">
       <!-- Logo -->
       <a href="/" class="logo">
@@ -104,116 +104,357 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- 菜单栏 -->
         <ul class="sidebar-menu">
+          <!-- 每个角色栏：分级呈现功能 -->
 
-          <!-- 每个大类分隔符 -->
-          <!-- TODO:测试完加上 v-show="user.user_type==对应数字" -->
-          <li v-show="user.user_type==1" class="header">考生报考(模块名字)</li>
-          <!-- 多级列表：根据实际情况修改，含【导航】的地方有子元素不加url -->
+          <!-- 角色：考生-->
+          <!-- TODO:测试完加上 v-show="user.user_type==1" -->
+          <li v-show="user.user_type==1" class="header">报名报考</li>
           <li v-show="user.user_type==1" class="treeview">
             <a href="#">
-              <span>第一层导航(有子元素，不加url)
+              <span>考生报名报考
                 <i class="iconfont icon-ziyuan pull-right"></i></span>
             </a>
             <ul class="treeview-menu" style="display: none;">
-              <li><a href="#">第二层</a></li>
+              <li><a href="/kaosheng/goto-personal-regist">个人报名</a></li>
+              <li><a href="/kaosheng/goto-personal-bk">个人报考</a></li>
+              <li><a href="/kaosheng/goto-personal-pay">个人缴费</a></li>
+              <li><a href="/kaosheng/goto-personal-seat-print">打印座位通知单</a></li>
+              <li><a href="/kaosheng/goto-personal-state-check">进度查看</a></li>
+              <li><a href="">违规记录</a></li>
+            </ul>
+          </li>
+          <!--FIXME:考生结束-->
+
+
+          <!-- 考务岗 1 -->
+          <!-- TODO:测试完加上 v-show="user.user_type==2" -->
+          <!-- 多级列表：根据实际情况修改，含【导航】的地方有子元素不加url -->
+          <li v-show="user.user_type==2" class="header">报名报考</li>
+          <li v-show="user.user_type==2" class="treeview">
+            <a href="#">
+              <span>报名报考管理
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="/exam/create">创建考试</a></li>
+              <li><a href="/exam/set">设置报名报考时限</a></li>
+              <li><a href="/exam/ext">延长报考时限</a></li>
+              <li><a href="/exam/show">查看考试</a></li>
+            </ul>
+          </li>
+          <!-- 考务岗 2 -->
+          <li v-show="user.user_type==2" class="header">考务管理</li>
+          <li v-show="user.user_type==2" class="treeview">
+            <a href="#">
+              <span>统考管理
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
               <li class="active">
                 <a href="#">
-                  <span>第二层导航
+                  <span>编场管理
                     <i class="iconfont icon-ziyuan pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu menu-open" style="display: block;">
-                  <li><a href="#">第三层</a></li>
-                  <li><a href="#">第三层</a></li>
-                  <li class="">
-                    <a href="#">
-                      <span>第三层导航
-                        <i class="iconfont icon-ziyuan pull-right"></i></span>
-                    </a>
-                    <ul class="treeview-menu menu-open" style="display: block;">
-                      <li><a href="#">第四层</a></li>
-                      <li><a href="#">第四层</a></li>
-                    </ul>
-                  </li>
+                  <li><a href="/exam/toArrangetime">设置编场时间</a></li>
+                  <li><a href="/exam/toKaochang">考场配置管理</a></li>
+                  <li><a href="/exam/toJuandai">卷袋规格管理</a></li>
+                  <li><a href="/exam/toZkao">设置准考证打印时间</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="/judge/toJudge">评卷管理</a>
+              </li>
+              <li class="active">
+                <a href="#">
+                  <span>违规上报
+                    <i class="iconfont icon-ziyuan pull-right"></i></span>
+                </a>
+                <ul class="treeview-menu menu-open" style="display: block;">
+                  <li><a href="/violation/toVio">违规情况查询</a></li>
+                  <li><a href="/violation/toList">违规处罚库管理</a></li>
+                </ul>
+              </li>
+              <li class="active">
+                <a href="#">
+                  <span>其它上报
+                    <i class="iconfont icon-ziyuan pull-right"></i></span>
+                </a>
+                <ul class="treeview-menu menu-open" style="display: block;">
+                  <li><a href="/exam/blacklist">合订册黑名单设置</a></li>
                 </ul>
               </li>
             </ul>
           </li>
+          <li v-show="user.user_type==2" class="treeview">
+            <a href="#">
+              <span>省考管理
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li class="active">
+                <a href="#">
+                  <span>编场管理
+                    <i class="iconfont icon-ziyuan pull-right"></i></span>
+                </a>
+                <ul class="treeview-menu menu-open" style="display: block;">
+                  <li><a href="/exam/set_skbc_time">设置时间单元</a></li>
+                  <li><a href="/exam/set_sk_xk_num">设置巡考数量</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="/judge/toJudge">评卷管理</a>
+              </li>
+            </ul>
+          </li>
+          <li v-show="user.user_type==2" class="treeview">
+            <a href="#">
+              <span>其它考试管理
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="/exam/EnKd">英语听说考点库管理</a></li>
+            </ul>
+          </li>
+          <li v-show="user.user_type==2" class="treeview">
+            <a href="#">
+              <span>数据统计与上报
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="/out/toList">上报数据导出</a></li>
+              <li class="active">
+                <a href="#">
+                  <span>统考报表
+                    <i class="iconfont icon-ziyuan pull-right"></i></span>
+                </a>
+                <ul class="treeview-menu menu-open" style="display: block;">
+                  <li><a href="/form/toCourselist">课程合订册统计</a></li>
+                  <li><a href="/form/toSchool">院校合订册统计</a></li>
+                  <li><a href="/form/toTime">考试日程统计</a></li>
+                  <li><a href="/form/toZJlist">卷袋信息与制卷数量统计</a></li>
+                  <li><a href="/form/toFenjuan">市州区县分卷统计</a></li>
+                </ul>
+              </li>
+              <li class="active">
+                <a href="#">
+                  <span>省考报表
+                    <i class="iconfont icon-ziyuan pull-right"></i></span>
+                </a>
+                <ul class="treeview-menu menu-open" style="display: block;">
+                  <li><a href="/stat/paper_q">制卷统计</a></li>
+                  <li><a href="/stat/sche_q">考试日程统计</a></li>
+                  <li><a href="/stat/kd_paper_q">考点分卷统计</a></li>
+                  <li><a href="/stat/bag_q">卷袋信息统计</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <!--FIXME:考务岗结束-->
 
-          <!-- 每个角色栏：分级呈现功能 -->
-
-
-          <!-- 角色：考办-->
-          <!-- 每个大类分隔符 -->
-          <!-- TODO:测试完加上 v-show="user.user_type==3 || user.user_type==4"   ,去掉后可直接右键使用浏览器查看，不用跑程序 -->
-          <li v-show="user.user_type==3 || user.user_type==4" class="header">考办</li>
-          <!-- 多级列表：根据实际情况修改，含【导航】的地方有子元素不加url -->
-          <li v-show="user.user_type==3 || user.user_type==4" class="treeview">
+          <!-- 角色：市州考办-->
+          <!-- TODO:测试完加上 v-show="user.user_type==3" -->
+          <li v-show="user.user_type==3" class="header">报名报考</li>
+          <li v-show="user.user_type==3" class="treeview">
             <a href="#">
               <span>报名报考管理(考办)
                 <i class="iconfont icon-ziyuan pull-right"></i></span>
             </a>
             <ul class="treeview-menu" style="display: none;">
-              <li><a href="">设置开考考区</a></li>
-              <li><a href="">审查资格</a></li>
-              <li><a href="kb_zkz/zkz">查看准考证</a></li>
+              <li><a href="/kaoban/seeShizhouSetCertainArea">设置开考考区</a></li>
+              <li><a href="/kaoban/seeCheckKaosheng">审查资格</a></li>
+              <li><a href="/kb_zkz/zkz">查看准考证</a></li>
             </ul>
-          </li><!--考办报名报考结束-->
-
-          <!-- TODO:测试完加上 v-show="user.user_type==3 || user.user_type==4"   ,去掉后可直接右键使用浏览器查看，不用跑程序 -->
-          <li v-show="user.user_type==3 || user.user_type==4" class="treeview">
+          </li>
+          <!--考办报名报考结束-->
+          <li v-show="user.user_type==3" class="header">考务管理</li>
+          <li v-show="user.user_type==3" class="treeview">
             <a href="#">
               <span>统考编场管理(考办)
                 <i class="iconfont icon-ziyuan pull-right"></i></span>
             </a>
             <ul class="treeview-menu" style="display: none;">
-              <li><a href="">考次考点设置</a></li>
-              <li><a href="">考场数预排</a></li>
-              <li><a href="statistic/kbbc">考点编排</a></li>
+              <li><a href="/kaoban/seeTotalKd">考点库管理</a></li>
+              <li><a href="/kaoban/seeSetKcKd">考次考点设置</a></li>
+              <li><a href="/kaoban/seeYupai">考场数预排</a></li>
+              <li><a href="/statistic/kbbc">考点编排</a></li>
             </ul>
-          </li><!--考办统考编场管理结束-->
-
-          <!-- TODO:测试完加上 v-show="user.user_type==3 || user.user_type==4"   ,去掉后可直接右键使用浏览器查看，不用跑程序 -->
-          <li v-show="user.user_type==3 || user.user_type==4" class="treeview">
+          </li>
+          <!--考办统考编场管理结束-->
+          <li v-show="user.user_type==3" class="treeview">
             <a href="#">
               <span>统考违规上报(考办)
                 <i class="iconfont icon-ziyuan pull-right"></i></span>
             </a>
             <ul class="treeview-menu" style="display: none;">
-              <li><a href="">上报违规情况</a></li>
-              <li><a href="">违规情况查询</a></li>
+              <li><a href="/kaoban/seeReportVio">违规情况查询并上报</a></li>
             </ul>
-          </li><!--考办违规上报结束-->
-
-          <!-- TODO:测试完加上 v-show="user.user_type==3 || user.user_type==4"   ,去掉后可直接右键使用浏览器查看，不用跑程序 -->
-          <li v-show="user.user_type==3 || user.user_type==4" class="treeview">
+          </li>
+          <!--考办违规上报结束-->
+          <li v-show="user.user_type==3" class="treeview">
             <a href="#">
               <span>统考其它上报(考办)
                 <i class="iconfont icon-ziyuan pull-right"></i></span>
             </a>
             <ul class="treeview-menu" style="display: none;">
-              <li><a href="">上报考场容量</a></li>
-              <li><a href="">上报巡考人数</a></li>
-              <li><a href="">上报考点信息</a></li>
-              <li><a href="">上报组织备案信息</a></li>
-              <li><a href="">上报领卷人员</a></li>
+              <li><a href="/kaoban/seeCapacity">上报考场容量和巡考人数</a></li>
+              <li><a href="/kaoban/seeKd">上报考点信息</a></li>
+              <li><a href="/kaoban/seeOrgnization">上报组织备案信息</a></li>
+              <li><a href="/kaoban/seeLingjuan">上报领卷人员</a></li>
             </ul>
-          </li><!--考办其它上报结束-->
-
-          <!-- TODO:测试完加上 v-show="user.user_type==3 || user.user_type==4"   ,去掉后可直接右键使用浏览器查看，不用跑程序 -->
-          <li v-show="user.user_type==3 || user.user_type==4" class="treeview">
+          </li>
+          <!--考办其它上报结束-->
+          <li v-show="user.user_type==3" class="treeview">
             <a href="#">
               <span>统考报表(考办)
                 <i class="iconfont icon-ziyuan pull-right"></i></span>
             </a>
             <ul class="treeview-menu" style="display: none;">
-              <li><a href="statistic/examdate">考试日程统计</a></li>
-              <li><a href="statistic/toJDlist">卷袋信息统计</a></li>
-              <li><a href="statistic/toFenjuan">市州区县分卷统计</a></li>
+              <li><a href="/statistic/examdate">考试日程统计</a></li>
+              <li><a href="/statistic/toJDlist">卷袋信息统计</a></li>
+              <li><a href="/statistic/toFenjuan">市州区县分卷统计</a></li>
             </ul>
-          </li><!--考办统考报表 结束-->
+          </li>
+          <!--FIXME:市州考办结束-->
+
+          <!-- 角色：区县考办-->
+          <!-- TODO:测试完加上 v-show="user.user_type==4" -->
+          <li v-show="user.user_type==4" class="header">报名报考</li>
+          <li v-show="user.user_type==4" class="treeview">
+            <a href="#">
+              <span>报名报考管理(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="/kaoban/seeCheckKaosheng">审查资格</a></li>
+              <li><a href="/kb_zkz/zkz">查看准考证</a></li>
+            </ul>
+          </li>
+          <!--考办报名报考结束-->
+          <li v-show="user.user_type==4" class="header">考务管理</li>
+          <li v-show="user.user_type==4" class="treeview">
+            <a href="#">
+              <span>统考编场管理(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="/kaoban/seeSetKcKd">考次考点设置</a></li>
+              <li><a href="/kaoban/seeYupai">考场数预排</a></li>
+              <li><a href="/statistic/kbbc">考点编排</a></li>
+            </ul>
+          </li>
+          <!--考办统考编场管理结束-->
+          <li v-show="user.user_type==4" class="treeview">
+            <a href="#">
+              <span>统考违规上报(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="/kaoban/seeReportVio">违规情况查询与上报违规情况</a></li>
+            </ul>
+          </li>
+          <!--考办违规上报结束-->
+          <li v-show="user.user_type==4" class="treeview">
+            <a href="#">
+              <span>统考其它上报(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="/kaoban/seeCapacity">上报考场容量和巡考人数</a></li>
+              <li><a href="/kaoban/seeKd">上报考点信息</a></li>
+              <li><a href="/kaoban/seeOrgnization">上报组织备案信息</a></li>
+              <li><a href="/kaoban/seeLingjuan">上报领卷人员</a></li>
+            </ul>
+          </li>
+          <!--考办其它上报结束-->
+          <li v-show="user.user_type==4" class="treeview">
+            <a href="#">
+              <span>统考报表(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="/statistic/examdate">考试日程统计</a></li>
+              <li><a href="/statistic/toJDlist">卷袋信息统计</a></li>
+              <li><a href="/statistic/toFenjuan">市州区县分卷统计</a></li>
+            </ul>
+          </li>
+          <!--FIXME:区县考办结束-->
+
+          <!-- 主考院校模块 1 -->
+          <!-- TODO:测试完加上 v-show="user.user_type==5" -->
+          <li v-show="user.user_type==5" class="header">报名报考</li>
+          <li v-show="user.user_type==5" class="treeview">
+            <a href="#">
+              <span>报名报考管理
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="/zkyx/set_white_list">设置白名单</a></li>
+              <li><a href=" /group/group_register">集体报名</a></li>
+              <li><a href="/group/group_signup">集体报考</a></li>
+            </ul>
+          </li>
+          <!-- 主考院校模块 2 -->
+          <li v-show="user.user_type==5" class="header">考务管理</li>
+          <li v-show="user.user_type==5" class="treeview">
+            <a href="#">
+              <span>省考管理
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li class="active">
+                <a href="#">
+                  <span>编场管理
+                    <i class="iconfont icon-ziyuan pull-right"></i></span>
+                </a>
+                <ul class="treeview-menu menu-open" style="display: block;">
+                  <li><a href="/zkyx/query_student">参考考生查询</a></li>
+                  <li><a href="/zkyx/set_kckd">考点库管理</a></li>
+                  <li><a href="/zkyx/set_exam_point">考点设置</a></li>
+                  <li><a href="/zkyx/alter_county">考生考区调整</a></li>
+                  <li><a href="/zkyx/arrange_kc">考场数预排</a></li>
+                  <li><a href="/zkyx/final_arrange">考场编排</a></li>
+                </ul>
+              </li>
+              <li class="active">
+                <a href="#">
+                  <span>违规上报
+                    <i class="iconfont icon-ziyuan pull-right"></i></span>
+                </a>
+                <ul class="treeview-menu menu-open" style="display: block;">
+                  <li><a href="/sk_violation/toVio">查询违规信息</a></li>
+                  <li><a href="/sk_violation/toAddpost ">上报违规情况</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li v-show="user.user_type==5" class="treeview">
+            <a href="#">
+              <span>其他考试管理
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="/zkyx/english_site">英语听说考点设置</a></li>
+              <li><a href="/sk_other/graduation" />上报毕业论文答辩计划</a></li>
+              <li><a href="/sk_other/practice">上报实践课程考核计划</a></li>
+            </ul>
+          </li>
+          <li v-show="user.user_type==5" class="treeview">
+            <a href="#">
+              <span>省考报表
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="/stat/paper_q">制卷统计</a></li>
+              <li><a href="/stat/sche_q">考试日程统计</a></li>
+              <li><a href="/stat/kd_paper_q">考点分卷统计</a></li>
+              <li><a href="/stat/bag_q">卷袋信息统计</a></li>
+            </ul>
+          </li>
+          <!--FIXME:主考院校结束-->
+
 
           <!-- 底部操作按钮栏 -->
-          <!-- 每个大类分隔符 -->
           <li class="header">其他</li>
           <li>
             <!-- 一层示例开始-->

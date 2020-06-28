@@ -1,6 +1,10 @@
 package com.xs.boot.service.impl;
 
 import com.xs.boot.dao.KaoBanMapper;
+import com.xs.boot.entity.Certain_exam_examArea;
+import com.xs.boot.entity.Certain_kqu_kd;
+import com.xs.boot.entity.Kd_info;
+import com.xs.boot.entity.Violist;
 import com.xs.boot.entity.myKaoban.*;
 import com.xs.boot.service.IKaoBanService;
 import org.springframework.stereotype.Service;

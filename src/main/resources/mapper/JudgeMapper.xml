@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xs.boot.dao.JudgeMapper">
+
+    <select id="getjudgeList" resultType="Judge">
+       SELECT
+       v.kc_code,v.type_name,v.course_id,o.name,l.major_id,m.major_name,j.school_id,j.judge_begin,j.judge_end,j.judge_teacher_num,z.school_name
+       FROM total_exam_course v
+       LEFT JOIN courses o on v.course_id = o.course_id
+       LEFT JOIN major_course l on v.course_id = l.course_id
+       LEFT JOIN major m on l.major_id = m.major_id
+      LEFT JOIN certain_judge_school_course j on v.kc_code = j.kc_code and v.type_name = j.type_name and m.major_id = j.major_id and v.course_id = j.course_id
+      LEFT JOIN zhukao_school z on z.school_id = j.school_id
+       where v.type_name = 1 or v.type_name=2
+    </select>
+
+    <select id="getschoolList" resultType="Judge">
+        select * from zhukao_school
+    </select>
+
+    <insert id="addJudge" parameterType="Judge">
+        insert into certain_judge_school_course(kc_code,type_name,school_id,major_id,course_id,judge_begin,judge_end,judge_teacher_num) VALUES (#{kc_code},#{type_name},#{school_id},#{major_id},#{course_id},#{judge_begin},#{judge_end},#{judge_teacher_num})
+    </insert>
+
+</mapper>

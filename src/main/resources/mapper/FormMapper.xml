@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xs.boot.dao.FormMapper">
+    <select id="getZJlist" resultType="Form" parameterType="Form">
+        SELECT
+        v.kc_code,v.type_name,v.course_id,o.name,e.juandai_spec,COUNT(s.bk_course_id) sum
+        FROM total_exam_course v
+        LEFT JOIN courses o on v.course_id = o.course_id
+        LEFT JOIN exam e on v.kc_code = e.kc_code and v.type_name = e.type_name
+        LEFT JOIN student_bk s on v.kc_code = s.kc_code and v.type_name = s.type_name and v.course_id = s.bk_course_id
+        where v.kc_code=#{kc_code} and v.type_name =#{type_name} and e.juandai_spec !=0
+        GROUP BY s.bk_course_id
+    </select>
+
+    <select id="getExam" resultType="Form">
+        select DISTINCT(kc_code), type_name from total_exam_course where type_name =1
+    </select>
+
+    <select id="getCourselist" resultType="Form" parameterType="Form">
+        SELECT
+        v.kc_code,v.type_name,v.course_id,c.name,COUNT(e.kqu_id) sum_kqu
+        FROM total_exam_course v
+        LEFT JOIN courses c on v.course_id = c.course_id
+        LEFT JOIN certain_exam_examarea e on v.kc_code = e.kc_code and v.type_name = e.type_name
+        where v.kc_code=#{kc_code} and v.type_name =#{type_name}
+        GROUP BY v.course_id
+    </select>
+
+    <select id="getSchool" resultType="Form">
+        select kd_id,kd_name from total_kd
+    </select>
+
+    <select id="getFenjuan" resultType="Form" parameterType="Form">
+        select
+        v.kc_code,v.type_name,o.name,d.kqu_name,count(student_id) sum_fenjuan
+        from student_bk v
+       LEFT JOIN courses o on v.bk_course_id = o.course_id
+       LEFT JOIN district d on v.kqu_id = concat(d.city_code , d.district_code)
+       where v.kc_code = #{kc_code} and v.type_name = #{type_name}
+       GROUP BY v.bk_course_id,v.kqu_id
+    </select>
+
+    <select id="getTime" resultType="Form" parameterType="Form">
+        SELECT
+            v.kc_code,v.type_name,v.kd_id,k.kd_name,v.start_time,v.end_time
+            FROM certain_kaotang_info v
+            LEFT JOIN total_kd k on v.kd_id = k.kd_id
+            where v.kc_code=#{kc_code} and v.type_name = #{type_name}
+    </select>
+
+</mapper>

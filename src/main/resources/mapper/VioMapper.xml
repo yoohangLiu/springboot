@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xs.boot.dao.VioMapper">
+<select id="findAll" resultType="Vio">
+    select * from violation_code
+</select>
+
+<insert id="addVio" parameterType="Vio" >
+    insert into violation_code(violation_name,suggest_deal) values (#{violation_name},#{suggest_deal})
+</insert>
+
+    <select id="findpostAll" resultType="Violist">
+       SELECT
+       v.id,v.kc_code,v.exam_type,o.name,k.start_time,k.end_time,v.zkao_num,s.stu_name,l.violation_name,l.suggest_deal,v.shangbao_state,v.memo,d.kd_name,v.kaochang_id
+       FROM certain_violation v
+       LEFT JOIN courses o on v.course_id = o.course_id
+       LEFT JOIN certain_kaotang_info k on v.kaotang_code = k.kaotang_code and v.kc_code = k.kc_code and v.exam_type = k.type_name and v.kqu_id = k.kqu_id and v.kd_id = k.kd_id and v.kaochang_id = k.kaochang_id
+       LEFT JOIN student_info s on v.zkao_num = s.zkao_num
+       LEFT JOIN total_kd d on v.kd_id = d.kd_id
+       LEFT JOIN violation_code l on v.jianyi_punish_id = l.violation_id
+    </select>
+
+</mapper>

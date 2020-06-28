@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xs.boot.dao.zkyx.KcKdMapper">
+
+    <insert id="insert" parameterType="KcKd">
+         insert into certain_kqu_kd(kc_code, type_name, kqu_id, kd_id) values(#{kc_code},
+          #{type_name}, #{kqu_id}, #{kd_id})
+    </insert>
+
+    <delete id="delete" parameterType="KcKd">
+        delete from certain_kqu_kd where kc_code = #{kc_code} and type_name = #{type_name} and
+        kqu_id = #{kqu_id} and kd_id = #{kd_id}
+    </delete>
+
+    <select id="count" parameterType="KcKd" resultType="java.lang.Integer">
+        select IFNULL(sum(kaochang_num), 0) from certain_kqu_kd where kc_code = #{kc_code} and kqu_id = #{kqu_id};
+    </select>
+
+    <select id="chk" parameterType="KcKd" resultType="java.lang.Integer">
+        select count(*) from certain_kqu_kd where kc_code = #{kc_code} and kqu_id = #{kqu_id};
+    </select>
+
+    <insert id="English_insert" parameterType="KcKd">
+        insert into certain_kqu_kd(kc_code, type_name, kqu_id, kd_id) values(#{kc_code},
+          3, #{kqu_id}, #{kd_id})
+    </insert>
+
+    <delete id="English_delete" parameterType="KcKd">
+        delete from certain_kqu_kd where kc_code = #{kc_code} and type_name = 3 and
+        kqu_id = #{kqu_id} and kd_id = #{kd_id}
+    </delete>
+
+
+</mapper>

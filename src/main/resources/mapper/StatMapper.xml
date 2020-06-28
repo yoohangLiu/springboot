@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xs.boot.dao.StatMapper">
+    <select id="paper_query" parameterType="Paper" resultType="Paper">
+        SELECT kc_code,type_name,bk_course_id as course_id,COUNT(student_id) as stu_num
+        FROM student_bk
+        WHERE kc_code = #{kc_code} and type_name = #{type_name}
+        GROUP BY bk_course_id
+    </select>
+
+    <select id="sche_query" parameterType="Sche" resultType="Sche">
+        select exam.kc_code as kc_code,exam.type_name as type_name,total_kd.kd_name as kd_name,exam_start_time as start_time,exam_end_time as end_time
+        from exam,certain_kqu_kd,total_kd
+        where exam.kc_code = #{kc_code} and exam.type_name = #{type_name} and certain_kqu_kd.kc_code = #{kc_code} and certain_kqu_kd.type_name = #{type_name} and certain_kqu_kd.kd_id = total_kd.kd_id
+    </select>
+
+    <select id="kd_paper_query" parameterType="Paper" resultType="Paper">
+        SELECT student_bk.kc_code as kc_code,
+        student_bk.type_name as type_name,
+        student_bk.bk_course_id as course_id,
+        total_kd.kd_name as kd_name,
+        COUNT(certain_seat_arrange.zkao_num) as stu_num
+        FROM certain_seat_arrange,total_kd,student_bk
+        WHERE student_bk.kc_code = #{kc_code}
+        and student_bk.type_name = #{type_name}
+        and certain_seat_arrange.kc_code = #{kc_code}
+        and certain_seat_arrange.type_name = #{type_name}
+        and student_bk.kqu_id = certain_seat_arrange.kqu_id
+        and certain_seat_arrange.kd_id = total_kd.kd_id
+        and certain_seat_arrange.student_id = student_bk.student_id
+        GROUP BY student_bk.bk_course_id,certain_seat_arrange.kd_id
+    </select>
+</mapper>

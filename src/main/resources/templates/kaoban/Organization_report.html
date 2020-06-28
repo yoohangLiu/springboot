@@ -36,212 +36,457 @@
 <body class="skin-blue sidebar-mini">
 <div class="wrapper">
 
-    <!-- Main Header -->
-    <header class="main-header">
-
+    <!-- 头部 -->
+    <header class="main-header" id="top_bar">
         <!-- Logo -->
-        <a href="../index2.html" class="logo">
+        <a href="/" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>LT</span>
+            <span class="logo-mini"><b>自考</b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>LTE</span>
+            <span class="logo-lg"><b>自学考试 </b>考务管理</span>
         </a>
 
-        <!-- Header Navbar -->
+        <!-- 头部导航 -->
         <nav class="navbar navbar-static-top" role="navigation">
-            <!-- Sidebar toggle button-->
+            <!-- 打开左侧导航栏按钮 -->
             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                <span class="sr-only">Toggle navigation</span>
+                <span class="sr-only">左侧导航栏</span>
             </a>
-            <!-- Navbar Right Menu -->
+
+            <!-- 头部：右侧导航栏 -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <!-- Messages: style can be found in dropdown.less-->
-                    <li class="dropdown messages-menu">
-                        <!-- Menu toggle button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="label label-success">4</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 4 messages</li>
-                            <li>
-                                <!-- inner menu: contains the messages -->
-                                <ul class="menu">
-                                    <li><!-- start message -->
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <!-- User Image -->
-                                                <img src="../static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
-                                            </div>
-                                            <!-- Message title and timestamp -->
-                                            <h4>
-                                                Support Team
-                                                <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                            </h4>
-                                            <!-- The message -->
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li><!-- end message -->
-                                </ul><!-- /.menu -->
-                            </li>
-                            <li class="footer"><a href="#">See All Messages</a></li>
-                        </ul>
-                    </li><!-- /.messages-menu -->
-
-                    <!-- Notifications Menu -->
-                    <li class="dropdown notifications-menu">
-                        <!-- Menu toggle button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning">10</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 10 notifications</li>
-                            <li>
-                                <!-- Inner Menu: contains the notifications -->
-                                <ul class="menu">
-                                    <li><!-- start notification -->
-                                        <a href="#">
-                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                        </a>
-                                    </li><!-- end notification -->
-                                </ul>
-                            </li>
-                            <li class="footer"><a href="#">View all</a></li>
-                        </ul>
-                    </li>
-                    <!-- Tasks Menu -->
-                    <li class="dropdown tasks-menu">
-                        <!-- Menu Toggle Button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-flag-o"></i>
-                            <span class="label label-danger">9</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 9 tasks</li>
-                            <li>
-                                <!-- Inner menu: contains the tasks -->
-                                <ul class="menu">
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <!-- Task title and progress text -->
-                                            <h3>
-                                                Design some buttons
-                                                <small class="pull-right">20%</small>
-                                            </h3>
-                                            <!-- The progress bar -->
-                                            <div class="progress xs">
-                                                <!-- Change the css width attribute to simulate progress -->
-                                                <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">20% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li><!-- end task item -->
-                                </ul>
-                            </li>
-                            <li class="footer">
-                                <a href="#">View all tasks</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- User Account Menu -->
+                    <!-- 用户信息 -->
                     <li class="dropdown user user-menu">
-                        <!-- Menu Toggle Button -->
+                        <!-- 响应式设置 -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="../static/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                            <img :src="user.stu_img" class="user-image" alt="User Image" />
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">Alexander Pierce</span>
+                            <span class="hidden-xs">{{user.user_type==1?user.stu_name:user.operator_name}}</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <!-- The user image in the menu -->
+                            <!-- 用户基本信息 -->
                             <li class="user-header">
-                                <img src="../static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                                <img :src="user.stu_img" class="img-circle" alt="User Image" />
                                 <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
+                                    {{user.user_type==1?user.stu_name:user.operator_name}}
+                                    <small>{{user.user_type_name}}</small>
                                 </p>
                             </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
-                                </div>
-                            </li>
-                            <!-- Menu Footer-->
+                            <!-- 点击头像 弹出-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a :href="personal_details_url" class="btn btn-default btn-flat">个人</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a :href="logout_url" class="btn btn-default btn-flat">登出</a>
                                 </div>
                             </li>
                         </ul>
-                    </li>
-                    <!-- Control Sidebar Toggle Button -->
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
 
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-
+    <!-- 左侧边栏 -->
+    <aside class="main-sidebar" id="left_bar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-
-            <!-- Sidebar user panel (optional) -->
+            <!-- 用户面板 -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="../static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                    <!-- 动态设置头像 -->
+                    <img :src="user.stu_img" class="img-circle" alt="User Image" />
                 </div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
-                    <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <!-- 用户姓名 -->
+                    <p>{{user.user_type==1?user.stu_name:user.operator_name}}</p>
+                    <!-- 用户角色 -->
+                    <a href="#"><i class="iconfont icon-denglu1" style="margin-right: 7px;"></i>{{user.user_type_name}}</a>
                 </div>
             </div>
 
-            <!-- search form (Optional) -->
+            <!-- 搜索框 -->
             <form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search..."/>
+                    <input type="text" name="q" class="form-control" placeholder="搜索..." />
                     <span class="input-group-btn">
-                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-              </span>
+              <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i
+                      class="glyphicon glyphicon-search"></i></button>
+            </span>
                 </div>
             </form>
             <!-- /.search form -->
 
-            <!-- Sidebar Menu -->
+            <!-- 菜单栏 -->
             <ul class="sidebar-menu">
-                <li class="header">HEADER</li>
-                <!-- Optionally, you can add icons to the links -->
-                <!--a标签调整示例-->
-                <li class="active"><a href="/"><i class='fa fa-link'></i> <span>首页</span></a></li>
-                <li><a href="/todo"><i class='fa fa-link'></i> <span>todoApp</span></a></li>
-                <li class="treeview">
-                    <a href="#"><i class='fa fa-link'></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a href="#">Link in level 2</a></li>
-                        <li><a href="#">Link in level 2</a></li>
+                <!-- 每个角色栏：分级呈现功能 -->
+
+                <!-- 角色：考生-->
+                <!-- TODO:测试完加上 v-show="user.user_type==1" -->
+                <li v-show="user.user_type==1" class="header">报名报考</li>
+                <li v-show="user.user_type==1" class="treeview">
+                    <a href="#">
+              <span>考生报名报考
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="/kaosheng/goto-personal-regist">个人报名</a></li>
+                        <li><a href="/kaosheng/goto-personal-bk">个人报考</a></li>
+                        <li><a href="/kaosheng/goto-personal-pay">个人缴费</a></li>
+                        <li><a href="/kaosheng/goto-personal-seat-print">打印座位通知单</a></li>
+                        <li><a href="/kaosheng/goto-personal-state-check">进度查看</a></li>
+                        <li><a href="">违规记录</a></li>
                     </ul>
                 </li>
-            </ul><!-- /.sidebar-menu -->
-        </section>
-        <!-- /.sidebar -->
+                <!--FIXME:考生结束-->
+
+
+                <!-- 考务岗 1 -->
+                <!-- TODO:测试完加上 v-show="user.user_type==2" -->
+                <!-- 多级列表：根据实际情况修改，含【导航】的地方有子元素不加url -->
+                <li v-show="user.user_type==2" class="header">报名报考</li>
+                <li v-show="user.user_type==2" class="treeview">
+                    <a href="#">
+              <span>报名报考管理
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="/exam/create">创建考试</a></li>
+                        <li><a href="/exam/set">设置报名报考时限</a></li>
+                        <li><a href="/exam/ext">延长报考时限</a></li>
+                        <li><a href="/exam/show">查看考试</a></li>
+                    </ul>
+                </li>
+                <!-- 考务岗 2 -->
+                <li v-show="user.user_type==2" class="header">考务管理</li>
+                <li v-show="user.user_type==2" class="treeview">
+                    <a href="#">
+              <span>统考管理
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li class="active">
+                            <a href="#">
+                  <span>编场管理
+                    <i class="iconfont icon-ziyuan pull-right"></i></span>
+                            </a>
+                            <ul class="treeview-menu menu-open" style="display: block;">
+                                <li><a href="/exam/toArrangetime">设置编场时间</a></li>
+                                <li><a href="/exam/toKaochang">考场配置管理</a></li>
+                                <li><a href="/exam/toJuandai">卷袋规格管理</a></li>
+                                <li><a href="/exam/toZkao">设置准考证打印时间</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/judge/toJudge">评卷管理</a>
+                        </li>
+                        <li class="active">
+                            <a href="#">
+                  <span>违规上报
+                    <i class="iconfont icon-ziyuan pull-right"></i></span>
+                            </a>
+                            <ul class="treeview-menu menu-open" style="display: block;">
+                                <li><a href="/violation/toVio">违规情况查询</a></li>
+                                <li><a href="/violation/toList">违规处罚库管理</a></li>
+                            </ul>
+                        </li>
+                        <li class="active">
+                            <a href="#">
+                  <span>其它上报
+                    <i class="iconfont icon-ziyuan pull-right"></i></span>
+                            </a>
+                            <ul class="treeview-menu menu-open" style="display: block;">
+                                <li><a href="/exam/blacklist">合订册黑名单设置</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li v-show="user.user_type==2" class="treeview">
+                    <a href="#">
+              <span>省考管理
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li class="active">
+                            <a href="#">
+                  <span>编场管理
+                    <i class="iconfont icon-ziyuan pull-right"></i></span>
+                            </a>
+                            <ul class="treeview-menu menu-open" style="display: block;">
+                                <li><a href="/exam/set_skbc_time">设置时间单元</a></li>
+                                <li><a href="/exam/set_sk_xk_num">设置巡考数量</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/judge/toJudge">评卷管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li v-show="user.user_type==2" class="treeview">
+                    <a href="#">
+              <span>其它考试管理
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="/exam/EnKd">英语听说考点库管理</a></li>
+                    </ul>
+                </li>
+                <li v-show="user.user_type==2" class="treeview">
+                    <a href="#">
+              <span>数据统计与上报
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="/out/toList">上报数据导出</a></li>
+                        <li class="active">
+                            <a href="#">
+                  <span>统考报表
+                    <i class="iconfont icon-ziyuan pull-right"></i></span>
+                            </a>
+                            <ul class="treeview-menu menu-open" style="display: block;">
+                                <li><a href="/form/toCourselist">课程合订册统计</a></li>
+                                <li><a href="/form/toSchool">院校合订册统计</a></li>
+                                <li><a href="/form/toTime">考试日程统计</a></li>
+                                <li><a href="/form/toZJlist">卷袋信息与制卷数量统计</a></li>
+                                <li><a href="/form/toFenjuan">市州区县分卷统计</a></li>
+                            </ul>
+                        </li>
+                        <li class="active">
+                            <a href="#">
+                  <span>省考报表
+                    <i class="iconfont icon-ziyuan pull-right"></i></span>
+                            </a>
+                            <ul class="treeview-menu menu-open" style="display: block;">
+                                <li><a href="/stat/paper_q">制卷统计</a></li>
+                                <li><a href="/stat/sche_q">考试日程统计</a></li>
+                                <li><a href="/stat/kd_paper_q">考点分卷统计</a></li>
+                                <li><a href="/stat/bag_q">卷袋信息统计</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <!--FIXME:考务岗结束-->
+
+                <!-- 角色：市州考办-->
+                <!-- TODO:测试完加上 v-show="user.user_type==3" -->
+                <li v-show="user.user_type==3" class="header">报名报考</li>
+                <li v-show="user.user_type==3" class="treeview">
+                    <a href="#">
+              <span>报名报考管理(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="/kaoban/seeShizhouSetCertainArea">设置开考考区</a></li>
+                        <li><a href="/kaoban/seeCheckKaosheng">审查资格</a></li>
+                        <li><a href="/kb_zkz/zkz">查看准考证</a></li>
+                    </ul>
+                </li>
+                <!--考办报名报考结束-->
+                <li v-show="user.user_type==3" class="header">考务管理</li>
+                <li v-show="user.user_type==3" class="treeview">
+                    <a href="#">
+              <span>统考编场管理(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="/kaoban/seeTotalKd">考点库管理</a></li>
+                        <li><a href="/kaoban/seeSetKcKd">考次考点设置</a></li>
+                        <li><a href="/kaoban/seeYupai">考场数预排</a></li>
+                        <li><a href="/statistic/kbbc">考点编排</a></li>
+                    </ul>
+                </li>
+                <!--考办统考编场管理结束-->
+                <li v-show="user.user_type==3" class="treeview">
+                    <a href="#">
+              <span>统考违规上报(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="/kaoban/seeReportVio">违规情况查询并上报</a></li>
+                    </ul>
+                </li>
+                <!--考办违规上报结束-->
+                <li v-show="user.user_type==3" class="treeview">
+                    <a href="#">
+              <span>统考其它上报(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="/kaoban/seeCapacity">上报考场容量和巡考人数</a></li>
+                        <li><a href="/kaoban/seeKd">上报考点信息</a></li>
+                        <li><a href="/kaoban/seeOrgnization">上报组织备案信息</a></li>
+                        <li><a href="/kaoban/seeLingjuan">上报领卷人员</a></li>
+                    </ul>
+                </li>
+                <!--考办其它上报结束-->
+                <li v-show="user.user_type==3" class="treeview">
+                    <a href="#">
+              <span>统考报表(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="/statistic/examdate">考试日程统计</a></li>
+                        <li><a href="/statistic/toJDlist">卷袋信息统计</a></li>
+                        <li><a href="/statistic/toFenjuan">市州区县分卷统计</a></li>
+                    </ul>
+                </li>
+                <!--FIXME:市州考办结束-->
+
+                <!-- 角色：区县考办-->
+                <!-- TODO:测试完加上 v-show="user.user_type==4" -->
+                <li v-show="user.user_type==4" class="header">报名报考</li>
+                <li v-show="user.user_type==4" class="treeview">
+                    <a href="#">
+              <span>报名报考管理(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="/kaoban/seeCheckKaosheng">审查资格</a></li>
+                        <li><a href="/kb_zkz/zkz">查看准考证</a></li>
+                    </ul>
+                </li>
+                <!--考办报名报考结束-->
+                <li v-show="user.user_type==4" class="header">考务管理</li>
+                <li v-show="user.user_type==4" class="treeview">
+                    <a href="#">
+              <span>统考编场管理(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="/kaoban/seeSetKcKd">考次考点设置</a></li>
+                        <li><a href="/kaoban/seeYupai">考场数预排</a></li>
+                        <li><a href="/statistic/kbbc">考点编排</a></li>
+                    </ul>
+                </li>
+                <!--考办统考编场管理结束-->
+                <li v-show="user.user_type==4" class="treeview">
+                    <a href="#">
+              <span>统考违规上报(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="/kaoban/seeReportVio">违规情况查询与上报违规情况</a></li>
+                    </ul>
+                </li>
+                <!--考办违规上报结束-->
+                <li v-show="user.user_type==4" class="treeview">
+                    <a href="#">
+              <span>统考其它上报(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="/kaoban/seeCapacity">上报考场容量和巡考人数</a></li>
+                        <li><a href="/kaoban/seeKd">上报考点信息</a></li>
+                        <li><a href="/kaoban/seeOrgnization">上报组织备案信息</a></li>
+                        <li><a href="/kaoban/seeLingjuan">上报领卷人员</a></li>
+                    </ul>
+                </li>
+                <!--考办其它上报结束-->
+                <li v-show="user.user_type==4" class="treeview">
+                    <a href="#">
+              <span>统考报表(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="/statistic/examdate">考试日程统计</a></li>
+                        <li><a href="/statistic/toJDlist">卷袋信息统计</a></li>
+                        <li><a href="/statistic/toFenjuan">市州区县分卷统计</a></li>
+                    </ul>
+                </li>
+                <!--FIXME:区县考办结束-->
+
+                <!-- 主考院校模块 1 -->
+                <!-- TODO:测试完加上 v-show="user.user_type==5" -->
+                <li v-show="user.user_type==5" class="header">报名报考</li>
+                <li v-show="user.user_type==5" class="treeview">
+                    <a href="#">
+              <span>报名报考管理
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="/zkyx/set_white_list">设置白名单</a></li>
+                        <li><a href=" /group/group_register">集体报名</a></li>
+                        <li><a href="/group/group_signup">集体报考</a></li>
+                    </ul>
+                </li>
+                <!-- 主考院校模块 2 -->
+                <li v-show="user.user_type==5" class="header">考务管理</li>
+                <li v-show="user.user_type==5" class="treeview">
+                    <a href="#">
+              <span>省考管理
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li class="active">
+                            <a href="#">
+                  <span>编场管理
+                    <i class="iconfont icon-ziyuan pull-right"></i></span>
+                            </a>
+                            <ul class="treeview-menu menu-open" style="display: block;">
+                                <li><a href="/zkyx/query_student">参考考生查询</a></li>
+                                <li><a href="/zkyx/set_kckd">考点库管理</a></li>
+                                <li><a href="/zkyx/set_exam_point">考点设置</a></li>
+                                <li><a href="/zkyx/alter_county">考生考区调整</a></li>
+                                <li><a href="/zkyx/arrange_kc">考场数预排</a></li>
+                                <li><a href="/zkyx/final_arrange">考场编排</a></li>
+                            </ul>
+                        </li>
+                        <li class="active">
+                            <a href="#">
+                  <span>违规上报
+                    <i class="iconfont icon-ziyuan pull-right"></i></span>
+                            </a>
+                            <ul class="treeview-menu menu-open" style="display: block;">
+                                <li><a href="/sk_violation/toVio">查询违规信息</a></li>
+                                <li><a href="/sk_violation/toAddpost ">上报违规情况</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li v-show="user.user_type==5" class="treeview">
+                    <a href="#">
+              <span>其他考试管理
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="/zkyx/english_site">英语听说考点设置</a></li>
+                        <li><a href="/sk_other/graduation" />上报毕业论文答辩计划</a></li>
+                        <li><a href="/sk_other/practice">上报实践课程考核计划</a></li>
+                    </ul>
+                </li>
+                <li v-show="user.user_type==5" class="treeview">
+                    <a href="#">
+              <span>省考报表
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="/stat/paper_q">制卷统计</a></li>
+                        <li><a href="/stat/sche_q">考试日程统计</a></li>
+                        <li><a href="/stat/kd_paper_q">考点分卷统计</a></li>
+                        <li><a href="/stat/bag_q">卷袋信息统计</a></li>
+                    </ul>
+                </li>
+                <!--FIXME:主考院校结束-->
+
+
+                <!-- 底部操作按钮栏 -->
+                <li class="header">其他</li>
+                <li>
+                    <!-- 一层示例开始-->
+                    <a :href="personal_details_url">
+              <span>个人
+                <i class="iconfont icon-huabanfuben pull-right" style="margin-right: 3px;"></i></span>
+                    </a>
+                </li><!-- 一层示例结束-->
+                <li><a :href="logout_url">
+              <span>登出
+                <i class="iconfont icon-tuichudenglu pull-right" style="margin-right: 3px;"></i></span>
+                </a></li>
+            </ul>
+        </section><!-- /.sidebar -->
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
