@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xs.boot.dao.Kb_zkzMapper">
+
+    <select id="getList1" resultType="Kb_zkz" parameterType="Kb_zkz">
+         Select v.kc_code,v.type_name,c.name,o.stu_name,o.zkao_num
+         from student_bk v,courses c,student_info o,district d
+         where v.kc_code=#{kc_code} and v.type_name=#{type_name} and v.bk_course_id=c.course_id and v.student_id=o.student_id and v.kqu_id=concat(d.city_code,d.district_code) and d.city_code=#{city_code}
+    </select>
+
+    <select id="getList2" resultType="Kb_zkz" parameterType="Kb_zkz">
+         Select v.kc_code,v.type_name,c.name,o.stu_name,o.zkao_num
+         from student_bk v,courses c,student_info o,district d
+         where v.kc_code=#{kc_code} and v.type_name=#{type_name} and v.bk_course_id=c.course_id and v.student_id=o.student_id and v.kqu_id=concat(d.city_code,d.district_code) and d.city_code=#{city_code} and d.district_code=#{district_code}
+    </select>
+
+    <select id="getExam" resultType="Kb_zkz">
+         select DISTINCT(e.kc_code), e.type_name,e1.exam_type_name from exam e,total_exam_type e1
+         where e.type_name=e1.type_name
+    </select>
+</mapper>

@@ -15,6 +15,7 @@ var createExam = new Vue({
         huji_type_list: ['城镇', '农村', '未采集'],
         bk_level: 0,
         bk_level_list: ['本科', '专科'],
+        bk_major_id:1,
         bk_major: '',
         bk_major_list: [],
         phone: '',
@@ -22,35 +23,106 @@ var createExam = new Vue({
         health_list: ['健康', '残疾'],
         stu_type: 0,
         stu_type_list: ['社会型', '应用型'],
-        sz_num: '',
+        sz_num: '01',
+        sz_name:'',
         sz_num_list: [],
-        qx_num: '',
+        qx_num: '01',
+        qx_name: '',
         qx_num_list: [],
+        taget_school_id:1,
         taget_school: '',
         taget_school_list: [],
 
         stu_img: '',
+        isOk: 1,
         msg: '',
-        isOk:-1
+        bmState:-1,
+    },
+    created: function () {
+        this.getAllMajors();
+        this.getAllCities();
+        this.getAllDistricts('01');
+        this.getAllZhuKaoSchools();
     },
     methods: {
+        // 报名页面初始化
+        // TODO: 获取数据库报考专业名、市州、区县编码、报名学校
+        getAllMajors: function () { 
+            var that = this;
+            axios.get('/kaosheng/getAllMajors')
+                .then(function (response) {
+                    console.log(response.data);
+                    that.bk_major_list = response.data.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        getAllCities: function () {
+            var that = this;
+            axios.get('/kaosheng/getAllCities')
+                .then(function (response) {
+                    console.log(response.data);
+                    that.sz_num_list = response.data.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        getAllDistricts: function (cityCode) {
+            var that = this;
+            axios.post('/kaosheng/getAllDistricts/'+cityCode)
+                .then(function (response) {
+                    console.log(response.data);
+                    that.qx_num_list = response.data.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        getAllZhuKaoSchools: function () {
+            var that = this;
+            axios.get('/kaosheng/getAllZhuKaoSchools')
+                .then(function (response) {
+                    console.log(response.data);
+                    that.taget_school_list = response.data.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+         },
+
+        // 页面检查
+        name_check: function () {
+            if (this.stu_name == '') {
+                this.isOk = 0;
+                this.msg = "姓名不能为空!";
+                return 0;
+            } else {
+                this.isOk = 1;
+                return 1;
+            }
+        },
         phone_check: function () {
             var rexp = /^1[3|4|5|7|8]\d{9}$/;
             if (!(rexp.test(this.phone))) {
-                this.msg = "输入出错, 请检查";
+                this.msg = "电话输入出错, 请检查!";
                 this.isOk = -1;
+                return 0;
             } else {
-                this.msg = '';
+                this.isOk = 1;
+                return 1;
             }
         },
         zj_num_check: function () {
             var rexp = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
             if (!rexp.test(this.zj_num)) {
-                this.msg = "输入出错, 请检查";
+                this.msg = "证件号码输入出错, 请检查!";
                 this.isOk = -1;
+                return 0;
             } else {
-                this.msg = '';
                 this.age = this.get_age_from_zj_num();
+                return 1;
             }
         },
         get_age_from_zj_num: function () {
@@ -83,51 +155,64 @@ var createExam = new Vue({
             this.bk_level = index;
         },
         choose_bk_major: function (index) {
-            this.bk_major = this.bk_major_list[index];
+            this.bk_major_id = this.bk_major_list[index].major_id;
+            this.bk_major = this.bk_major_list[index].major_name;
         },
         choose_stu_type: function (index) {
             this.stu_type = index;
         },
         choose_sz_num: function (index) {
-            this.sz_num = index;
+            this.sz_num = this.sz_num_list[index].city_code;
+            this.sz_name = this.sz_num_list[index].city_name;
+            this.getAllDistricts(this.sz_num);
         },
         choose_qx_num: function (index) {
-            this.qx_num = index;
+            this.qx_num = this.qx_num_list[index].district_code;
+            this.qx_name = this.qx_num_list[index].district_name;
         },
         choose_taget_school: function (index) {
-            this.taget_school = this.taget_school_list[index];
+            this.taget_school_id = this.taget_school_list[index].school_id;
+            this.taget_school = this.taget_school_list[index].school_name;
         },
         choose_health: function (index) {
             this.health = index;
         },
         regist: function () {
+            // TODO:检查字段是否完整
             var that = this;
-            axios.post('/kaosheng/personal-regist', {
-                stuName: that.stu_name,
-                sex: that.sex,
-                zjType: that.zj_type,
-                zjNum: that.zj_num,
-                age: that.age,
-                // nation: 0,
-                nation: that.nation,
-                zzmm: that.zzmm,
-                hujiType: that.huji_type,
-                bkLevel: that.bk_level,
-                bkMajor: that.bk_major,
-                phone: that.phone,
-                health: that.health,
-                stuType: that.stu_type,
-                szNum: that.sz_num,
-                qxNum: that.qx_num,
-                tagetSchoolId: that.taget_school,
-            }).then(function (response) {
+
+            if (that.name_check() && that.zj_num_check() && that.phone_check()) {
+                that.isOk = 1;
+            }
+
+            if (that.isOk > 0) {
+                axios.post('/kaosheng/personal-regist', {
+                    stuName: that.stu_name,
+                    sex: that.sex,
+                    zjType: that.zj_type,
+                    zjNum: that.zj_num,
+                    age: that.age,
+                    nation: that.nation,
+                    zzmm: that.zzmm,
+                    hujiType: that.huji_type,
+                    bkLevel: that.bk_level,
+                    bkMajor: that.bk_major_id,
+                    phone: that.phone,
+                    health: that.health,
+                    stuType: that.stu_type,
+                    szNum: that.sz_num,
+                    qxNum: that.qx_num,
+                    tagetSchoolId: that.taget_school_id,
+                }).then(function (response) {
                     console.log(response);
                     alert("报名成功！");
+                    that.bmState = 0;
                 })
-                .catch(function (error) {
-                    console.log(error);
-                    alert("报名失败！");
-                });
+                    .catch(function (error) {
+                        console.log(error);
+                        alert("报名失败！");
+                    });
+            }
         }
     },
 });

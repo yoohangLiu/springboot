@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>省考试院自学考试考务管理系统</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!--导入基础依赖css文件-->
+    <link href="../../static/css/basic.css" rel="stylesheet" type="text/css" />
+    <!--导入自己的 css -->
+    <link href="../../static/css/kaosheng/personal-seat-print.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="skin-blue sidebar-mini">
+    <div class="wrapper">
+        <!-- Main Header -->
+        <header class="main-header">
+
+            <!-- Logo -->
+            <a href="/" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>考务</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>自学考试 </b>考务管理</span>
+            </a>
+
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- 打开左侧导航栏按钮 -->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">左侧导航栏</span>
+                </a>
+                <!-- 头部：右侧导航栏 -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- 消息提示菜单 -->
+                        <li class="dropdown notifications-menu">
+                            <!-- Menu toggle button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-comment"></span>
+                                <span class="label label-warning">10</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">你有 10 条信息待处理</li>
+                                <li>
+                                    <!-- Inner Menu: contains the notifications -->
+                                    <ul class="menu">
+                                        <li>
+                                            <!-- start notification 如果有多条 可用 v-for -->
+                                            <a href="#">
+                                                <i class="fa fa-users text-aqua"></i> 5 条白名单申请待处理
+                                            </a>
+                                        </li>
+                                        <!-- end notification -->
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">查看全部</a></li>
+                            </ul>
+                        </li>
+                        <!-- User Account Menu -->
+                        <li class="dropdown user user-menu">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- The user image in the navbar-->
+                                <img src="../../static/dist/img/user2-160x160.jpg" class="user-image"
+                                    alt="User Image" />
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                <span class="hidden-xs">FF</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- The user image in the menu -->
+                                <li class="user-header">
+                                    <img src="../../static/dist/img/user2-160x160.jpg" class="img-circle"
+                                        alt="User Image" />
+                                    <p>
+                                        FF
+                                        <small>四川大学考务</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">个人</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default btn-flat">登出</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- 左侧边栏 -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- 用户面板 -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="../../static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                    </div>
+                    <div class="pull-left info">
+                        <p>FF</p>
+                        <!-- 用户角色 -->
+                        <a href="#"><i class="fa fa-circle text-success"></i> 考务</a>
+                    </div>
+                </div>
+
+                <!-- 搜索框 -->
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="搜索..." />
+                        <span class="input-group-btn">
+                            <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i
+                                    class="glyphicon glyphicon-search"></i></button>
+                        </span>
+                    </div>
+                </form>
+                <!-- /.search form -->
+
+                <!-- 菜单栏 -->
+                <ul class="sidebar-menu">
+                    <li class="header"></li>
+                    <!--a标签使用示例-->
+                    <li><a href="/"><span>首页</span></a></li>
+                    <li class="active"><a href="/bmbk/"><span>报名报考</span></a></li>
+                    <li><a href="#"><i class='glyphicon glyphicon-link'> </i><span>带图标链接示例</span></a></li>
+                    <li class="treeview">
+                        <a href="#"><span>多级链接示例</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="#">二级链接</a></li>
+                            <li><a href="#">二级链接</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- /.sidebar-menu -->
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- 页面内容 -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    打印座位通知单
+                    <small>详情如下</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#">报名报考</a></li>
+                    <li class="active">打印座位通知单</li>
+                </ol>
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <!-- 我们的页面内容放这里 -->
+                <div id="kaosheng">
+                    <!-- 功能名字 -->
+                    <div class="func_name"></div>
+                    <!-- 消息提示框 -->
+                    <div v-show="isOk<1" class="func_alert">
+                        <div class="alert alert-warning alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="glyphicon glyphicon-warning-sign"></i> 注意</h4>
+                            {{msg}}
+                        </div>
+                    </div>
+                    <!--功能内容-->
+                    <div class="func_content">
+                        <div class="func_content_left">
+                            <div class="func_item">
+                                <label>报考课程</label>
+                                <div class="btn-group">
+                                    <button type="button"
+                                        class="btn btn-default">{{ print_allowed_count == 0?'无可打印考试座位信息' : '可打印 '+ print_allowed_count + ' 门课程座位通知单' }}</button>
+                                </div>
+                            </div>
+                            <div class="func_item">
+                                <table class="table table-bordered">
+                                    <tbody style="width: 100%;">
+                                        <tr>
+                                            <th style="width: 35%; text-align: center;">报考课程</th>
+                                            <th style="width: 20%; text-align: center;">费用</th>
+                                            <th style="width: 20%; text-align: center;">缴费</th>
+                                            <th style="width: 25%; text-align: center;">座位通知单</th>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td style="width: 35%; text-align: center;">计算机</td>
+                                            <td style="width: 20%; text-align: center;">50</td>
+                                            <td style="width: 20%; text-align: center;">
+                                                <button type="button" class="btn btn-warning"
+                                                    disabled><span>请缴费</span></button>
+                                            </td>
+                                            <th style="width: 25%; text-align: center;"><button type="button"
+                                                    class="btn btn-primary"
+                                                    @click="print_seat_details"><span>打印预览</span></button></th>
+                                        </tr> -->
+                                        <tr v-for="(item, index) in bk_course_list">
+                                            <td style="width: 35%; text-align: center;">{{item.name}}</td>
+                                            <td style="width: 20%; text-align: center;">{{item.money}}</td>
+                                            <td style="width: 20%; text-align: center;">
+                                                <button v-show="item.pay_state==0" type="button" class="btn btn-warning"
+                                                    @click="pay_bk_course(index)" disabled><span>请缴费</span></button>
+                                                <button v-show="item.pay_state!=0" type="button" class="btn btn-default"
+                                                    @click="pay_bk_course(index)" disabled><span>已缴费</span></button>
+                                            </td>
+                                            <th style="width: 25%; text-align: center;">
+                                                <button type="button" class="btn btn-primary" :disabled="print_flag_list[index]==0?true:false"
+                                                    @click="set_print_course(index)"><span>{{print_flag_list[index]==0?"不可打印":'打印预览'}}</span></button></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div v-show="bm_state<3" class="func_item">
+                                <label><a href="/kaosheng/goto-personal-pay"><span>跳转到缴费</span></a></label>
+                            </div>
+                        </div>
+                        <div style="background-color:white;" v-show="item.course_id==bk_course_id"
+                            v-for="(item, index) in seat_details_list" class="func_content_right">
+                            <div class="print_title">
+                                <h2>打印座位通知单</h2>
+                            </div>
+                            <div class="print_item">
+                                <div class="print_zd_name">
+                                    <button type="button" class="btn btn-info">证件号码</button>
+                                </div>
+                                <div class="print_zd_content">
+                                    <button style="background-color: gainsboro;" type="button"
+                                        class="btn btn-default">{{studentBasicInfo.zj_num}}</button>
+                                </div>
+                            </div>
+                            <div class="print_item">
+                                <div class="print_zd_name">
+                                    <button type="button" class="btn btn-info">考生姓名</button>
+                                </div>
+                                <div class="print_zd_content">
+                                    <button style="background-color:gainsboro;" type="button"
+                                        class="btn btn-default">{{studentBasicInfo.stu_name}}</button>
+                                </div>
+                            </div>
+                            <div class="print_item">
+                                <div class="print_zd_name">
+                                    <button type="button" class="btn btn-info">考生类型</button>
+                                </div>
+                                <div class="print_zd_content">
+                                    <button style="background-color: gainsboro;" type="button"
+                                        class="btn btn-default">{{studentBasicInfo.stu_type==0?'社会型':'应用型'}}</button>
+                                </div>
+                            </div>
+                            <div class="print_item">
+                                <div class="print_zd_name">
+                                    <button type="button" class="btn btn-info">报考等级</button>
+                                </div>
+                                <div class="print_zd_content">
+                                    <button style="background-color: gainsboro;" type="button"
+                                        class="btn btn-default">{{studentBasicInfo.bk_level==0?'专科':'本科'}}</button>
+                                </div>
+                            </div>
+                            <div class="print_item">
+                                <div class="print_zd_name">
+                                    <button type="button" class="btn btn-info">报考专业</button>
+                                </div>
+                                <div class="print_zd_content">
+                                    <button style="background-color: gainsboro;" type="button"
+                                        class="btn btn-default">{{item.major_name}}</button>
+                                </div>
+                            </div>
+                            <div class="print_item">
+                                <div class="print_zd_name">
+                                    <button type="button" class="btn btn-info">报考考试</button>
+                                </div>
+                                <div class="print_zd_content">
+                                    <button style="background-color: gainsboro;" type="button"
+                                        class="btn btn-default">{{item.kc_code}} {{item.exam_type_name}}</button>
+                                </div>
+                            </div>
+                            <div class="print_item">
+                                <div class="print_zd_name">
+                                    <button type="button" class="btn btn-info">课程名</button>
+                                </div>
+                                <div class="print_zd_content">
+                                    <button style="background-color:pink;" type="button"
+                                        class="btn btn-default">{{item.name}}(正在打印预览)</button>
+                                </div>
+                            </div>
+                            <div class="print_item">
+                                <div class="print_zd_name">
+                                    <button type="button" class="btn btn-info">座位号</button>
+                                </div>
+                                <div class="print_zd_content">
+                                    <button style="background-color: gainsboro;" type="button"
+                                        class="btn btn-default">{{item.set_num}}</button>
+                                </div>
+                            </div>
+                            <div class="print_item">
+                                <div class="print_zd_name">
+                                    <button type="button" class="btn btn-info">考试时间</button>
+                                </div>
+                                <div class="print_zd_content">
+                                    <button style="background-color: gainsboro;" type="button"
+                                        class="btn btn-default">{{item.exam_start_time}}-{{item.exam_end_time}}</button>
+                                </div>
+                            </div>
+                            <div class="print_item">
+                                <div class="print_zd_name">
+                                    <button type="button" class="btn btn-info">考区</button>
+                                </div>
+                                <div class="print_zd_content">
+                                    <button style="background-color: gainsboro;" type="button"
+                                        class="btn btn-default">{{item.kqu_name}}</button>
+                                </div>
+                            </div>
+                            <div class="print_item">
+                                <div class="print_zd_name">
+                                    <button type="button" class="btn btn-info">考试地点</button>
+                                </div>
+                                <div class="print_zd_content">
+                                    <button style="background-color: gainsboro;" type="button"
+                                        class="btn btn-default">{{item.kd_name}} {{item.thorough_address}}</button>
+                                </div>
+                            </div>
+                            <div v-show="studentBasicInfo.stu_type==1" class="print_item">
+                                <div class="print_zd_name">
+                                    <button type="button" class="btn btn-info">主考院校名</button>
+                                </div>
+                                <div class="print_zd_content">
+                                    <button style="background-color: gainsboro;" type="button"
+                                        class="btn btn-default">{{item.school_name}}</button>
+                                </div>
+                            </div>
+                            <!-- 默认两种类型考生都有考区 -->
+                            <!-- <div v-show="studentBasicInfo.stu_type==0" class="print_item">
+                                <div class="print_zd_name">
+                                    <button type="button" class="btn btn-info">考区</button>
+                                </div>
+                                <div class="print_zd_content">
+                                    <button style="background-color: gainsboro;" type="button"
+                                        class="btn btn-default">{{item.kqu_name}}</button>
+                                </div>
+                            </div> -->
+                            <div v-show="print_state==0" class="func_buttons">
+                                <button class="btn btn-danger" @click="set_print_state(-1)">取消</button>
+                                <button class="btn btn-primary" @click="set_print_state(1)">打印</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <div><strong>Copyright &copy; 2020 <a href="#">省考试院自学考试考务管理</a>.</strong> All rights reserved.</div>
+            </div>
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- 基础 js 文件 -->
+    <!-- jQuery 2.1.4 -->
+    <script src="../../static/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- popper.min.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap 3.3.2 JS -->
+    <script src="../../static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- AdminLTE App -->
+    <script src="../../static/dist/js/app.min.js" type="text/javascript"></script>
+    <!-- vuejs -->
+    <script src="../../static/js/vue.js"></script>
+    <!-- axios：前后端数据交互 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- 额外 js 文件添加下面 -->
+    <script src="../../static/js/kaosheng/personal-seat-print.js"></script>
+    <!-- 打印基本插件 -->
+    <script src="http://www.jq22.com/jquery/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../static/js/kaosheng/jquery.jqprint-0.3.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xs.boot.dao.kaosheng.PersonalRegistMapper">
+    <!--使用 useGeneratedKeys="true" keyProperty="studentId" 将数据库生成的主键返回并注入studentId-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="studentId" parameterType="com.xs.boot.entity.kaosheng.StudentInfoEntity">
+        insert into student_info(
+        zkao_num, stu_name, sex, zj_type,
+        zj_num, age, nation, zzmm,
+        huji_type, bk_level, bk_major, phone,
+        health, stu_type, yy_xueji_school_id, stu_img,
+        sz_num, qx_num, taget_school_id, op_time,
+        bm_state)
+        values(
+            #{zkaoNum}, #{stuName}, #{sex}, #{zjType},
+            #{zjNum}, #{age}, #{nation}, #{zzmm},
+            #{hujiType}, #{bkLevel}, #{bkMajor}, #{phone},
+            #{health}, #{stuType}, #{yyXuejiSchoolId}, #{stuImg},
+            #{szNum}, #{qxNum}, #{tagetSchoolId}, #{opTime},
+            #{bmState})
+    </insert>
+
+    <select id="getAllMajors" resultType="com.xs.boot.entity.kaosheng.MajorEntity">
+        select * from major order by major_id ASC
+    </select>
+    
+    <select id="getAllCities" resultType="com.xs.boot.entity.kaosheng.DistrictEntity">
+        select * from district group by city_code order by city_code ASC
+    </select>
+
+    <select id="getAllDistricts" parameterType="String" resultType="DistrictEntity">
+        select * from district WHERE city_code = #{cityCode} and district_name != '' order by district_code ASC
+    </select>
+
+    <select id="getAllZhuKaoSchools" resultType="com.xs.boot.entity.kaosheng.ZhuKaoSchoolEntity">
+        select * from zhukao_school order by school_id ASC
+    </select>
+
+    <update id="updateStudentInfo" parameterType="com.xs.boot.entity.kaosheng.StudentInfoEntity">
+        update student_info set
+        zkao_num=#{zkaoNum}, stu_name=#{stuName},
+        sex=#{sex}, zj_type=#{zjType},
+        zj_num=#{zjNum}, age=#{age},
+        nation=#{nation}, zzmm=#{zzmm},
+        huji_type=#{hujiType}, bk_level=#{bkLevel},
+        bk_major=#{bkMajor}, phone=#{phone},
+        health=#{health}, stu_type=#{stuType},
+        yy_xueji_school_id=#{yyXuejiSchoolId}, stu_img=#{stuImg},
+        sz_num=#{szNum}, qx_num=#{qxNum},
+        taget_school_id=#{tagetSchoolId}, op_time=#{opTime},
+        bm_state=#{bmState}
+        where student_id = #{studentId}
+    </update>
+</mapper>

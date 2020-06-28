@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html>
 
 <head>
@@ -18,76 +14,50 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <body class="skin-blue sidebar-mini">
     <div class="wrapper">
         <!-- Main Header -->
-        <header class="main-header">
-
+        <header class="main-header" id="top_bar">
             <!-- Logo -->
             <a href="/" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>考务</b></span>
+                <span class="logo-mini"><b>自考</b></span>
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg"><b>自学考试 </b>考务管理</span>
             </a>
-
-            <!-- Header Navbar -->
+        
+            <!-- 头部导航 -->
             <nav class="navbar navbar-static-top" role="navigation">
                 <!-- 打开左侧导航栏按钮 -->
                 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                     <span class="sr-only">左侧导航栏</span>
                 </a>
+        
                 <!-- 头部：右侧导航栏 -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        <!-- 消息提示菜单 -->
-                        <li class="dropdown notifications-menu">
-                            <!-- Menu toggle button -->
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-comment"></span>
-                                <span class="label label-warning">10</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">你有 10 条信息待处理</li>
-                                <li>
-                                    <!-- Inner Menu: contains the notifications -->
-                                    <ul class="menu">
-                                        <li>
-                                            <!-- start notification 如果有多条 可用 v-for -->
-                                            <a href="#">
-                                                <i class="fa fa-users text-aqua"></i> 5 条白名单申请待处理
-                                            </a>
-                                        </li>
-                                        <!-- end notification -->
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">查看全部</a></li>
-                            </ul>
-                        </li>
-                        <!-- User Account Menu -->
+                        <!-- 用户信息 -->
                         <li class="dropdown user user-menu">
-                            <!-- Menu Toggle Button -->
+                            <!-- 响应式设置 -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                <img src="../../static/dist/img/user2-160x160.jpg" class="user-image"
-                                    alt="User Image" />
+                                <img :src="user.stu_img" class="user-image" alt="User Image" />
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">FF</span>
+                                <span class="hidden-xs">{{user.user_type==1?user.stu_name:user.operator_name}}</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <!-- The user image in the menu -->
+                                <!-- 用户基本信息 -->
                                 <li class="user-header">
-                                    <img src="../../static/dist/img/user2-160x160.jpg" class="img-circle"
-                                        alt="User Image" />
+                                    <img :src="user.stu_img" class="img-circle" alt="User Image" />
                                     <p>
-                                        FF
-                                        <small>四川大学考务</small>
+                                        {{user.user_type==1?user.stu_name:user.operator_name}}
+                                        <small>{{user.user_type_name}}</small>
                                     </p>
                                 </li>
-                                <!-- Menu Footer-->
+                                <!-- 点击头像 弹出-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">个人</a>
+                                        <a :href="personal_details_url" class="btn btn-default btn-flat">个人</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">登出</a>
+                                        <a :href="logout_url" class="btn btn-default btn-flat">登出</a>
                                     </div>
                                 </li>
                             </ul>
@@ -96,23 +66,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
             </nav>
         </header>
-
+        
         <!-- 左侧边栏 -->
-        <aside class="main-sidebar">
+        <aside class="main-sidebar" id="left_bar">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
                 <!-- 用户面板 -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="../../static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                        <!-- 动态设置头像 -->
+                        <img :src="user.stu_img" class="img-circle" alt="User Image" />
                     </div>
                     <div class="pull-left info">
-                        <p>FF</p>
+                        <!-- 用户姓名 -->
+                        <p>{{user.user_type==1?user.stu_name:user.operator_name}}</p>
                         <!-- 用户角色 -->
-                        <a href="#"><i class="fa fa-circle text-success"></i> 考务</a>
+                        <a href="#"><i class="iconfont icon-denglu1" style="margin-right: 7px;"></i>{{user.user_type_name}}</a>
                     </div>
                 </div>
-
+        
                 <!-- 搜索框 -->
                 <form action="#" method="get" class="sidebar-form">
                     <div class="input-group">
@@ -124,25 +96,83 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                 </form>
                 <!-- /.search form -->
-
+        
                 <!-- 菜单栏 -->
                 <ul class="sidebar-menu">
-                    <li class="header"></li>
-                    <!--a标签使用示例-->
-                    <li><a href="/"><span>首页</span></a></li>
-                    <li class="active"><a href="/bmbk/"><span>报名报考</span></a></li>
-                    <li><a href="#"><i class='glyphicon glyphicon-link'> </i><span>带图标链接示例</span></a></li>
-                    <li class="treeview">
-                        <a href="#"><span>多级链接示例</span> <i class="fa fa-angle-left pull-right"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a href="#">二级链接</a></li>
-                            <li><a href="#">二级链接</a></li>
+        
+                    <!-- 每个大类分隔符 -->
+                    <!-- TODO:测试完加上 v-show="user.user_type==对应数字" -->
+                    <li v-show="user.user_type==2" class="header">考生报考(模块名字)</li>
+                    <!-- 多级列表：根据实际情况修改，含【导航】的地方有子元素不加url -->
+                    <li v-show="user.user_type==2" class="treeview">
+                        <a href="#">
+                            <span>第一层导航(有子元素，不加url)
+                                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                        </a>
+                        <ul class="treeview-menu" style="display: none;">
+                            <li><a href="#">第二层</a></li>
+                            <li class="active">
+                                <a href="#">
+                                    <span>第二层导航
+                                        <i class="iconfont icon-ziyuan pull-right"></i></span>
+                                </a>
+                                <ul class="treeview-menu menu-open" style="display: block;">
+                                    <li><a href="#">第三层</a></li>
+                                    <li><a href="#">第三层</a></li>
+                                    <li class="">
+                                        <a href="#">
+                                            <span>第三层导航
+                                                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                                        </a>
+                                        <ul class="treeview-menu menu-open" style="display: block;">
+                                            <li><a href="#">第四层</a></li>
+                                            <li><a href="#">第四层</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
+        
+                    <!-- 每个角色栏：分级呈现功能 -->
+        
+                    <!-- 角色：考生-->
+                    <!-- 每个大类分隔符 -->
+                    <!-- TODO:测试完加上 v-show="user.user_type==1" -->
+                    <li v-show="user.user_type==1" class="header">考生报考</li>
+                    <!-- 多级列表：根据实际情况修改，含【导航】的地方有子元素不加url -->
+                    <li v-show="user.user_type==1" class="treeview">
+                        <a href="#">
+                            <span>考生报名报考
+                                <i class="iconfont icon-ziyuan pull-right"></i></span>
+                        </a>
+                        <ul class="treeview-menu" style="display: none;">
+                            <li><a href="kaosheng/goto-personal-regist">个人报名</a></li>
+                            <li><a href="kaosheng/goto-personal-bk">个人报考</a></li>
+                            <li><a href="kaosheng/goto-personal-pay">个人缴费</a></li>
+                            <li><a href="kaosheng/goto-personal-seat-print">打印座位通知单</a></li>
+                            <li><a href="kaosheng/goto-personal-state-check">进度查看</a></li>
+                            <li><a href="#">违规记录</a></li>
+                        </ul>
+                    </li>
+                    <!--考生结束-->
+        
+                    <!-- 底部操作按钮栏 -->
+                    <!-- 每个大类分隔符 -->
+                    <li class="header">其他</li>
+                    <li>
+                        <!-- 一层示例开始-->
+                        <a :href="personal_details_url">
+                            <span>个人
+                                <i class="iconfont icon-huabanfuben pull-right" style="margin-right: 3px;"></i></span>
+                        </a>
+                    </li><!-- 一层示例结束-->
+                    <li><a :href="logout_url">
+                            <span>登出
+                                <i class="iconfont icon-tuichudenglu pull-right" style="margin-right: 3px;"></i></span>
+                        </a></li>
                 </ul>
-                <!-- /.sidebar-menu -->
-            </section>
-            <!-- /.sidebar -->
+            </section><!-- /.sidebar -->
         </aside>
 
         <!-- 页面内容 -->
@@ -165,12 +195,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div id="kaosheng">
                     <!-- 功能名字 -->
                     <div class="func_name"></div>
+                    <!-- 消息提示框 -->
+                    <div v-show="isOk<1" class="func_alert">
+                        <div class="alert alert-warning alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="glyphicon glyphicon-warning-sign"></i>  注意</h4>
+                            {{msg}}
+                        </div>
+                    </div>
                     <!--功能内容-->
                     <div class="func_content">
                         <div class="func_content_left">
                             <div class="func_item">
                                 <label>姓名</label>
-                                <input v-model="stu_name" type="text" placeholder="请输入姓名">
+                                <input v-model="stu_name" type="text" placeholder="请输入姓名" @blur="name_check">
+                                <!-- <label v-show="isOk>0"><span
+                                        style="color: red; margin-left: 10px;">{{msg}}</span></label> -->
                             </div>
                             <div class="func_item">
                                 <label>性别</label>
@@ -211,9 +251,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="func_item">
                                 <label>证件号码</label>
                                 <input v-model="zj_num" type="text" placeholder="请输入证件号码" @blur="zj_num_check">
-                                <label v-show="msg!=''"><span style="color: red; margin-left: 10px;">{{msg}}</span></label>
+                                <!-- <label v-show="isOk>0"><span
+                                        style="color: red; margin-left: 10px;">{{msg}}</span></label> -->
                             </div>
-                            <!-- TODO: 根据证件号码截取年龄 -->
+                            <!-- 根据证件号码截取年龄 -->
                             <div class="func_item">
                                 <label>年龄</label>
                                 <!-- <label>{{age>-1?age:'待输入'}}</label> -->
@@ -239,7 +280,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </ul>
                                 </div>
                             </div>
-                            <!-- TODO:  -->
                             <div class="func_item">
                                 <label>户籍</label>
                                 <div class="btn-group">
@@ -278,7 +318,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <label>报考专业名</label>
                                 <div class="btn-group">
                                     <button type="button"
-                                        class="btn btn-default">{{ bk_major == ''?'请选择' : bk_major_list[bk_major]}}</button>
+                                        class="btn btn-default">{{ bk_major == ''?'请选择' : bk_major}}</button>
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                         aria-expanded="false">
                                         <span class="caret"></span>
@@ -286,7 +326,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
                                         <li v-for="(item, index) in bk_major_list" @click="choose_bk_major(index)"><a
-                                                href="#">{{item}}</a></li>
+                                                href="#">{{item.major_name}}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -310,7 +350,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <label>所属市州</label>
                                 <div class="btn-group">
                                     <button type="button"
-                                        class="btn btn-default">{{ sz_num == ''?'请选择' : sz_num_list[sz_num]}}</button>
+                                        class="btn btn-default">{{ sz_name == ''?'请选择' : sz_name}}</button>
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                         aria-expanded="false">
                                         <span class="caret"></span>
@@ -318,7 +358,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
                                         <li v-for="(item, index) in sz_num_list" @click="choose_sz_num(index)"><a
-                                                href="#">{{item}}</a></li>
+                                                href="#">{{item.city_name}}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -326,7 +366,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <label>所属区县</label>
                                 <div class="btn-group">
                                     <button type="button"
-                                        class="btn btn-default">{{ qx_num == ''?'请选择' : qx_num_list[qx_num]}}</button>
+                                        class="btn btn-default">{{ qx_name == ''?'请选择' : qx_name }}</button>
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                         aria-expanded="false">
                                         <span class="caret"></span>
@@ -334,7 +374,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
                                         <li v-for="(item, index) in qx_num_list" @click="choose_qx_num(index)"><a
-                                                href="#">{{item}}</a></li>
+                                                href="#">{{item.district_name}}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -342,7 +382,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <label>报名学校</label>
                                 <div class="btn-group">
                                     <button type="button"
-                                        class="btn btn-default">{{ taget_school == ''?'请选择' : taget_school_list[taget_school]}}</button>
+                                        class="btn btn-default">{{ taget_school == ''?'请选择' : taget_school}}</button>
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                         aria-expanded="false">
                                         <span class="caret"></span>
@@ -350,7 +390,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
                                         <li v-for="(item, index) in taget_school_list"
-                                            @click="choose_taget_school(index)"><a href="#">{{item}}</a></li>
+                                            @click="choose_taget_school(index)"><a href="#">{{item.school_name}}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -373,12 +413,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="func_item">
                                 <label>联系方式</label>
                                 <input v-model="phone" type="text" placeholder="请输入联系方式" @blur="phone_check">
-                                <label v-show="msg!=''"><span style="color: red; margin-left: 10px;">{{msg}}</span></label>
+                                <!-- <label v-show="msg!=''"><span
+                                        style="color: red; margin-left: 10px;">{{msg}}</span></label> -->
                             </div>
                         </div>
                     </div>
                     <div class="func_buttons">
-                        <button class="btn btn-block btn-primary" @click="regist">报名</button>
+                        <button class="btn btn-block btn-primary" @click="regist">{{bmState>-1?'修改':'报名'}}</button>
                     </div>
                 </div>
             </section>
@@ -412,6 +453,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- 额外 js 文件添加下面 -->
+    <!-- 左边栏和顶部 Vue 实例 -->
+    <script src="../../static/js/util/top_left_bar.js"></script>
     <script src="../../static/js/kaosheng/personal-regist.js"></script>
 </body>
 

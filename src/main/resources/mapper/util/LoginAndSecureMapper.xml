@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xs.boot.dao.util.LoginAndSecureMapper">
+    <!--仅仅根据账号查询用户信息-->
+    <select id="findUserByAccountOnly" parameterType="UserEntity" resultType="UserEntity">
+        select * from user where account=#{account} limit 1
+    </select>
+
+    <!--查询用户信息: 已经解决登录用户 zj_num 不存在 student_info 的情况-->
+    <select id="findUserByAccount" parameterType="UserEntity" resultType="UserEntity">
+        select
+        user.*,
+        student_info.stu_name, student_info.stu_img,
+        utype.user_type_name
+        from user, student_info, total_user_type utype
+        where 1 = 1
+        <if test="account != '' and account != null">
+            and account=#{account}
+            and utype.user_type = user.user_type
+        </if>
+        <if test="user_type == 1">
+            and user.account = student_info.zj_num
+        </if>
+        limit 1
+    </select>
+</mapper>

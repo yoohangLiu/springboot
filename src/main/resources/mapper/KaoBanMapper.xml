@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xs.boot.dao.KaoBanMapper">
+    <select id="find_exam" parameterType="com.xs.boot.entity.myKaoban.Certain_exam_examArea" resultType="com.xs.boot.entity.myKaoban.Certain_exam_examArea">
+         select * from certain_exam_examarea
+           where certain_exam_examarea.kqu_id=#{kqu_id}
+    </select>
+    <select id="find_exam3" parameterType="com.xs.boot.entity.myKaoban.Certain_kqu_kd" resultType="com.xs.boot.entity.myKaoban.Certain_kqu_kd">
+         select * from certain_kqu_kd
+           where kqu_id=#{kqu_id} and kc_code=#{kc_code} and type_name=#{type_name}
+    </select>
+    <select id="find_tongkao" parameterType="com.xs.boot.entity.myKaoban.Lingjuan_list" resultType="com.xs.boot.entity.myKaoban.Lingjuan_list">
+         select * from certain_exam_examarea
+           where kqu_id=#{kqu_id} and type_name=1
+    </select>
+    <select id="find_shizhou_certain_area" parameterType="com.xs.boot.entity.myKaoban.Lingjuan_list" resultType="com.xs.boot.entity.myKaoban.Lingjuan_list">
+         select * from certain_exam_examarea
+           where kqu_id like concat(#{city_code},'_','_') and kc_code=#{kc_code} and type_name=#{type_name}
+    </select>
+
+    <select id="find_exam2" parameterType="com.xs.boot.entity.myKaoban.Orgnization_memo" resultType="com.xs.boot.entity.myKaoban.Orgnization_memo">
+         select * from orgnization_memo
+           where  orgnization_memo.kc_code=#{kc_code}
+           and orgnization_memo.type_name=#{type_name}
+           and orgnization_memo.kqu_id=#{kqu_id}
+    </select>
+
+    <select id="find_Lingjuan" parameterType="com.xs.boot.entity.myKaoban.Lingjuan_list" resultType="com.xs.boot.entity.myKaoban.Lingjuan_list">
+         select * from lingjuan_list
+           where  lingjuan_list.kc_code=#{kc_code}
+           and lingjuan_list.city_code=#{kqu_id}
+    </select>
+    <select id="find_vioList" parameterType="com.xs.boot.entity.myKaoban.Violist" resultType="com.xs.boot.entity.myKaoban.Violist">
+         select * from certain_violation
+           where  kqu_id=#{kqu_id} and exam_type=1
+    </select>
+    <select id="find_total_kd" parameterType="com.xs.boot.entity.myKaoban.Kd_info" resultType="com.xs.boot.entity.myKaoban.Kd_info">
+         select * from total_kd
+    </select>
+    <select id="findMaxKd_id" parameterType="com.xs.boot.entity.myKaoban.Kd_info" resultType="com.xs.boot.entity.myKaoban.Kd_info">
+        select * from total_kd order by kd_id desc limit 1
+    </select>
+    <select id="find_student_info" parameterType="com.xs.boot.entity.myKaoban.StudentInfo" resultType="com.xs.boot.entity.myKaoban.StudentInfo">
+        select * from student_info where sz_num=#{sz_num} and qx_num=#{qx_num}
+    </select>
+    <select id="select_bk_student_num" parameterType="com.xs.boot.entity.myKaoban.Certain_exam_examArea" resultType="com.xs.boot.entity.myKaoban.Certain_exam_examArea">
+        select count(student_id) as bk_student_num,student_bk.kc_code,student_bk.type_name,student_bk.kqu_id
+        from certain_exam_examarea,student_bk
+        where certain_exam_examarea.kc_code=student_bk.kc_code and certain_exam_examarea.type_name=student_bk.type_name
+         and certain_exam_examarea.kqu_id=student_bk.kqu_id and student_bk.kqu_id=#{kqu_id}
+          group by student_bk.type_name,student_bk.kc_code,student_bk.kqu_id order by count(student_id) desc;
+    </select>
+    <select id="select_total_kaochang_num" parameterType="com.xs.boot.entity.myKaoban.Certain_exam_examArea" resultType="com.xs.boot.entity.myKaoban.Certain_exam_examArea">
+        select sum(certain_kqu_kd.kaochang_num) as total_kaochang_num from certain_kqu_kd where kqu_id=#{kqu_id};
+    </select>
+    <select id="select_kaochang_spec_and_num" parameterType="com.xs.boot.entity.myKaoban.Certain_kqu_kd" resultType="com.xs.boot.entity.myKaoban.Certain_kqu_kd">
+        select kaochang_spec,kaochang_num from certain_kqu_kd
+        where kqu_id=#{kqu_id} and kc_code=#{kc_code} and type_name=#{type_name} and kaochang_num is not null and kaochang_spec is not null
+    </select>
+    <insert id="addKd_info">
+        replace into total_kd(kd_id, kd_name, post_code) VALUES (#{kd_id},#{kd_name},#{post_code})
+    </insert>
+    <insert id="insert_Certain_Kqu">
+        replace into certain_exam_examarea(kc_code,type_name,kqu_id) VALUES(#{kc_code},#{type_name},#{kqu_id})
+    </insert>
+    <delete id="delete_kd_info">
+        delete from total_kd where kd_id=#{kd_id}
+    </delete>
+    <update id="addCapacity" parameterType="com.xs.boot.entity.myKaoban.Certain_exam_examArea">
+        update  certain_exam_examarea set kqu_capacity=#{kqu_capacity} , xunkao_num=#{xunkao_num}
+        where kc_code=#{kc_code} and type_name=#{type_name} and kqu_id=#{kqu_id}
+    </update>
+
+    <insert id="addViolationList" parameterType="com.xs.boot.entity.myKaoban.Violist">
+         replace into  certain_violation(kc_code,exam_type,
+         course_id,kqu_id,kd_id,kaochang_id,
+         kaotang_code,zkao_num,jianyi_punish_id,shangbao_state,memo)
+         values (#{kc_code},1,#{course_id}
+         ,#{kqu_id},#{kd_id},#{kaochang_id},#{kaotang_code}
+         ,#{zkao_num},#{jianyi_punish_id},1,#{memo})
+    </insert>
+    <update id="alterCertainKquKd" parameterType="com.xs.boot.entity.myKaoban.Certain_kqu_kd">
+        update  certain_kqu_kd set supervisor_num=#{supervisor_num} , contactor=#{contactor},
+        phone=#{phone},memo=#{memo}
+        where kc_code=#{kc_code} and type_name=#{type_name} and kqu_id=#{kqu_id} and kd_id=#{kd_id}
+    </update>
+    <update id="alterCertainKquKd2" parameterType="com.xs.boot.entity.myKaoban.Certain_kqu_kd">
+        update  certain_kqu_kd set kaochang_num=#{kaochang_num} , kaochang_spec=#{kaochang_spec},
+        belong_code=#{belong_code} where kc_code=#{kc_code} and type_name=1 and kqu_id=#{kqu_id} and kd_id=#{kd_id}
+    </update>
+    <update id="alterOneState" parameterType="com.xs.boot.entity.myKaoban.StudentInfo">
+        update student_info set bm_state=1 where student_id=#{student_id}
+    </update>
+    <update id="alterAllState" parameterType="com.xs.boot.entity.myKaoban.StudentInfo">
+        update student_info set bm_state=1 where sz_num=#{sz_num} and qx_num=#{qx_num}
+    </update>
+    <insert id="insert_certain_kqu_kd" parameterType="com.xs.boot.entity.myKaoban.Certain_kqu_kd">
+         replace into  certain_kqu_kd(kc_code,type_name,kqu_id,kd_id
+         ,kd_state,kd_type,belong_code,kaochang_spec,kaochang_num)
+         values (#{kc_code},1,#{kqu_id}
+         ,#{kd_id},1,#{kd_type},#{belong_code}
+         ,#{kaochang_spec},#{kaochang_num})
+    </insert>
+    <select id="find_kqu_kd" parameterType="com.xs.boot.entity.myKaoban.Certain_kqu_kd" resultType="com.xs.boot.entity.myKaoban.Certain_kqu_kd">
+        select * from certain_kqu_kd as certain,total_kd as kd
+           where certain.kc_code=#{kc_code}
+           and certain.type_name=#{type_name}
+           and certain.kqu_id=#{kqu_id}
+           and certain.kd_id=kd.kd_id
+    </select>
+    <insert id="addOrganazationMemo" parameterType="com.xs.boot.entity.myKaoban.Orgnization_memo">
+         replace into  Orgnization_memo(kc_code,type_name,kqu_id,secret_room_name,fuze_name,fuze_phone,jingcha_num,zk_fuze_name,
+         zk_fuze_phone,exam_zhiban_phone,technology_name,technology_phone)
+         values (#{kc_code},#{type_name},#{kqu_id},#{secret_room_name}
+         ,#{fuze_name},#{fuze_phone},#{jingcha_num},#{zk_fuze_name}
+         ,#{zk_fuze_phone},#{exam_zhiban_phone},#{technology_name},#{technology_phone})
+    </insert>
+    <insert id="addLingjuanList" parameterType="com.xs.boot.entity.myKaoban.Lingjuan_list">
+         replace into  lingjuan_list(kc_code,city_code,leader_name,leader_address
+         ,leader_phone,leader_id,chepai_zuoci,lingjuan_date,return_paper_stime,return_paper_etime)
+         values (#{kc_code},#{kqu_id},#{leader_name}
+         ,#{leader_address},#{leader_phone},#{leader_id},#{chepai_zuoci}
+         ,#{lingjuan_date},#{return_paper_stime},#{return_paper_etime})
+    </insert>
+</mapper>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>省考试院自学考试考务管理系统</title>
+  <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+  <!--导入基础依赖css文件-->
+  <link href="../../static/css/basic.css" rel="stylesheet" type="text/css" />
+  <!--导入自己的 css -->
+
+</head>
+
+<body class="skin-blue sidebar-mini">
+  <div class="wrapper">
+
+    <!-- Main Header -->
+    <header class="main-header" id="top_bar">
+      <!-- Logo -->
+      <a href="/" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>自考</b></span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>自学考试 </b>考务管理</span>
+      </a>
+
+      <!-- 头部导航 -->
+      <nav class="navbar navbar-static-top" role="navigation">
+        <!-- 打开左侧导航栏按钮 -->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <span class="sr-only">左侧导航栏</span>
+        </a>
+
+        <!-- 头部：右侧导航栏 -->
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- 用户信息 -->
+            <li class="dropdown user user-menu">
+              <!-- 响应式设置 -->
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <!-- The user image in the navbar-->
+                <img :src="user.stu_img" class="user-image" alt="User Image" />
+                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                <span class="hidden-xs">{{user.user_type==1?user.stu_name:user.operator_name}}</span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- 用户基本信息 -->
+                <li class="user-header">
+                  <img :src="user.stu_img" class="img-circle" alt="User Image" />
+                  <p>
+                    {{user.user_type==1?user.stu_name:user.operator_name}}
+                    <small>{{user.user_type_name}}</small>
+                  </p>
+                </li>
+                <!-- 点击头像 弹出-->
+                <li class="user-footer">
+                  <div class="pull-left">
+                    <a :href="personal_details_url" class="btn btn-default btn-flat">个人</a>
+                  </div>
+                  <div class="pull-right">
+                    <a :href="logout_url" class="btn btn-default btn-flat">登出</a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- 左侧边栏 -->
+    <aside class="main-sidebar" id="left_bar">
+      <!-- sidebar: style can be found in sidebar.less -->
+      <section class="sidebar">
+        <!-- 用户面板 -->
+        <div class="user-panel">
+          <div class="pull-left image">
+            <!-- 动态设置头像 -->
+            <img :src="user.stu_img" class="img-circle" alt="User Image" />
+          </div>
+          <div class="pull-left info">
+            <!-- 用户姓名 -->
+            <p>{{user.user_type==1?user.stu_name:user.operator_name}}</p>
+            <!-- 用户角色 -->
+            <a href="#"><i class="iconfont icon-denglu1" style="margin-right: 7px;"></i>{{user.user_type_name}}</a>
+          </div>
+        </div>
+
+        <!-- 搜索框 -->
+        <form action="#" method="get" class="sidebar-form">
+          <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="搜索..." />
+            <span class="input-group-btn">
+              <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i
+                  class="glyphicon glyphicon-search"></i></button>
+            </span>
+          </div>
+        </form>
+        <!-- /.search form -->
+
+        <!-- 菜单栏 -->
+        <ul class="sidebar-menu">
+
+          <!-- 每个大类分隔符 -->
+          <!-- TODO:测试完加上 v-show="user.user_type==对应数字" -->
+          <li v-show="user.user_type==1" class="header">考生报考(模块名字)</li>
+          <!-- 多级列表：根据实际情况修改，含【导航】的地方有子元素不加url -->
+          <li v-show="user.user_type==1" class="treeview">
+            <a href="#">
+              <span>第一层导航(有子元素，不加url)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="#">第二层</a></li>
+              <li class="active">
+                <a href="#">
+                  <span>第二层导航
+                    <i class="iconfont icon-ziyuan pull-right"></i></span>
+                </a>
+                <ul class="treeview-menu menu-open" style="display: block;">
+                  <li><a href="#">第三层</a></li>
+                  <li><a href="#">第三层</a></li>
+                  <li class="">
+                    <a href="#">
+                      <span>第三层导航
+                        <i class="iconfont icon-ziyuan pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu menu-open" style="display: block;">
+                      <li><a href="#">第四层</a></li>
+                      <li><a href="#">第四层</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <!-- 每个角色栏：分级呈现功能 -->
+
+
+          <!-- 角色：考办-->
+          <!-- 每个大类分隔符 -->
+          <!-- TODO:测试完加上 v-show="user.user_type==3 || user.user_type==4"   ,去掉后可直接右键使用浏览器查看，不用跑程序 -->
+          <li v-show="user.user_type==3 || user.user_type==4" class="header">考办</li>
+          <!-- 多级列表：根据实际情况修改，含【导航】的地方有子元素不加url -->
+          <li v-show="user.user_type==3 || user.user_type==4" class="treeview">
+            <a href="#">
+              <span>报名报考管理(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="">设置开考考区</a></li>
+              <li><a href="">审查资格</a></li>
+              <li><a href="kb_zkz/zkz">查看准考证</a></li>
+            </ul>
+          </li><!--考办报名报考结束-->
+
+          <!-- TODO:测试完加上 v-show="user.user_type==3 || user.user_type==4"   ,去掉后可直接右键使用浏览器查看，不用跑程序 -->
+          <li v-show="user.user_type==3 || user.user_type==4" class="treeview">
+            <a href="#">
+              <span>统考编场管理(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="">考次考点设置</a></li>
+              <li><a href="">考场数预排</a></li>
+              <li><a href="statistic/kbbc">考点编排</a></li>
+            </ul>
+          </li><!--考办统考编场管理结束-->
+
+          <!-- TODO:测试完加上 v-show="user.user_type==3 || user.user_type==4"   ,去掉后可直接右键使用浏览器查看，不用跑程序 -->
+          <li v-show="user.user_type==3 || user.user_type==4" class="treeview">
+            <a href="#">
+              <span>统考违规上报(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="">上报违规情况</a></li>
+              <li><a href="">违规情况查询</a></li>
+            </ul>
+          </li><!--考办违规上报结束-->
+
+          <!-- TODO:测试完加上 v-show="user.user_type==3 || user.user_type==4"   ,去掉后可直接右键使用浏览器查看，不用跑程序 -->
+          <li v-show="user.user_type==3 || user.user_type==4" class="treeview">
+            <a href="#">
+              <span>统考其它上报(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="">上报考场容量</a></li>
+              <li><a href="">上报巡考人数</a></li>
+              <li><a href="">上报考点信息</a></li>
+              <li><a href="">上报组织备案信息</a></li>
+              <li><a href="">上报领卷人员</a></li>
+            </ul>
+          </li><!--考办其它上报结束-->
+
+          <!-- TODO:测试完加上 v-show="user.user_type==3 || user.user_type==4"   ,去掉后可直接右键使用浏览器查看，不用跑程序 -->
+          <li v-show="user.user_type==3 || user.user_type==4" class="treeview">
+            <a href="#">
+              <span>统考报表(考办)
+                <i class="iconfont icon-ziyuan pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="statistic/examdate">考试日程统计</a></li>
+              <li><a href="statistic/toJDlist">卷袋信息统计</a></li>
+              <li><a href="statistic/toFenjuan">市州区县分卷统计</a></li>
+            </ul>
+          </li><!--考办统考报表 结束-->
+
+          <!-- 底部操作按钮栏 -->
+          <!-- 每个大类分隔符 -->
+          <li class="header">其他</li>
+          <li>
+            <!-- 一层示例开始-->
+            <a :href="personal_details_url">
+              <span>个人
+                <i class="iconfont icon-huabanfuben pull-right" style="margin-right: 3px;"></i></span>
+            </a>
+          </li><!-- 一层示例结束-->
+          <li><a :href="logout_url">
+              <span>登出
+                <i class="iconfont icon-tuichudenglu pull-right" style="margin-right: 3px;"></i></span>
+            </a></li>
+        </ul>
+      </section><!-- /.sidebar -->
+    </aside>
+
+    <!-- 页面内容 -->
+    <div class="content-wrapper">
+    </div><!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+      <div style="display: flex; justify-content: center; align-items: center;">
+        <div><strong>Copyright &copy; 2020 <a href="#">省考试院自学考试考务管理</a>.</strong> All rights reserved.</div>
+      </div>
+    </footer>
+  </div><!-- ./wrapper -->
+
+  <!-- 基础 js 文件 -->
+  <!-- jQuery 2.1.4 -->
+  <script src="../../static/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+  <!-- popper.min.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <!-- Bootstrap 3.3.2 JS -->
+  <script src="../../static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+  <!-- AdminLTE App -->
+  <script src="../../static/dist/js/app.min.js" type="text/javascript"></script>
+  <!-- vuejs -->
+  <script src="../../static/js/vue.js"></script>
+  <!-- axios：前后端数据交互 -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <!-- 额外 js 文件添加下面 -->
+  <!-- 左边栏和顶部 Vue 实例 -->
+  <script src="../../static/js/util/top_left_bar.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xs.boot.dao.kaosheng.KaoShengMapper">
+    <!--个人报名-->
+    <!--使用 useGeneratedKeys="true" keyProperty="studentId" 将数据库生成的主键返回并注入studentId-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="studentId" parameterType="StudentInfoEntity">
+        insert into student_info(
+        zkao_num, stu_name, sex, zj_type,
+        zj_num, age, nation, zzmm,
+        huji_type, bk_level, bk_major, phone,
+        health, stu_type, yy_xueji_school_id, stu_img,
+        sz_num, qx_num, taget_school_id, op_time,
+        bm_state)
+        values(
+            #{zkao_num}, #{stu_name}, #{sex}, #{zj_type},
+            #{zj_num}, #{age}, #{nation}, #{zzmm},
+            #{huji_type}, #{bk_level}, #{bk_major}, #{phone},
+            #{health}, #{stu_type}, #{yy_xueji_school_id}, #{stu_img},
+            #{sz_num}, #{qx_num}, #{taget_school_id}, #{op_time},
+            #{bm_state})
+    </insert>
+
+    <select id="getAllMajors" resultType="MajorEntity">
+        select * from major order by major_id ASC
+    </select>
+
+    <select id="getAllCities" resultType="DistrictEntity">
+        select * from district group by city_code order by city_code ASC
+    </select>
+
+    <select id="getAllDistricts" parameterType="String" resultType="DistrictEntity">
+        select * from district WHERE city_code = #{cityCode} and district_name != '' order by district_code ASC
+    </select>
+
+    <select id="getAllZhuKaoSchools" resultType="ZhuKaoSchoolEntity">
+        select * from zhukao_school order by school_id ASC
+    </select>
+
+    <update id="updateStudentInfo" parameterType="StudentInfoEntity">
+        update student_info set
+        zkao_num=#{zkaoNum}, stu_name=#{stuName},
+        sex=#{sex}, zj_type=#{zjType},
+        zj_num=#{zjNum}, age=#{age},
+        nation=#{nation}, zzmm=#{zzmm},
+        huji_type=#{hujiType}, bk_level=#{bkLevel},
+        bk_major=#{bkMajor}, phone=#{phone},
+        health=#{health}, stu_type=#{stuType},
+        yy_xueji_school_id=#{yyXuejiSchoolId}, stu_img=#{stuImg},
+        sz_num=#{szNum}, qx_num=#{qxNum},
+        taget_school_id=#{tagetSchoolId}, op_time=#{opTime},
+        bm_state=#{bmState}
+        where student_id = #{studentId}
+    </update>
+
+    <!--个人报考-->
+    <!--插入报考信息-->
+    <insert id="insertBk" parameterType="StudentBkEntity">
+        insert into student_bk(student_id, kc_code, type_name, bk_major, bk_course_id, kqu_id, target_school_id, op_time, pay_state)
+        VALUE(
+        #{student_id}, #{kc_code},
+        #{type_name},#{bk_major},
+        #{bk_course_id},#{kqu_id},
+        #{target_school_id},#{op_time},
+        #{pay_state}
+        )
+    </insert>
+
+    <!--更新报名状态-->
+    <update id="updateStudentBmState" parameterType="StudentInfoEntity">
+        update student_info set
+        bm_state=#{bmState}
+        where student_id = #{studentId}
+    </update>
+
+    <!--根据身份证获取学生报名信息: 选择最大的准考证号-->
+    <select id="getStudentInfoLimitByZj" parameterType="String" resultType="StudentInfo4SelectEntity">
+        <!--select * from student_info WHERE zj_num=#{zj_num}-->
+        select * from student_info WHERE student_id in
+        (select max(student_id) FROM student_info WHERE zj_num=#{zj_num} )
+    </select>
+
+    <!--获取考试：根据当前时间限制-->
+    <select id="getExamsLimitByTime" parameterType="String" resultType="ExamEntity">
+        select * from exam WHERE bm_end_time >= #{time_now} and #{time_now} >= bm_begin_time
+    </select>
+
+    <!--获取课程：根据专业限制-->
+    <select id="getCoursesLimitByMajor" parameterType="String" resultType="CourseEntity">
+        select * from courses WHERE course_id in
+        (select major_course.course_id from major_course where major_course.major_id in
+          (select major.major_id from major where major_name = #{major_name})
+        )
+    </select>
+
+    <!--获取考区：根据考试类型+考次选择限制-->
+    <select id="getKaoQuLimitByExam" parameterType="ExamEntity" resultType="ExamKquEntity">
+        SELECT * FROM certain_exam_examarea where kc_code = #{kc_code} and type_name = #{type_name} ORDER by kqu_id
+    </select>
+
+    <!--获取考区名字：根据市州代码和区县代码-->
+    <select id="getKaoQuNameLimitByKquId" parameterType="ExamKquEntity" resultType="DistrictEntity">
+        SELECT * FROM district where city_code=#{city_code} and district_code=#{district_code}
+    </select>
+
+    <!--获取主考院校：根据专业限制-->
+    <select id="getZhuKaoSchoolsLimitByMajor" parameterType="String" resultType="ZhuKaoSchoolEntity">
+        select * from zhukao_school WHERE school_id in
+        (SELECT school_id FROM zhukaoschool_major where major_id IN
+          (select major_id from major where major_name = #{major_name})
+        )
+        order by school_id ASC
+    </select>
+
+    <!--个人缴费-->
+    <!--获取课程：根据学生报考限制-->
+    <select id="getCoursesLimitByStuBk" parameterType="String" resultType="CourseEntity">
+        select c.*, bk.pay_state from courses c, student_bk bk WHERE c.course_id in
+        (select bk_course_id FROM student_bk WHERE student_id = #{student_id}
+        ) and bk.bk_course_id = c.course_id
+        GROUP BY course_id
+        ORDER by course_id ASC
+    </select>
+
+    <!--更新考试缴费状态-->
+    <update id="updateStudentBKPayState" parameterType="StudentBkEntity">
+        update student_bk set
+        pay_state=#{pay_state}
+        where student_id = #{student_id}
+    </update>
+
+    <!--打印座位通知单-->
+    <!--获取座位安排信息: 根据准考证限制-->
+    <select id="getSeatArrangeLimitByZKaoNum" parameterType="SeatArrangeEntity" resultType="SeatArrangeEntity">
+        select * from certain_seat_arrange WHERE zkao_num=#{zkao_num} and kc_code = #{kc_code} and type_name = #{type_name}
+        ORDER by zkao_num ASC
+    </select>
+
+    <!--获取考试报考信息：根据 student_id 和 bk_course_id 限制-->
+    <select id="getStudentBkLimitByStuIdAndCourseId" parameterType="SeatArrangeEntity" resultType="StudentBkEntity">
+        select * from student_bk WHERE student_id = #{student_id} and bk_course_id = #{bk_course_id}
+    </select>
+
+    <!--获取考试座详情：未检查身份类型，seat.kqu_id 可能为空，target_school_id可能为-1-->
+    <!-- seat.kqu_id 可能为空未解决 -->
+    <!--bk.target_school_id=-1 解决方案：在主考院校添加id为-1的学校 -->
+    <select id="getSeatDetailsByStuId" parameterType="SeatLimitParamsEntity" resultType="SeatDetailsEntity">
+        select
+        bk.student_id, bk.bk_major, bk.target_school_id, bk.pay_state,
+        seat.*,
+        courses.*,
+        kd.kd_name, kd.post_code,
+        kaochang.thorough_address,
+        district.kqu_name,
+        exam.dy_zw_s_time, exam.dy_zw_e_time, exam.exam_start_time, exam.exam_end_time,
+        extype.exam_type_name,
+        major.major_name,
+        zhukao_school.school_name
+        FROM student_bk bk, certain_seat_arrange seat, courses, total_kd kd, total_kaochang_info kaochang, district, exam, total_exam_type extype, major, zhukao_school
+        where
+        bk.student_id=#{student_id}
+        and bk.student_id = RIGHT(seat.zkao_num,2) and bk.kc_code = seat.kc_code and bk.type_name = seat.type_name
+        and bk.bk_course_id = courses.course_id
+        and seat.kd_id = kd.kd_id
+        and seat.kd_id = kaochang.kd_id and seat.kaochang_id = kaochang.kaochang_id
+        <if test="stu_type == 0">
+            and district.city_code = left(seat.kqu_id, 2) and district.district_code = right(seat.kqu_id, 2)
+        </if>
+        and seat.kc_code = exam.kc_code and seat.type_name = exam.type_name
+        and seat.type_name = extype.type_name
+        and major.major_id = bk.bk_major
+        <if test="stu_type == 1">
+            and bk.target_school_id = zhukao_school.school_id
+        </if>
+        GROUP BY bk.student_id, courses.course_id
+    </select>
+</mapper>

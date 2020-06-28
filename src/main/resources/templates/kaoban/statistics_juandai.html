@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>省考试院自学考试考务管理系统</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!--导入基础依赖css文件-->
+    <link href="../../static/css/basic.css" rel="stylesheet" type="text/css" />
+    <!--导入自己的 css -->
+    <link href="../../static/css/bmbk/create-exam.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="skin-blue sidebar-mini">
+<div class="wrapper">
+    <!-- Main Header -->
+    <header class="main-header">
+
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>考务</b></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>自学考试 </b>考务管理</span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- 打开左侧导航栏按钮 -->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">左侧导航栏</span>
+            </a>
+            <!-- 头部：右侧导航栏 -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- 消息提示菜单 -->
+                    <li class="dropdown notifications-menu">
+                        <!-- Menu toggle button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-comment"></span>
+                            <span class="label label-warning">10</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">你有 10 条信息待处理</li>
+                            <li>
+                                <!-- Inner Menu: contains the notifications -->
+                                <ul class="menu">
+                                    <li><!-- start notification 如果有多条 可用 v-for -->
+                                        <a href="#">
+                                            <i class="fa fa-users text-aqua"></i> 5 条白名单申请待处理
+                                        </a>
+                                    </li><!-- end notification -->
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="#">查看全部</a></li>
+                        </ul>
+                    </li>
+                    <!-- User Account Menu -->
+                    <li class="dropdown user user-menu">
+                        <!-- Menu Toggle Button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <!-- The user image in the navbar-->
+                            <img src="../../static/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                            <span class="hidden-xs">FF</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- The user image in the menu -->
+                            <li class="user-header">
+                                <img src="../../static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                                <p>
+                                    FF
+                                    <small>四川大学考务</small>
+                                </p>
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="#" class="btn btn-default btn-flat">个人</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="#" class="btn btn-default btn-flat">登出</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 左侧边栏 -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- 用户面板 -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="../../static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                </div>
+                <div class="pull-left info">
+                    <p>FF</p>
+                    <!-- 用户角色 -->
+                    <a href="#"><i class="fa fa-circle text-success"></i> 考务</a>
+                </div>
+            </div>
+
+            <!-- 搜索框 -->
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="搜索..."/>
+                    <span class="input-group-btn">
+                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="glyphicon glyphicon-search"></i></button>
+              </span>
+                </div>
+            </form>
+            <!-- /.search form -->
+
+            <!-- 菜单栏 -->
+            <ul class="sidebar-menu">
+                <li class="header"></li>
+
+                <li class="treeview">
+                    <a href="#"><span>统考管理</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li class="treeview">
+                            <a href="#"><span>违规处罚管理</span> <i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="/violation/toList">违规处罚库管理</a></li>
+                                <li><a href="/violation/toVio">违规情况查询</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#"><span>编场管理</span> <i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="/exam/toArrangetime">设置编场时间</a></li>
+                                <li><a href="/exam/toZkao">设置准考证打印时间</a></li>
+                                <li><a href="/exam/toJuandai">设置卷袋规格</a></li>
+                                <li><a href="/exam/toKaochang">考场配置管理</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/judge/toJudge">评卷管理</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#"><span>数据统计与上报</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="/out/toList">上报数据导出</a></li>
+                        <li class="treeview">
+                            <a href="#"><span>统考报表</span> <i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="/form/toZJlist">制卷数量统计</a></li>
+                                <li><a href="/form/toCourselist">课程合订册统计</a></li>
+                                <li><a href="/form/toFenjuan">市州区县分卷统计</a></li>
+                                <li><a href="/form/toSchool">院校合订册统计</a></li>
+                                <li><a href="/form/toTime">考试日程统计</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul><!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- 页面内容 -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                卷袋信息统计
+                <small>查询考试卷带信息统计结果</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">数据统计与上报</li>
+                <li class="active">统考报表</li>
+                <li >卷袋信息统计</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <!-- 我们的页面内容放这里 -->
+            <div id="violation_list">
+
+                <div class="box">
+                    <div class="box-header with-border">
+                        <div class="form-group">
+                            <label>考试</label><br>
+                            <select  @change="changeModel($event)"  v-model="selectModel" >
+                                <option value="" selected>请选择考试</option>
+                                <option :value="index"  v-for="(item,index) in vioList" :key="index">
+                                    第{{item.kc_code}}次统考
+                                </option>
+                            </select>
+                        </div>
+                        <button @click="getList" class="btn  btn-success btn-sm">查询数据</button>
+                    </div>
+                    <div v-show="content.search">
+                        <input type="button" value="导出到excel" class="btn btn-primary " style="float: right" onclick="exportExcel()"/>
+                        <div class="box-body" >
+
+                            <div class="row">
+                                <table class="table table-bordered table2excel" id="list_table">
+                                    <tbody>
+                                    <tr>
+                                        <th style="width: 5%; text-align: center;">考试</th>
+                                        <th style="width: 5%; text-align: center;">课程编号</th>
+                                        <th style="width: 10%; text-align: center;">课程名称</th>
+                                        <th style="width: 10%; text-align: center;">考试人数</th>
+                                        <th style="width: 10%; text-align: center;">试卷数量</th>
+                                        <th style="width: 10%; text-align: center;">试卷袋总数</th>
+                                    </tr>
+                                    <tr v-for="(item, index) in countList" :key="index">
+                                        <td style="width: 5%; text-align: center;">第{{item.kc_code}}次统考</td>
+                                        <td style="width: 5%; text-align: center;">{{item.course_id}}</td>
+                                        <td style="width: 10%; text-align: center;">{{item.name}}</td>
+                                        <td style="width: 10%; text-align: center;">{{item.sum}}</td>
+                                        <td style="width: 10%; text-align: center;">{{item.num}}</td>
+                                        <td style="width: 10%; text-align: center;">{{item.juandai}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.box-body -->
+        </section><!-- /.content -->
+    </div><!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <div><strong>Copyright &copy; 2020 <a href="#">省考试院自学考试考务管理</a>.</strong> All rights reserved.</div>
+        </div>
+    </footer>
+</div><!-- ./wrapper -->
+
+<!-- 基础 js 文件 -->
+<!-- jQuery 2.1.4 -->
+<script src="../../static/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<!-- popper.min.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<!-- Bootstrap 3.3.2 JS -->
+<script src="../../static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- AdminLTE App -->
+<script src="../../static/dist/js/app.min.js" type="text/javascript"></script>
+<!-- vuejs -->
+<script src="../../static/js/vue.js"></script>
+<!-- axios：前后端数据交互 -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script src="../../static/js/excel/jquery.table2excel.js"></script>
+<script src="../../static/js/util/top_left_bar.js"></script>
+<script>
+
+    function exportExcel(){
+        console.log(222222222);
+        $(".table2excel").table2excel({
+            exclude: ".noExl",
+            name: "Excel Document Name",
+            filename: "卷带数量表",
+            exclude_img: true,
+            exclude_links: true,
+            exclude_inputs: true
+        });
+    }
+</script>
+
+<script>
+    let f_createPost = new Vue({
+        el: '#violation_list',
+        data: {
+            kc_code:'',
+            type_name:'',
+            selectModel:'',
+            city_code:"",
+            district_code:"",
+            vioList: [],
+            countList:[],
+            temList:[],
+            totalPage: 1, // 统共页数，默认为1
+            currentPage: 1, //当前页数 ，默认为1
+            pageSize: 10, // 每页显示数量
+            currentPageData: [],//当前页显示内容
+            content:
+                {
+                    search:false
+                }
+        },
+        mounted:function(){
+            this.getExam();
+        },
+        methods: {
+            getExam:function(){
+                let that = this;
+                axios.post('/statistic/getExam')
+                    .then(function(response){
+                        that.vioList = response.data;
+                    })
+                    .catch(function(error){
+                        console.log(error)
+
+                    })
+
+            },
+            getList:function(){
+                let that = this;
+                if (that.selectModel == undefined || that.selectModel == "" || that.selectModel == null) {
+                    alert("请选择考试");}
+                if(that.district_code=="00") {
+                    axios.post('/statistic/getJDlist1',
+                        {
+                            kc_code: that.kc_code,
+                            type_name: that.type_name,
+                            city_code: that.city_code,
+                            district_code: that.district_code
+                        })
+                        .then(function (response) {
+                            alert("查询成功");
+                            that.temList = response.data;
+                            that.countZJnum();
+                            f_createPost.$set(that.content, 'search', true);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                            alert("查询失败");
+
+                        })
+                }
+                else{axios.post('/statistic/getJDlist2',
+                    {
+                        kc_code: that.kc_code,
+                        type_name: that.type_name,
+                        city_code: that.city_code,
+                        district_code: that.district_code
+                    })
+                    .then(function (response) {
+                        alert("查询成功");
+                        that.temList = response.data;
+                        that.countZJnum();
+                        f_createPost.$set(that.content, 'search', true);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        alert("查询失败");
+
+                    })}
+            },
+            countZJnum:function(){
+                let that = this;
+                that.countList = [];
+                that.temList.forEach(function (item, index){
+                    that.countList.push({"kc_code":item.kc_code,"type_name":item.type_name,"course_id":item.course_id,"name":item.name,"sum":item.sum,"num":item.juandai_spec * Math.ceil(item.sum / item.juandai_spec),"juandai":Math.ceil(item.sum / item.juandai_spec) });
+                });
+
+
+            },
+            changeModel:function(event){
+                let that = this;
+                that.selectModel = event.target.value;
+                that.kc_code = that.vioList[that.selectModel].kc_code;
+                that.type_name = that.vioList[that.selectModel].type_name;
+            }
+
+        }
+    })
+</script>
+</body>
+</html>
