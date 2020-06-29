@@ -25,12 +25,14 @@ var createExam = new Vue({
             var that = this;
             axios.get('/kaosheng/getStudentInfoLimitByZj/' + that.zj_num)
                 .then(function (response) {
-                    var student_info = response.data.data;
-                    console.log("student_info",student_info);
-                    that.student_id = student_info[0].student_id;
-                    that.bm_state = student_info[0].bm_state;
+                    if (response.data.flag == 1) { 
+                        var student_info = response.data.data;
+                        console.log("student_info", student_info);
+                        that.student_id = student_info[0].student_id;
+                        that.bm_state = student_info[0].bm_state;
+                    }
+   
                     // 检查考生报名状态
-
                     if (that.bm_state == 0) {
                         that.isOk = -1;
                         that.msg = "当前未审核，请等待审核！";
@@ -45,6 +47,9 @@ var createExam = new Vue({
                         that.isOk = -1;
                         that.msg = "已缴费！";
                         that.getCoursesLimitByStuBk();
+                    } else { 
+                        that.isOk = -1;
+                        that.msg = '当前未报名, <a href="/kaosheng/goto-personal-regist">跳转到报名</a>.';
                     }
                 })
                 .catch(function (error) {

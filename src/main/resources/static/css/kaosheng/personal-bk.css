@@ -76,6 +76,11 @@
     align-items: center;
 }
 
+.func_item table{
+    width: 60%;
+    background-color: white;
+}
+
 .func_item div input{
     width: 20%;
 }

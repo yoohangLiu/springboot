@@ -26,8 +26,9 @@ var loginSecureVue = new Vue({
                 that.login_state = response.data.flag;
                 // that.account = respon
 
-                // 登录成功，停留2秒后页面跳转到首页
+                // 登录成功
                 if (response.data.flag == 1) {
+                    // 停留2秒后页面跳转到首页
                     window.setTimeout("window.location.href = '/index'", 2000);
                 }
             })

@@ -12,13 +12,13 @@ let lyh_create = new Vue({
         currentPage: 1, //当前页数 ，默认为1
         pageSize: 5, // 每页显示数量
         currentPageData: [], //当前页显示内容
-        kqu_id:"0100",
+        kqu_id:"",
         showModel:false,
         student_id:'',
         zkao_num:"",
         stu_name:"",
-        sz_num:"",
-        qx_num:"",
+        city_code:"",
+        district_code:"",
         if_show:false,
     },
     created:function(){
@@ -29,12 +29,17 @@ let lyh_create = new Vue({
     },
     methods: {
         getList:function(){
-            this.sz_num=this.kqu_id.substr(0,2);
+            /*this.sz_num=this.kqu_id.substr(0,2);
             this.qx_num=this.kqu_id.substr(2,2);
+            console.log(this.sz_num);
+            console.log(this.qx_num);*/
+            console.log(this.kqu_id)
+            console.log(this.sz_num);
+            console.log(this.qx_num);
             let that = this;
             axios.post('/kaoban/find_student_info', {
-                sz_num: that.sz_num,
-                qx_num:that.qx_num,
+                sz_num: that.city_code,
+                qx_num:that.district_code,
             })
                 .then(function(response){
                     Vue.nextTick(function(){
@@ -87,8 +92,8 @@ let lyh_create = new Vue({
         },alterall:function () {
             let that2=this;
             axios.post('/kaoban/alterAllState',{
-                sz_num:that2.sz_num,
-                qx_num:that2.qx_num,
+                sz_num:that2.city_code,
+                qx_num:that2.district_code,
                 }).then(function (response) {
                 alert("一键审查成功！")
             }).catch(function (error) {

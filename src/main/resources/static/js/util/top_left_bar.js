@@ -28,6 +28,10 @@ var leftVue = new Vue({
                 headVue.user = that.user;
                 console.log("headVue获取到的session数据", headVue.user);
 
+
+                // 将session数据存入localstorage
+                const parsed = JSON.stringify(that.user);
+                localStorage.setItem('user', parsed);
                 //风哥
                 f_createPost.city_code=leftVue.user.city_code;
                 console.log("市州编码",f_createPost.city_code);

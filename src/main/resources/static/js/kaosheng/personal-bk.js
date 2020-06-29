@@ -2,7 +2,7 @@ var createExam = new Vue({
     el: '#kaosheng',
     data: {
         zj_num: '51018119971106441X',
-        bm_state: 1, // 判断是否有报考权限
+        bm_state: -1, // 判断是否有报考权限
 
         // 直接从后端获取
         student_id: -1,// 传
@@ -20,6 +20,7 @@ var createExam = new Vue({
         bk_course_indexs: [],
         bk_course_id: [],// 根据indexs构建
         bk_course_list: [],
+        courses_bk_now: 0,
         
         // 根据学生类型选择考区或主考院校
         kqu_id: '',
@@ -47,34 +48,65 @@ var createExam = new Vue({
             var that = this;
             axios.get('/kaosheng/getStudentInfoLimitByZj/' + that.zj_num)
                 .then(function (response) {
-                    var student_info = response.data.data;
-                    console.log("student_info",student_info);
-                    that.student_id = student_info[0].student_id;
-                    that.bk_major_id = student_info[0].bk_major;
-                    that.student_type = student_info[0].stu_type;
-                    that.bm_state = student_info[0].bm_state;
-                    
-                    // 检查考生报名状态，如果未审核不予报考
-                    if (that.bm_state == 0) {
+                    // flag=0表示考生未报名
+                    console.log("getStudentInfoLimitByZj response flag", response.data.flag);
+                    if (response.data.flag == 1) {
+                        // 考生已经报名
+                        var student_info = response.data.data;
+                        console.log("student_info", student_info);
+                        that.student_id = student_info[0].student_id;
+                        that.bk_major_id = student_info[0].bk_major;
+                        that.student_type = student_info[0].stu_type;
+                        that.bm_state = student_info[0].bm_state;
+                        
+
+                        // 检查考生报名状态，如果未审核不予报考
+                        if (that.bm_state == 0) {
+                            that.isOk = -1;
+                            that.msg = "当前未审核，不能报考！";
+                        } else if (that.bm_state == 1) {
+                            // 可报考
+                            that.isOk = 1;
+                        } else if (that.bm_state == 2) {
+                            // 查询已经报考课程数 如果未到4门 则还可报考
+                            that.getCoursesLimitByStuBk();
+                        } else if (that.bm_state == 3) {
+                            // 查询已经报考课程数 如果未到4门 则还可报考
+                            that.getCoursesLimitByStuBk();
+                        }
+                        // 将专业id转换成专业名字 方便显示
+                        that.getMajorNameByMajorId(that.bk_major_id);
+                    } else { 
                         that.isOk = -1;
-                        that.msg = "当前未审核，不能报考！";
-                    } else if (that.bm_state == 1) {
-                        // 可报考
-                        that.isOk = 1;
-                    } else if (that.bm_state == 2){ 
-                        that.isOk = -1;
-                        that.msg = "已报考，请缴费！";
-                    } else if (that.bm_state == 3) {
-                        that.isOk = -1;
-                        that.msg = "已缴费！";
-                    }
-                    // 将专业id转换成专业名字 方便显示
-                    that.getMajorNameByMajorId(that.bk_major_id);
+                        that.msg ='当前未报名, <a href="/kaosheng/goto-personal-regist">跳转到报名</a>.';
+                    }               
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         },
+
+        // 获取已经报考课程信息
+        getCoursesLimitByStuBk: function () {
+            var that = this;
+            axios.get('/kaosheng/getCoursesLimitByStuBk?student_id=' + that.student_id)
+                .then(function (response) {
+                    console.log("bk_course_list", response.data.data);
+                    that.courses_bk_now = response.data.data.length;   
+                    console.log("查询已经报考课程数:", that.courses_bk_now, response.data.data.length);
+                    
+                    that.isOk = -1;
+                    if (that.courses_bk_now >= 4 && that.bm_state == 3) {
+                        that.msg = "已缴费, 恭喜你完成报考！";
+                    }else {
+                        that.msg = '已报考 ' + that.courses_bk_now + ' 门课程, 上限 4 门, <a href="/kaosheng/goto-personal-pay">跳转到缴费并查看课程详情</a>.';
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+
         getMajorNameByMajorId: function (bk_major_id) {
             var that = this;
             var major_name;
@@ -236,7 +268,7 @@ var createExam = new Vue({
         choose_bk_course(index) {
             var that = this;
             if (that.bk_course_indexs.indexOf(index) == -1) {
-                if (that.bk_course_indexs.length < 4) {
+                if ((that.bk_course_indexs.length + that.courses_bk_now) < 4) {
                     that.bk_course_indexs.push(index);
                 } else {
                     that.isOk = -1;
@@ -276,10 +308,12 @@ var createExam = new Vue({
                 })
                     .then(function (response) {
                         console.log("成功报考", response.data.data);
+                        alert("恭喜你，成功报考!");
                         that.bkState = 1;
                     })
                     .catch(function (error) {
                         console.log(error);
+                        alert("报考失败!");
                     });
             }    
         },

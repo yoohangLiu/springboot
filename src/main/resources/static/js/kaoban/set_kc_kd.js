@@ -13,7 +13,7 @@ let lyh_create = new Vue({
         pageSize: 5, // 每页显示数量
         currentPageData: [], //当前页显示内容
         showModel:false,
-        kqu_id:"0100",
+        kqu_id:"",
         if_show:false,
         if_show2:false,
         kc_code:'',
@@ -27,6 +27,8 @@ let lyh_create = new Vue({
         kd_id2:'',
         kaochang_num2:'',
         kaochang_spec2:'',
+        city_code:"",
+        district_code:"",
     },
     methods: {
         getList:function(){

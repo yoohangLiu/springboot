@@ -90,11 +90,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- 搜索框 -->
             <form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="搜索..." />
                     <span class="input-group-btn">
-              <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i
-                      class="glyphicon glyphicon-search"></i></button>
-            </span>
+              <button type='submit' name='search' id='search-btn' class="btn btn-flat" @click="getList()"><i
+                      class="glyphicon glyphicon-search"></i>查看违规信息</button>
+              </span>
                 </div>
             </form>
             <!-- /.search form -->
@@ -489,8 +488,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 <div class="box">
                     <div class="box-header with-border">
-                        <input  placeholder="请输入搜索内容" class="col-xs-2"  v-model="searchVal" @input="reset()"/>
-                        <button @click="search()" type="button" class="btn btn-default btn-sm" style="margin-left: 10px">搜索</button>
+                        <button @click="getList()" type="button" class="btn btn-default btn-sm" style="margin-left: 10px">查看违规处罚</button>
                         <a @click="alter1()" class="btn  btn-success btn-sm">新增违规处罚</a>
                     </div>
                     <div class="box-body">

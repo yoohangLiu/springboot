@@ -14,7 +14,7 @@ let lyh_create = new Vue({
         currentPageData: [], //当前页显示内容
         showModel:false,
         kc_code:'',
-        kqu_id:"0100",
+        kqu_id:"",
         type_name:'',
         city_code:"",
         district_code:"",
@@ -30,8 +30,6 @@ let lyh_create = new Vue({
     },
     methods: {
         getList:function(){
-            this.city_code=this.kqu_id.substr(0,2);
-            this.district_code=this.kqu_id.substr(2,2);
             let that = this;
             axios.post('/kaoban/find_shizhou_certain_area',{
                 city_code:that.city_code,

@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class KaoShengService implements IKaoShengService {
+public class KaoShengService implements IKaoShengService{
     @Resource
     private PersonalRegistMapper personalRegistMapper;
     @Resource

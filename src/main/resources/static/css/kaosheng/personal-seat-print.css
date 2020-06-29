@@ -31,7 +31,7 @@
 }
 
 .func_content_left{
-    width: 100%;
+    width: 45%;
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
@@ -40,12 +40,17 @@
 }
 
 .func_content_right{
-    width: 100%;
+    width: 50%;
     margin-bottom: 20px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+}
+
+.func_content_right div{
+    margin-bottom: 3px;
 }
 
 .func_item{
@@ -76,10 +81,59 @@
     align-items: center;
 }
 
+.func_item table{
+    width:95%;
+    background-color: white;
+}
+
+.func_item img{
+    width: 40%;
+}
+
+
 .func_item div input{
     width: 20%;
 }
 
 .func_buttons{
+    width: 100%;
+    margin-top: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
 
+.func_buttons button{
+    width: 30%;
+}
+
+.print_title{
+    width: 100%;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.print_item{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.print_zd_name{
+    width: 30%;
+}
+
+.print_zd_name button{
+    width: 100%;
+}
+
+.print_zd_content{
+    width: 65%;
+}
+
+.print_zd_content button{
+    width: 100%;
 }

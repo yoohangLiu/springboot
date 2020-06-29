@@ -13,7 +13,7 @@ let lyh_create = new Vue({
         pageSize: 5, // 每页显示数量
         currentPageData: [], //当前页显示内容
         if_show:false,
-        kqu_id:"0100",
+        kqu_id:"",
         kc_code:'',
         course_id:'',
         kd_id:'',
@@ -22,6 +22,8 @@ let lyh_create = new Vue({
         kaotang_code:"",
         jianyi_punish_id:'',
         memo:"",
+        city_code:"",
+        district_code:"",
     },
     created:function(){
 

@@ -15,7 +15,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
     @Override
     //直接配置页面调整url映射
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/main").setViewName("index");
+        //registry.addViewController("/main").setViewName("index");
     }
 
     @Override

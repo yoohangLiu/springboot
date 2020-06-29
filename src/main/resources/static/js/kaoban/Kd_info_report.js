@@ -13,7 +13,7 @@ let lyh_create = new Vue({
         pageSize: 5, // 每页显示数量
         currentPageData: [], //当前页显示内容
         showModel:false,
-        kqu_id:"0100",
+        kqu_id:"",
         if_show:false,
         kc_code:'',
         type_name:1,//默认只管统考
@@ -21,7 +21,9 @@ let lyh_create = new Vue({
         supervisor_num: '',
         contactor: "",
         phone:'',
-        memo:''
+        memo:'',
+        city_code:"",
+        district_code:"",
     },
     methods: {
         getList:function(){

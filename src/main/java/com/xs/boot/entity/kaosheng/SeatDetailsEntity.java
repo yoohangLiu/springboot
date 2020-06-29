@@ -29,7 +29,7 @@ public class SeatDetailsEntity {
     private int kd_id;
     private int kaochang_id;
     private String kaotang_code;
-    private int set_num;
+    private int seat_num;
 
 
     private int course_id;
@@ -69,7 +69,7 @@ public class SeatDetailsEntity {
                 ", kd_id=" + kd_id +
                 ", kaochang_id=" + kaochang_id +
                 ", kaotang_code='" + kaotang_code + '\'' +
-                ", set_num=" + set_num +
+                ", seat_num=" + seat_num +
                 ", course_id=" + course_id +
                 ", name='" + name + '\'' +
                 ", money=" + money +
@@ -86,22 +86,6 @@ public class SeatDetailsEntity {
                 ", school_name='" + school_name + '\'' +
                 ", dy_zw_allowed=" + dy_zw_allowed +
                 '}';
-    }
-
-    public String getMajor_name() {
-        return major_name;
-    }
-
-    public void setMajor_name(String major_name) {
-        this.major_name = major_name;
-    }
-
-    public String getSchool_name() {
-        return school_name;
-    }
-
-    public void setSchool_name(String school_name) {
-        this.school_name = school_name;
     }
 
     public int getStudent_id() {
@@ -192,12 +176,12 @@ public class SeatDetailsEntity {
         this.kaotang_code = kaotang_code;
     }
 
-    public int getSet_num() {
-        return set_num;
+    public int getSeat_num() {
+        return seat_num;
     }
 
-    public void setSet_num(int set_num) {
-        this.set_num = set_num;
+    public void setSeat_num(int seat_num) {
+        this.seat_num = seat_num;
     }
 
     public int getCourse_id() {
@@ -294,6 +278,22 @@ public class SeatDetailsEntity {
 
     public void setExam_type_name(String exam_type_name) {
         this.exam_type_name = exam_type_name;
+    }
+
+    public String getMajor_name() {
+        return major_name;
+    }
+
+    public void setMajor_name(String major_name) {
+        this.major_name = major_name;
+    }
+
+    public String getSchool_name() {
+        return school_name;
+    }
+
+    public void setSchool_name(String school_name) {
+        this.school_name = school_name;
     }
 
     public int getDy_zw_allowed() {

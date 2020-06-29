@@ -12,12 +12,14 @@ let lyh_create = new Vue({
         pageSize: 5, // 每页显示数量
         currentPageData: [], //当前页显示内容
         showModel:false,
-        kqu_id:"0100",
+        kqu_id:"",
         kc_code:'',
         type_name:'',
         if_show:false,
         capacity:'',
-        xunkao_num: ''
+        xunkao_num: '',
+        city_code:"",
+        district_code:"",
     },
     created:function(){
         this.getList();

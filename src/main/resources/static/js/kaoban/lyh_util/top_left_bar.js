@@ -31,6 +31,11 @@ var leftVue = new Vue({
                 //
                 lyh_create.kqu_id=leftVue.user.kqu_id;
                 console.log("编码",lyh_create.kqu_id);
+
+                lyh_create.city_code=leftVue.user.city_code;
+                lyh_create.district_code=leftVue.user.district_code;
+                console.log("编码",lyh_create.city_code);
+                console.log("编码",lyh_create.district_code);
             })
             .catch(function (error) {
                 console.log(error);

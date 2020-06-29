@@ -1,29 +1,29 @@
 package com.xs.boot.controller;
 
-import com.xs.boot.entity.kaosheng.SeatDetailsEntity;
-import com.xs.boot.entity.kaosheng.SeatLimitParamsEntity;
+import com.xs.boot.entity.kaosheng.StudentInfo4SelectEntity;
 import com.xs.boot.entity.util.UserEntity;
+import com.xs.boot.service.impl.KaoShengService;
 import com.xs.boot.service.impl.LoginAndSecureService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
 public class IndexController {
     @Autowired
     private LoginAndSecureService loginAndSecureService;
+
+    @Autowired
+    private KaoShengService kaoShengService;
 
     //跳转到登录
     @RequestMapping(value = "/login")
@@ -48,6 +48,20 @@ public class IndexController {
             if(userEntityToGetUserType != null){
                 //数据库存在该用户
                 userEntity.setUser_type(userEntityToGetUserType.getUser_type());
+
+                //检查考生是否报名，如果报名，可直接查询用户表，如果没有过滤掉考生表信息
+                int studentBmFlag = 0;
+                if (userEntity.getUser_type() == 1){
+                    StudentInfo4SelectEntity studentInfo4SelectEntity = kaoShengService.getStudentInfoLimitByZj(userEntity.getAccount());
+                    if (studentInfo4SelectEntity != null){
+                        //学生已报名
+                        studentBmFlag = 1;
+                    }else {
+                        studentBmFlag = 0;
+                        userEntity.setUser_type(-1);
+                    }
+                }
+
                 userEntityDB = loginAndSecureService.findUserByAccount(userEntity);
 
                 //验证密码
@@ -61,6 +75,12 @@ public class IndexController {
 
                     //脱密
                     userEntityDB.setPassword("");
+
+                    //如果考生未报名，设置考试名字为：请报名
+                    if (studentBmFlag == 0 && userEntityDB.getUser_type() == 1){
+                        userEntityDB.setStu_name("请报名");
+                        userEntityDB.setStu_img("../../static/dist/img/notbm1.png");
+                    }
 
                     //如果不是考生，设置操作人名字为：管理员
                     if(!userEntityDB.getUser_type_name().equals("考生")){

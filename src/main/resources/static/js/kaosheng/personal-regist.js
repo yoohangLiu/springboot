@@ -1,13 +1,16 @@
 var createExam = new Vue({
     el: '#kaosheng',
     data: {
+        //获取用户信息
+        user: {},
+
         stu_name: '',
         sex: 0,
         sex_list: ['男', '女'],
         zj_type: 0,
         zj_type_list: ['居民省份证', '军官证', '警官证', '文职干部证', '士兵证', '港澳台人员省份证', '外籍人员护照'],
         zj_num: '',
-        age: 1,
+        age: '等待输入证件号码',
         nation: '',
         zzmm: -1,
         zzmm_list: ['党员', '团员', '其他', '未采集'],
@@ -36,7 +39,8 @@ var createExam = new Vue({
         stu_img: '',
         isOk: 1,
         msg: '',
-        bmState:-1,
+        bmState: -1,
+        flag: 1 // 默认不可报名
     },
     created: function () {
         this.getAllMajors();
@@ -44,7 +48,70 @@ var createExam = new Vue({
         this.getAllDistricts('01');
         this.getAllZhuKaoSchools();
     },
+
+    // 使用 mounted 方法来从 localStorage 中加载数据
+    mounted() {// vue实例被挂载后调用
+        if (localStorage.getItem('user')) {
+            try {
+                // 从本地story获取用户登录信息并设置
+                var user = JSON.parse(localStorage.getItem('user'));
+                this.user = user;
+                this.zj_num = user.account;
+                console.log("localStorage获取zj_num:", this.zj_num);
+
+                // 证件检查并设置年龄
+                this.zj_num_check();
+
+                // 设施完信息后调用的函数
+                this.getStudentInfoLimitByZj();
+            } catch (e) {
+                console.log("catch(e)");
+                localStorage.removeItem('user');
+            }
+        } else {
+            window.location.href = '/logout';
+        }
+    },
+
     methods: {
+        // 检查是否为新考生
+        getStudentInfoLimitByZj: function () {
+            var that = this;
+            axios.get('/kaosheng/getStudentInfoLimitByZj/' + that.zj_num)
+                .then(function (response) {
+                    var student_info;
+                    if (response.data.flag == 1) {
+                        student_info = response.data.data[0];
+                    } else { 
+
+                    }
+                    console.log("student_info", response.data, student_info);
+                    
+                    if (response.data.flag == 0) { 
+                        // 新考生,可报名
+                        that.isOk = 1;
+                        that.flag = 0;
+                    } else {
+                        // 老考生，不可报名
+                        that.isOk = -2;
+                        that.flag = 1;
+                        // 检查考生报名状态，如果未审核不予报考
+                        if (student_info.bm_state == 0) {
+                            that.msg = '已报名, 当前未审核!';
+                        } else if (student_info.bm_state == 1) {
+                            that.msg = '已审核, <a href="/kaosheng/goto-personal-bk">跳转到报考</a>.';
+                        } else if (student_info.bm_state == 2) {
+                            that.msg = '已报考, <a href="/kaosheng/goto-personal-pay">跳转到缴费并查看课程信息</a>.';
+                        } else if (student_info.bm_state == 3) {
+                            that.msg = "已缴费, 恭喜你完成报考！";
+                        }
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+
         // 报名页面初始化
         // TODO: 获取数据库报考专业名、市州、区县编码、报名学校
         getAllMajors: function () { 
@@ -164,6 +231,9 @@ var createExam = new Vue({
         choose_sz_num: function (index) {
             this.sz_num = this.sz_num_list[index].city_code;
             this.sz_name = this.sz_num_list[index].city_name;
+
+            // 修改市州信息，情况qx名字
+            this.qx_name = '';
             this.getAllDistricts(this.sz_num);
         },
         choose_qx_num: function (index) {
